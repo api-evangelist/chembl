@@ -1,0 +1,1825 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ChEMBL Data REST API",
+    "description": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.",
+    "version": "ChEMBL_37",
+    "contact": {
+      "name": "ChEMBL Team",
+      "email": "chembl-help@ebi.ac.uk",
+      "url": "https://www.ebi.ac.uk/chembl/"
+    },
+    "license": {
+      "name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+      "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+    },
+    "termsOfService": "https://www.ebi.ac.uk/about/terms-of-use/",
+    "x-logo": {
+      "url": "https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://www.ebi.ac.uk/chembl/api/data",
+      "description": "ChEMBL Production API Server"
+    }
+  ],
+  "externalDocs": {
+    "description": "ChEMBL Web Services Documentation",
+    "url": "https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services"
+  },
+  "tags": [
+    {
+      "name": "Activity",
+      "description": "Activity values recorded in assays, linking molecules to targets with quantitative bioactivity measurements."
+    },
+    {
+      "name": "Assay",
+      "description": "Experimental protocols and result details from source documents and datasets."
+    },
+    {
+      "name": "Molecule",
+      "description": "Chemical molecules including properties, structural representations, synonyms, and drug-like properties."
+    },
+    {
+      "name": "Target",
+      "description": "Protein and non-protein targets defined in assays."
+    },
+    {
+      "name": "Drug",
+      "description": "Approved drug information including applicants, patent numbers, and research codes."
+    },
+    {
+      "name": "Drug Indication",
+      "description": "Drug-disease associations with clinical trial and regulatory references."
+    },
+    {
+      "name": "Drug Warning",
+      "description": "Safety information for withdrawn or black-box warned drugs."
+    },
+    {
+      "name": "Mechanism",
+      "description": "Mechanism of action information for approved drugs."
+    },
+    {
+      "name": "Compound Record",
+      "description": "Occurrence of a compound in a specific source document."
+    },
+    {
+      "name": "Document",
+      "description": "Source documents and datasets from which assay data is derived."
+    },
+    {
+      "name": "ATC Classification",
+      "description": "WHO Anatomical Therapeutic Chemical classification for drugs."
+    },
+    {
+      "name": "Binding Site",
+      "description": "Target binding site definitions used in assays."
+    },
+    {
+      "name": "Biotherapeutic",
+      "description": "Biotherapeutic molecules including HELM notation and sequence data."
+    },
+    {
+      "name": "Cell Line",
+      "description": "Cell line information used in assays."
+    },
+    {
+      "name": "Similarity",
+      "description": "Molecule similarity searching using Tanimoto coefficient."
+    },
+    {
+      "name": "Substructure",
+      "description": "Molecular substructure searching."
+    },
+    {
+      "name": "Status",
+      "description": "API operational status and ChEMBL database version information."
+    }
+  ],
+  "paths": {
+    "/activity": {
+      "get": {
+        "tags": ["Activity"],
+        "summary": "List activities",
+        "description": "Retrieve a paginated list of activity records. Activities link molecules to targets with quantitative bioactivity measurements (IC50, Ki, EC50, etc.).",
+        "operationId": "listActivities",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by ChEMBL ID of the compound",
+            "schema": {"type": "string", "example": "CHEMBL25"}
+          },
+          {
+            "name": "target_chembl_id",
+            "in": "query",
+            "description": "Filter by ChEMBL ID of the target",
+            "schema": {"type": "string", "example": "CHEMBL301"}
+          },
+          {
+            "name": "assay_chembl_id",
+            "in": "query",
+            "description": "Filter by ChEMBL ID of the assay",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "standard_type",
+            "in": "query",
+            "description": "Filter by activity type (e.g., IC50, Ki, EC50, Kd)",
+            "schema": {"type": "string", "example": "IC50"}
+          },
+          {
+            "name": "standard_value__lte",
+            "in": "query",
+            "description": "Filter by standard value less than or equal to",
+            "schema": {"type": "number"}
+          },
+          {
+            "name": "standard_value__gte",
+            "in": "query",
+            "description": "Filter by standard value greater than or equal to",
+            "schema": {"type": "number"}
+          },
+          {
+            "name": "assay_type",
+            "in": "query",
+            "description": "Filter by assay type (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)",
+            "schema": {"type": "string", "enum": ["B","F","A","T","P","U"]}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with paginated list of activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "activities": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Activity"}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"},
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/activity/{activity_id}": {
+      "get": {
+        "tags": ["Activity"],
+        "summary": "Get activity by ID",
+        "description": "Retrieve a single activity record by its unique activity ID.",
+        "operationId": "getActivity",
+        "parameters": [
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique numeric activity ID",
+            "schema": {"type": "integer", "example": 31863}
+          },
+          {"$ref": "#/components/parameters/format"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity record",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/Activity"}
+              }
+            }
+          },
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/activity/search": {
+      "get": {
+        "tags": ["Activity"],
+        "summary": "Search activities",
+        "description": "Full-text search for activities using query string.",
+        "operationId": "searchActivities",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Search query string",
+            "schema": {"type": "string"}
+          },
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "activities": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Activity"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/assay": {
+      "get": {
+        "tags": ["Assay"],
+        "summary": "List assays",
+        "description": "Retrieve a paginated list of assays. Each assay describes an experimental protocol and associated results from source documents.",
+        "operationId": "listAssays",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "assay_chembl_id",
+            "in": "query",
+            "description": "Filter by ChEMBL assay ID",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "assay_type",
+            "in": "query",
+            "description": "Filter by assay type",
+            "schema": {"type": "string", "enum": ["B","F","A","T","P","U"]}
+          },
+          {
+            "name": "target_chembl_id",
+            "in": "query",
+            "description": "Filter by target ChEMBL ID",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of assays",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "assays": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Assay"}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"},
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/assay/{assay_chembl_id}": {
+      "get": {
+        "tags": ["Assay"],
+        "summary": "Get assay by ChEMBL ID",
+        "description": "Retrieve a single assay by its ChEMBL ID.",
+        "operationId": "getAssay",
+        "parameters": [
+          {
+            "name": "assay_chembl_id",
+            "in": "path",
+            "required": true,
+            "description": "ChEMBL ID of the assay",
+            "schema": {"type": "string", "example": "CHEMBL1909072"}
+          },
+          {"$ref": "#/components/parameters/format"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Assay record",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/Assay"}
+              }
+            }
+          },
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/molecule": {
+      "get": {
+        "tags": ["Molecule"],
+        "summary": "List molecules",
+        "description": "Retrieve a paginated list of molecules. Includes chemical properties, structural representations (SMILES, InChI), synonyms, and drug-like properties.",
+        "operationId": "listMolecules",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by ChEMBL molecule ID",
+            "schema": {"type": "string", "example": "CHEMBL25"}
+          },
+          {
+            "name": "pref_name",
+            "in": "query",
+            "description": "Filter by preferred molecule name",
+            "schema": {"type": "string", "example": "ASPIRIN"}
+          },
+          {
+            "name": "max_phase",
+            "in": "query",
+            "description": "Filter by maximum clinical development phase (4 = approved)",
+            "schema": {"type": "integer", "enum": [0, 1, 2, 3, 4]}
+          },
+          {
+            "name": "molecule_type",
+            "in": "query",
+            "description": "Filter by molecule type",
+            "schema": {"type": "string", "example": "Small molecule"}
+          },
+          {
+            "name": "therapeutic_flag",
+            "in": "query",
+            "description": "Filter for molecules with therapeutic applications",
+            "schema": {"type": "boolean"}
+          },
+          {
+            "name": "withdrawn_flag",
+            "in": "query",
+            "description": "Filter for withdrawn drugs",
+            "schema": {"type": "boolean"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of molecules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "molecules": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Molecule"}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"},
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/molecule/{molecule_chembl_id}": {
+      "get": {
+        "tags": ["Molecule"],
+        "summary": "Get molecule by ChEMBL ID",
+        "description": "Retrieve a single molecule record by its ChEMBL ID.",
+        "operationId": "getMolecule",
+        "parameters": [
+          {
+            "name": "molecule_chembl_id",
+            "in": "path",
+            "required": true,
+            "description": "ChEMBL ID of the molecule",
+            "schema": {"type": "string", "example": "CHEMBL25"}
+          },
+          {"$ref": "#/components/parameters/format"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Molecule record",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/Molecule"}
+              }
+            }
+          },
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/molecule/search": {
+      "get": {
+        "tags": ["Molecule"],
+        "summary": "Search molecules",
+        "description": "Full-text search for molecules by name, synonym, or other text fields.",
+        "operationId": "searchMolecules",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Search query string (molecule name, synonym, etc.)",
+            "schema": {"type": "string", "example": "aspirin"}
+          },
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "molecules": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Molecule"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/target": {
+      "get": {
+        "tags": ["Target"],
+        "summary": "List targets",
+        "description": "Retrieve a paginated list of targets. Targets can be single proteins, protein complexes, organisms, cell lines, or other biological entities.",
+        "operationId": "listTargets",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "target_chembl_id",
+            "in": "query",
+            "description": "Filter by target ChEMBL ID",
+            "schema": {"type": "string", "example": "CHEMBL301"}
+          },
+          {
+            "name": "target_type",
+            "in": "query",
+            "description": "Filter by target type (e.g., SINGLE PROTEIN, PROTEIN COMPLEX)",
+            "schema": {"type": "string", "example": "SINGLE PROTEIN"}
+          },
+          {
+            "name": "organism",
+            "in": "query",
+            "description": "Filter by organism (e.g., Homo sapiens)",
+            "schema": {"type": "string", "example": "Homo sapiens"}
+          },
+          {
+            "name": "pref_name",
+            "in": "query",
+            "description": "Filter by preferred target name",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of targets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "targets": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Target"}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"},
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/target/{target_chembl_id}": {
+      "get": {
+        "tags": ["Target"],
+        "summary": "Get target by ChEMBL ID",
+        "description": "Retrieve a single target record by its ChEMBL ID.",
+        "operationId": "getTarget",
+        "parameters": [
+          {
+            "name": "target_chembl_id",
+            "in": "path",
+            "required": true,
+            "description": "ChEMBL ID of the target",
+            "schema": {"type": "string", "example": "CHEMBL301"}
+          },
+          {"$ref": "#/components/parameters/format"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Target record",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/Target"}
+              }
+            }
+          },
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/target/search": {
+      "get": {
+        "tags": ["Target"],
+        "summary": "Search targets",
+        "description": "Full-text search for targets by name or other text fields.",
+        "operationId": "searchTargets",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Search query string",
+            "schema": {"type": "string", "example": "kinase"}
+          },
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "targets": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Target"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drug": {
+      "get": {
+        "tags": ["Drug"],
+        "summary": "List approved drugs",
+        "description": "Retrieve a paginated list of approved drugs with information on applicants, patent numbers, research codes, and regulatory data.",
+        "operationId": "listDrugs",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by molecule ChEMBL ID",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "applicants",
+            "in": "query",
+            "description": "Filter by drug applicant name",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of drugs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "drugs": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Drug"}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {"$ref": "#/components/responses/BadRequest"},
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/drug_indication": {
+      "get": {
+        "tags": ["Drug Indication"],
+        "summary": "List drug indications",
+        "description": "Retrieve drug-disease associations with clinical trial phase information and regulatory references.",
+        "operationId": "listDrugIndications",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by molecule ChEMBL ID",
+            "schema": {"type": "string", "example": "CHEMBL25"}
+          },
+          {
+            "name": "max_phase_for_ind",
+            "in": "query",
+            "description": "Filter by maximum clinical phase for the indication",
+            "schema": {"type": "integer"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of drug indications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "drug_indications": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/DrugIndication"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drug_warning": {
+      "get": {
+        "tags": ["Drug Warning"],
+        "summary": "List drug warnings",
+        "description": "Retrieve safety information for drugs that have been withdrawn or carry black-box warnings.",
+        "operationId": "listDrugWarnings",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by molecule ChEMBL ID",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "warning_type",
+            "in": "query",
+            "description": "Filter by warning type",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of drug warnings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "drug_warnings": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/DrugWarning"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mechanism": {
+      "get": {
+        "tags": ["Mechanism"],
+        "summary": "List mechanisms of action",
+        "description": "Retrieve mechanism of action information for approved drugs, including target, action type, and selectivity.",
+        "operationId": "listMechanisms",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by molecule ChEMBL ID",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "target_chembl_id",
+            "in": "query",
+            "description": "Filter by target ChEMBL ID",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of drug mechanisms",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "mechanisms": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Mechanism"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/similarity/{smiles}/{similarity}": {
+      "get": {
+        "tags": ["Similarity"],
+        "summary": "Similarity search by SMILES",
+        "description": "Search for molecules similar to a given SMILES string using Tanimoto coefficient. Returns molecules above the specified similarity threshold.",
+        "operationId": "similaritySearch",
+        "parameters": [
+          {
+            "name": "smiles",
+            "in": "path",
+            "required": true,
+            "description": "SMILES string of the query molecule (URL-encoded)",
+            "schema": {"type": "string", "example": "CC(=O)Oc1ccccc1C(=O)O"}
+          },
+          {
+            "name": "similarity",
+            "in": "path",
+            "required": true,
+            "description": "Minimum Tanimoto similarity score (40-100)",
+            "schema": {"type": "integer", "minimum": 40, "maximum": 100, "example": 70}
+          },
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Similar molecules above the specified threshold",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "molecules": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Molecule"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/substructure/{smiles}": {
+      "get": {
+        "tags": ["Substructure"],
+        "summary": "Substructure search",
+        "description": "Search for molecules containing a given SMILES substructure.",
+        "operationId": "substructureSearch",
+        "parameters": [
+          {
+            "name": "smiles",
+            "in": "path",
+            "required": true,
+            "description": "SMILES string representing the substructure query (URL-encoded)",
+            "schema": {"type": "string", "example": "c1ccccc1"}
+          },
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Molecules containing the query substructure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "molecules": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Molecule"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/{molecule_chembl_id}": {
+      "get": {
+        "tags": ["Molecule"],
+        "summary": "Get molecule structure image",
+        "description": "Retrieve an SVG structural image for a given molecule.",
+        "operationId": "getMoleculeImage",
+        "parameters": [
+          {
+            "name": "molecule_chembl_id",
+            "in": "path",
+            "required": true,
+            "description": "ChEMBL ID of the molecule",
+            "schema": {"type": "string", "example": "CHEMBL25"}
+          },
+          {
+            "name": "dimensions",
+            "in": "query",
+            "description": "Image dimensions in pixels (e.g., 500 for 500x500)",
+            "schema": {"type": "integer", "default": 500}
+          },
+          {
+            "name": "ignore_coords",
+            "in": "query",
+            "description": "Ignore existing coordinates and recalculate layout",
+            "schema": {"type": "boolean", "default": false}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SVG structure image",
+            "content": {
+              "image/svg+xml": {
+                "schema": {"type": "string", "format": "binary"}
+              }
+            }
+          },
+          "404": {"$ref": "#/components/responses/NotFound"}
+        }
+      }
+    },
+    "/atc_class": {
+      "get": {
+        "tags": ["ATC Classification"],
+        "summary": "List ATC classifications",
+        "description": "Retrieve WHO Anatomical Therapeutic Chemical (ATC) classification records.",
+        "operationId": "listAtcClasses",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "who_atc_code",
+            "in": "query",
+            "description": "Filter by ATC code",
+            "schema": {"type": "string", "example": "A10BA02"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of ATC classifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "atc_classifications": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/AtcClass"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/binding_site": {
+      "get": {
+        "tags": ["Binding Site"],
+        "summary": "List binding sites",
+        "description": "Retrieve target binding site definitions used in assays.",
+        "operationId": "listBindingSites",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of binding sites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "binding_sites": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/BindingSite"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cell_line": {
+      "get": {
+        "tags": ["Cell Line"],
+        "summary": "List cell lines",
+        "description": "Retrieve cell line information used in assays.",
+        "operationId": "listCellLines",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "cell_name",
+            "in": "query",
+            "description": "Filter by cell line name",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of cell lines",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "cell_lines": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/CellLine"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chembl_id_lookup": {
+      "get": {
+        "tags": ["Status"],
+        "summary": "ChEMBL ID lookup",
+        "description": "Identify the entity type (molecule, assay, target, document, etc.) for a given ChEMBL ID.",
+        "operationId": "chemblIdLookup",
+        "parameters": [
+          {
+            "name": "chembl_id",
+            "in": "query",
+            "description": "ChEMBL ID to look up",
+            "schema": {"type": "string", "example": "CHEMBL25"}
+          },
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "ChEMBL ID lookup result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "chembl_id_lookups": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "chembl_id": {"type": "string"},
+                          "entity_type": {"type": "string"},
+                          "resource_url": {"type": "string"},
+                          "status": {"type": "string"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document": {
+      "get": {
+        "tags": ["Document"],
+        "summary": "List documents",
+        "description": "Retrieve source documents and datasets from which assay data is derived.",
+        "operationId": "listDocuments",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "journal",
+            "in": "query",
+            "description": "Filter by journal abbreviation",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Filter by publication year",
+            "schema": {"type": "integer"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of documents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "documents": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Document"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/compound_record": {
+      "get": {
+        "tags": ["Compound Record"],
+        "summary": "List compound records",
+        "description": "Retrieve compound records representing the occurrence of a compound in a specific document.",
+        "operationId": "listCompoundRecords",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by molecule ChEMBL ID",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of compound records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "compound_records": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/CompoundRecord"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/go_slim": {
+      "get": {
+        "tags": ["Target"],
+        "summary": "List GO slim classifications",
+        "description": "Retrieve gene ontology slim classifications used to annotate targets.",
+        "operationId": "listGoSlim",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of GO slim entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "go_slims": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/GoSlim"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metabolism": {
+      "get": {
+        "tags": ["Drug"],
+        "summary": "List metabolism data",
+        "description": "Retrieve metabolic pathway data with substrate, product, and enzyme references.",
+        "operationId": "listMetabolism",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "substrate_molecule_chembl_id",
+            "in": "query",
+            "description": "Filter by substrate molecule ChEMBL ID",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of metabolism records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "metabolisms": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Metabolism"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protein_class": {
+      "get": {
+        "tags": ["Target"],
+        "summary": "List protein classifications",
+        "description": "Retrieve hierarchical protein family classification information for targets.",
+        "operationId": "listProteinClasses",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of protein classifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "protein_classifications": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/ProteinClass"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tissue": {
+      "get": {
+        "tags": ["Target"],
+        "summary": "List tissues",
+        "description": "Retrieve tissue classification information.",
+        "operationId": "listTissues",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"},
+          {
+            "name": "pref_name",
+            "in": "query",
+            "description": "Filter by tissue preferred name",
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of tissues",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "tissues": {
+                      "type": "array",
+                      "items": {"$ref": "#/components/schemas/Tissue"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/xref_source": {
+      "get": {
+        "tags": ["Molecule"],
+        "summary": "List cross-reference sources",
+        "description": "Retrieve cross-reference source definitions for external chemical and biological databases.",
+        "operationId": "listXrefSources",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"},
+          {"$ref": "#/components/parameters/limit"},
+          {"$ref": "#/components/parameters/offset"}
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of cross-reference sources",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {"$ref": "#/components/schemas/Meta"},
+                    "xref_sources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "xref_src_db": {"type": "string"},
+                          "xref_src_description": {"type": "string"},
+                          "xref_src_url": {"type": "string", "format": "uri"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": ["Status"],
+        "summary": "Get API status",
+        "description": "Retrieve API operational status and ChEMBL database version information including record counts.",
+        "operationId": "getStatus",
+        "parameters": [
+          {"$ref": "#/components/parameters/format"}
+        ],
+        "responses": {
+          "200": {
+            "description": "API status information",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/Status"}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "format": {
+        "name": "format",
+        "in": "query",
+        "description": "Response format",
+        "schema": {"type": "string", "enum": ["json", "xml", "yaml", "jsonp"], "default": "json"}
+      },
+      "limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Number of records to return per page (default 20, max 1000)",
+        "schema": {"type": "integer", "default": 20, "maximum": 1000, "minimum": 1}
+      },
+      "offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Number of records to skip for pagination",
+        "schema": {"type": "integer", "default": 0, "minimum": 0}
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request - invalid query parameters",
+        "content": {
+          "application/json": {
+            "schema": {"$ref": "#/components/schemas/Error"}
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": {"$ref": "#/components/schemas/Error"}
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Meta": {
+        "type": "object",
+        "description": "Pagination metadata for list responses",
+        "properties": {
+          "limit": {"type": "integer", "description": "Number of records returned per page"},
+          "next": {"type": "string", "nullable": true, "description": "URL for the next page of results"},
+          "offset": {"type": "integer", "description": "Number of records skipped"},
+          "previous": {"type": "string", "nullable": true, "description": "URL for the previous page of results"},
+          "total_count": {"type": "integer", "description": "Total number of records matching the query"}
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error_message": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "Status": {
+        "type": "object",
+        "description": "API and database status information",
+        "properties": {
+          "status": {"type": "string", "description": "API operational status", "example": "UP"},
+          "chembl_db_version": {"type": "string", "description": "Current ChEMBL database version", "example": "ChEMBL_37"},
+          "chembl_release_date": {"type": "string", "format": "date", "description": "Release date of current ChEMBL version"},
+          "activities": {"type": "integer", "description": "Total number of activity records"},
+          "compound_records": {"type": "integer", "description": "Total number of compound records"},
+          "disinct_compounds": {"type": "integer", "description": "Total number of distinct compounds"},
+          "publications": {"type": "integer", "description": "Total number of source publications"},
+          "targets": {"type": "integer", "description": "Total number of targets"}
+        }
+      },
+      "Activity": {
+        "type": "object",
+        "description": "A bioactivity measurement linking a compound to a target through an assay",
+        "properties": {
+          "activity_id": {"type": "integer", "description": "Unique ID for the activity record"},
+          "assay_chembl_id": {"type": "string", "description": "ChEMBL ID of the assay"},
+          "assay_description": {"type": "string", "description": "Description of the assay"},
+          "assay_type": {"type": "string", "description": "Assay type code (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)"},
+          "bao_endpoint": {"type": "string", "description": "BioAssay Ontology (BAO) endpoint term ID"},
+          "bao_format": {"type": "string", "description": "BioAssay Ontology (BAO) format term ID"},
+          "bao_label": {"type": "string", "description": "Human-readable BAO endpoint label"},
+          "canonical_smiles": {"type": "string", "description": "Canonical SMILES representation of the compound"},
+          "data_validity_comment": {"type": "string", "nullable": true, "description": "Comment on data validity/quality"},
+          "document_chembl_id": {"type": "string", "description": "ChEMBL ID of the source document"},
+          "document_journal": {"type": "string", "description": "Journal of the source publication"},
+          "document_year": {"type": "integer", "nullable": true, "description": "Year of the source publication"},
+          "molecule_chembl_id": {"type": "string", "description": "ChEMBL ID of the tested compound"},
+          "pchembl_value": {"type": "number", "nullable": true, "description": "Negative log10 of the molar activity value (-log10 of standard value in M)"},
+          "relation": {"type": "string", "nullable": true, "description": "Relationship qualifier for the activity value (=, >, <, >=, <=, ~)"},
+          "standard_flag": {"type": "boolean", "nullable": true, "description": "Whether the activity was standardized"},
+          "standard_relation": {"type": "string", "nullable": true, "description": "Standardized relationship qualifier"},
+          "standard_text_value": {"type": "string", "nullable": true, "description": "Standardized text value for non-numeric activities"},
+          "standard_type": {"type": "string", "nullable": true, "description": "Standardized activity type (e.g., IC50, Ki, EC50, Kd)"},
+          "standard_units": {"type": "string", "nullable": true, "description": "Standardized units of the activity measurement"},
+          "standard_value": {"type": "number", "nullable": true, "description": "Standardized numeric activity value"},
+          "target_chembl_id": {"type": "string", "description": "ChEMBL ID of the biological target"},
+          "target_organism": {"type": "string", "nullable": true, "description": "Organism of the biological target"},
+          "target_pref_name": {"type": "string", "nullable": true, "description": "Preferred name of the biological target"},
+          "target_tax_id": {"type": "string", "nullable": true, "description": "NCBI taxonomy ID of the target organism"},
+          "type": {"type": "string", "nullable": true, "description": "Original activity type as reported in the source document"},
+          "units": {"type": "string", "nullable": true, "description": "Original units as reported in the source document"},
+          "value": {"type": "string", "nullable": true, "description": "Original numeric or text value as reported in the source document"}
+        }
+      },
+      "Assay": {
+        "type": "object",
+        "description": "An experimental assay describing the protocol used to measure bioactivity",
+        "properties": {
+          "assay_category": {"type": "string", "nullable": true, "description": "Assay category (e.g., screening, confirmatory, summary)"},
+          "assay_cell_type": {"type": "string", "nullable": true, "description": "Cell type used in the assay"},
+          "assay_chembl_id": {"type": "string", "description": "Unique ChEMBL ID for the assay"},
+          "assay_description": {"type": "string", "description": "Description of the assay as curated from the source document"},
+          "assay_organism": {"type": "string", "nullable": true, "description": "Organism from which the assay target comes"},
+          "assay_strain": {"type": "string", "nullable": true, "description": "Strain of organism used in the assay"},
+          "assay_subcellular_fraction": {"type": "string", "nullable": true, "description": "Subcellular fraction used in the assay"},
+          "assay_tax_id": {"type": "string", "nullable": true, "description": "NCBI taxonomy ID of the assay organism"},
+          "assay_tissue": {"type": "string", "nullable": true, "description": "Tissue from which the assay is derived"},
+          "assay_type": {"type": "string", "description": "Assay type code"},
+          "assay_type_description": {"type": "string", "nullable": true, "description": "Description of the assay type"},
+          "bao_format": {"type": "string", "nullable": true, "description": "BioAssay Ontology format classification"},
+          "bao_label": {"type": "string", "nullable": true, "description": "BioAssay Ontology format label"},
+          "document_chembl_id": {"type": "string", "description": "ChEMBL ID of the source document"},
+          "relationship_description": {"type": "string", "nullable": true, "description": "Description of the target-assay relationship"},
+          "relationship_type": {"type": "string", "nullable": true, "description": "Relationship between the assay and its molecular target"},
+          "src_assay_id": {"type": "string", "nullable": true, "description": "Assay ID from the source database"},
+          "src_id": {"type": "integer", "nullable": true, "description": "Source database ID"},
+          "target_chembl_id": {"type": "string", "nullable": true, "description": "ChEMBL ID of the assay target"},
+          "tissue_chembl_id": {"type": "string", "nullable": true, "description": "ChEMBL ID of the tissue"},
+          "variant_sequence": {"type": "string", "nullable": true, "description": "Sequence mutation information for variant assays"}
+        }
+      },
+      "MoleculeProperties": {
+        "type": "object",
+        "description": "Calculated physicochemical properties of a molecule",
+        "properties": {
+          "alogp": {"type": "number", "nullable": true, "description": "Calculated ALogP"},
+          "aromatic_rings": {"type": "integer", "nullable": true, "description": "Number of aromatic rings"},
+          "cx_logd": {"type": "number", "nullable": true, "description": "ChemAxon LogD at pH 7.4"},
+          "cx_logp": {"type": "number", "nullable": true, "description": "ChemAxon LogP"},
+          "cx_most_apka": {"type": "number", "nullable": true, "description": "Most acidic pKa (ChemAxon)"},
+          "cx_most_bpka": {"type": "number", "nullable": true, "description": "Most basic pKa (ChemAxon)"},
+          "full_molformula": {"type": "string", "nullable": true, "description": "Molecular formula including all salt and solvent components"},
+          "full_mwt": {"type": "number", "nullable": true, "description": "Molecular weight of parent plus all salt and solvent components"},
+          "hba": {"type": "integer", "nullable": true, "description": "Number of hydrogen bond acceptors (Lipinski definition)"},
+          "hba_lipinski": {"type": "integer", "nullable": true, "description": "Number of hydrogen bond acceptors (Lipinski HBA definition)"},
+          "hbd": {"type": "integer", "nullable": true, "description": "Number of hydrogen bond donors (Lipinski definition)"},
+          "hbd_lipinski": {"type": "integer", "nullable": true, "description": "Number of hydrogen bond donors (Lipinski HBD definition)"},
+          "heavy_atoms": {"type": "integer", "nullable": true, "description": "Number of heavy (non-hydrogen) atoms"},
+          "molecular_species": {"type": "string", "nullable": true, "description": "Classification of the molecular species (ACID, BASE, NEUTRAL, ZWITTERION)"},
+          "mw_freebase": {"type": "number", "nullable": true, "description": "Molecular weight of the freebase/parent form"},
+          "mw_monoisotopic": {"type": "number", "nullable": true, "description": "Monoisotopic molecular weight"},
+          "np_likeness_score": {"type": "number", "nullable": true, "description": "Natural product-likeness score"},
+          "num_lipinski_ro5_violations": {"type": "integer", "nullable": true, "description": "Number of violations of Lipinski's Rule of Five"},
+          "num_ro5_violations": {"type": "integer", "nullable": true, "description": "Number of Lipinski Rule of Five violations"},
+          "psa": {"type": "number", "nullable": true, "description": "Polar surface area"},
+          "qed_weighted": {"type": "number", "nullable": true, "description": "Quantitative Estimate of Drug-likeness (QED) score"},
+          "ro3_pass": {"type": "string", "nullable": true, "description": "Indicates whether the compound satisfies the Rule of Three (fragment-like)"},
+          "rtb": {"type": "integer", "nullable": true, "description": "Number of rotatable bonds"}
+        }
+      },
+      "MoleculeStructures": {
+        "type": "object",
+        "description": "Structural representations of a molecule",
+        "properties": {
+          "canonical_smiles": {"type": "string", "nullable": true, "description": "Canonical SMILES representation"},
+          "molfile": {"type": "string", "nullable": true, "description": "MDL/Symyx molfile structure representation"},
+          "standard_inchi": {"type": "string", "nullable": true, "description": "Standard InChI representation"},
+          "standard_inchi_key": {"type": "string", "nullable": true, "description": "Standard InChIKey (27-character hash)"}
+        }
+      },
+      "Molecule": {
+        "type": "object",
+        "description": "A chemical molecule in the ChEMBL database",
+        "properties": {
+          "molecule_chembl_id": {"type": "string", "description": "Unique ChEMBL ID for the molecule", "example": "CHEMBL25"},
+          "pref_name": {"type": "string", "nullable": true, "description": "Preferred name for the molecule", "example": "ASPIRIN"},
+          "max_phase": {"type": "number", "nullable": true, "description": "Maximum clinical development phase (4 = approved, null = not progressed)"},
+          "molecule_type": {"type": "string", "nullable": true, "description": "Type of molecule (Small molecule, Protein, Antibody, Oligosaccharide, Oligonucleotide, Cell, Unknown)"},
+          "structure_type": {"type": "string", "nullable": true, "description": "Indicates structure type (MOL, SEQ, NONE)"},
+          "chirality": {"type": "integer", "nullable": true, "description": "Chirality: -1=not defined, 0=racemic, 1=single stereoisomer, 2=achiral molecule"},
+          "natural_product": {"type": "integer", "nullable": true, "description": "Natural product flag (1=natural product derived)"},
+          "first_approval": {"type": "integer", "nullable": true, "description": "Year of earliest known approval"},
+          "first_in_class": {"type": "integer", "nullable": true, "description": "First in class flag (1=first compound of its class)"},
+          "oral": {"type": "boolean", "nullable": true, "description": "Oral administration route"},
+          "parenteral": {"type": "boolean", "nullable": true, "description": "Parenteral administration route"},
+          "topical": {"type": "boolean", "nullable": true, "description": "Topical administration route"},
+          "black_box_warning": {"type": "integer", "nullable": true, "description": "Black box warning flag (1=has black box warning)"},
+          "therapeutic_flag": {"type": "boolean", "nullable": true, "description": "Therapeutic application flag"},
+          "withdrawn_flag": {"type": "boolean", "nullable": true, "description": "Withdrawn from market in at least one country"},
+          "prodrug": {"type": "integer", "nullable": true, "description": "Prodrug flag (1=is a prodrug)"},
+          "inorganic_flag": {"type": "integer", "nullable": true, "description": "Inorganic molecule flag"},
+          "usan_year": {"type": "integer", "nullable": true, "description": "Year of USAN/INN name application"},
+          "usan_stem": {"type": "string", "nullable": true, "description": "USAN stem"},
+          "usan_stem_definition": {"type": "string", "nullable": true, "description": "Definition of the USAN stem"},
+          "molecule_properties": {"$ref": "#/components/schemas/MoleculeProperties"},
+          "molecule_structures": {"$ref": "#/components/schemas/MoleculeStructures"},
+          "molecule_synonyms": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "molecule_synonym": {"type": "string"},
+                "syn_type": {"type": "string"},
+                "synonyms": {"type": "string"}
+              }
+            },
+            "description": "List of synonyms and trade names"
+          },
+          "atc_classifications": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "ATC classification codes"
+          }
+        }
+      },
+      "TargetComponent": {
+        "type": "object",
+        "description": "A component (protein sequence) of a target",
+        "properties": {
+          "accession": {"type": "string", "description": "UniProt accession number"},
+          "component_description": {"type": "string", "nullable": true},
+          "component_id": {"type": "integer"},
+          "component_type": {"type": "string", "description": "Component type (PROTEIN, DNA, RNA)"},
+          "relationship": {"type": "string", "description": "Relationship of this component to the target"},
+          "target_component_id": {"type": "integer"}
+        }
+      },
+      "Target": {
+        "type": "object",
+        "description": "A biological target in ChEMBL",
+        "properties": {
+          "target_chembl_id": {"type": "string", "description": "Unique ChEMBL ID for the target", "example": "CHEMBL301"},
+          "pref_name": {"type": "string", "description": "Preferred target name"},
+          "target_type": {"type": "string", "description": "Target type (e.g., SINGLE PROTEIN, PROTEIN COMPLEX, ORGANISM, CELL-LINE)"},
+          "organism": {"type": "string", "nullable": true, "description": "Source organism of the target"},
+          "tax_id": {"type": "integer", "nullable": true, "description": "NCBI taxonomy ID of the target organism"},
+          "species_group_flag": {"type": "boolean", "nullable": true, "description": "Indicates target represents a group of species"},
+          "score": {"type": "number", "nullable": true, "description": "Relevance score for search results"},
+          "target_components": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/TargetComponent"},
+            "description": "Protein components making up this target"
+          },
+          "cross_references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "xref_id": {"type": "string"},
+                "xref_name": {"type": "string"},
+                "xref_src": {"type": "string"}
+              }
+            },
+            "description": "Cross-references to external databases (UniProt, Ensembl, etc.)"
+          }
+        }
+      },
+      "Drug": {
+        "type": "object",
+        "description": "An approved drug with regulatory and patent information",
+        "properties": {
+          "molecule_chembl_id": {"type": "string", "description": "ChEMBL ID of the drug molecule"},
+          "applicants": {"type": "string", "nullable": true, "description": "Drug applicant/manufacturer name"},
+          "atc_classification": {"type": "string", "nullable": true, "description": "ATC classification code"},
+          "availability_type": {"type": "integer", "nullable": true, "description": "Availability type (0=discontinued, 1=prescription only, 2=over-the-counter)"},
+          "biotherapeutic": {"type": "object", "nullable": true},
+          "black_box": {"type": "integer", "nullable": true, "description": "Black box warning flag"},
+          "chirality": {"type": "integer", "nullable": true},
+          "development_phase": {"type": "integer", "nullable": true},
+          "drug_type": {"type": "integer", "nullable": true},
+          "first_approval": {"type": "integer", "nullable": true},
+          "helm_notation": {"type": "string", "nullable": true},
+          "indication_class": {"type": "string", "nullable": true},
+          "molecule_properties": {"$ref": "#/components/schemas/MoleculeProperties"},
+          "molecule_structures": {"$ref": "#/components/schemas/MoleculeStructures"},
+          "molecule_synonyms": {"type": "array", "items": {"type": "object"}},
+          "natural_product": {"type": "integer", "nullable": true},
+          "oral": {"type": "boolean", "nullable": true},
+          "parenteral": {"type": "boolean", "nullable": true},
+          "patent_expire_date": {"type": "string", "nullable": true, "format": "date"},
+          "pref_name": {"type": "string", "nullable": true},
+          "prodrug": {"type": "integer", "nullable": true},
+          "research_codes": {"type": "array", "items": {"type": "string"}, "nullable": true},
+          "sc_patent": {"type": "string", "nullable": true},
+          "synonyms": {"type": "array", "items": {"type": "string"}},
+          "topical": {"type": "boolean", "nullable": true},
+          "usan_stem": {"type": "string", "nullable": true},
+          "usan_year": {"type": "integer", "nullable": true},
+          "withdrawn_class": {"type": "string", "nullable": true},
+          "withdrawn_country": {"type": "string", "nullable": true},
+          "withdrawn_flag": {"type": "boolean", "nullable": true},
+          "withdrawn_reason": {"type": "string", "nullable": true},
+          "withdrawn_year": {"type": "integer", "nullable": true}
+        }
+      },
+      "DrugIndication": {
+        "type": "object",
+        "description": "Association between a drug and a disease indication",
+        "properties": {
+          "drugind_id": {"type": "integer", "description": "Unique ID for the drug indication record"},
+          "efo_id": {"type": "string", "nullable": true, "description": "EFO (Experimental Factor Ontology) term ID"},
+          "efo_term": {"type": "string", "nullable": true, "description": "EFO ontology term for the disease/indication"},
+          "indication_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ref_id": {"type": "string"},
+                "ref_type": {"type": "string"},
+                "ref_url": {"type": "string"}
+              }
+            }
+          },
+          "max_phase_for_ind": {"type": "number", "nullable": true, "description": "Maximum clinical phase reached for this specific indication"},
+          "mesh_heading": {"type": "string", "nullable": true, "description": "MeSH heading for the disease indication"},
+          "mesh_id": {"type": "string", "nullable": true, "description": "MeSH term ID"},
+          "molecule_chembl_id": {"type": "string", "description": "ChEMBL ID of the drug"}
+        }
+      },
+      "DrugWarning": {
+        "type": "object",
+        "description": "Safety warning information for a drug",
+        "properties": {
+          "warning_id": {"type": "integer", "description": "Unique ID for the warning record"},
+          "efo_id": {"type": "string", "nullable": true},
+          "efo_term": {"type": "string", "nullable": true},
+          "molecule_chembl_id": {"type": "string", "description": "ChEMBL ID of the drug"},
+          "parent_molecule_chembl_id": {"type": "string", "nullable": true},
+          "warning_class": {"type": "string", "nullable": true, "description": "Class of the drug warning"},
+          "warning_country": {"type": "string", "nullable": true, "description": "Country where the warning applies"},
+          "warning_refs": {"type": "array", "items": {"type": "object"}},
+          "warning_type": {"type": "string", "nullable": true, "description": "Type of warning (e.g., BLACK BOX WARNING, WITHDRAWN)"},
+          "warning_year": {"type": "integer", "nullable": true, "description": "Year the warning was issued"}
+        }
+      },
+      "Mechanism": {
+        "type": "object",
+        "description": "Mechanism of action for an approved drug",
+        "properties": {
+          "mec_id": {"type": "integer", "description": "Unique ID for the mechanism record"},
+          "action_type": {"type": "string", "nullable": true, "description": "Action type (e.g., INHIBITOR, AGONIST, ANTAGONIST, MODULATOR)"},
+          "binding_site_comment": {"type": "string", "nullable": true},
+          "direct_interaction": {"type": "boolean", "nullable": true, "description": "Indicates a direct interaction with the target"},
+          "disease_efficacy": {"type": "boolean", "nullable": true, "description": "Indicates the mechanism is responsible for clinical efficacy"},
+          "mechanism_comment": {"type": "string", "nullable": true},
+          "mechanism_of_action": {"type": "string", "nullable": true, "description": "Free-text description of the mechanism of action"},
+          "molecular_mechanism": {"type": "boolean", "nullable": true},
+          "molecule_chembl_id": {"type": "string", "description": "ChEMBL ID of the drug"},
+          "refs": {"type": "array", "items": {"type": "object"}},
+          "selectivity_comment": {"type": "string", "nullable": true},
+          "site_id": {"type": "integer", "nullable": true},
+          "target_chembl_id": {"type": "string", "nullable": true, "description": "ChEMBL ID of the mechanism target"}
+        }
+      },
+      "Document": {
+        "type": "object",
+        "description": "A source document (journal article, dataset, patent) for assay data",
+        "properties": {
+          "doc_id": {"type": "integer"},
+          "document_chembl_id": {"type": "string", "description": "Unique ChEMBL ID for the document"},
+          "abstract": {"type": "string", "nullable": true},
+          "authors": {"type": "string", "nullable": true},
+          "doi": {"type": "string", "nullable": true, "description": "Digital Object Identifier"},
+          "first_page": {"type": "string", "nullable": true},
+          "issue": {"type": "string", "nullable": true},
+          "journal": {"type": "string", "nullable": true},
+          "journal_full_title": {"type": "string", "nullable": true},
+          "last_page": {"type": "string", "nullable": true},
+          "patent_id": {"type": "string", "nullable": true},
+          "pubmed_id": {"type": "integer", "nullable": true, "description": "PubMed ID if from a journal article"},
+          "src_id": {"type": "integer"},
+          "title": {"type": "string", "nullable": true},
+          "volume": {"type": "string", "nullable": true},
+          "year": {"type": "integer", "nullable": true}
+        }
+      },
+      "CompoundRecord": {
+        "type": "object",
+        "description": "Occurrence of a compound in a specific source document",
+        "properties": {
+          "record_id": {"type": "integer"},
+          "compound_name": {"type": "string", "nullable": true, "description": "Compound name as listed in the source document"},
+          "document_chembl_id": {"type": "string"},
+          "molecule_chembl_id": {"type": "string"},
+          "src_compound_id": {"type": "string", "nullable": true},
+          "src_id": {"type": "integer"}
+        }
+      },
+      "AtcClass": {
+        "type": "object",
+        "description": "WHO ATC classification entry",
+        "properties": {
+          "who_atc_code": {"type": "string", "description": "WHO ATC classification code", "example": "A10BA02"},
+          "level1": {"type": "string", "nullable": true, "description": "First level ATC code (Anatomical main group)"},
+          "level1_description": {"type": "string", "nullable": true},
+          "level2": {"type": "string", "nullable": true, "description": "Second level ATC code (Therapeutic subgroup)"},
+          "level2_description": {"type": "string", "nullable": true},
+          "level3": {"type": "string", "nullable": true, "description": "Third level ATC code (Pharmacological subgroup)"},
+          "level3_description": {"type": "string", "nullable": true},
+          "level4": {"type": "string", "nullable": true, "description": "Fourth level ATC code (Chemical subgroup)"},
+          "level4_description": {"type": "string", "nullable": true},
+          "level5": {"type": "string", "nullable": true, "description": "Fifth level ATC code (Chemical substance)"},
+          "who_name": {"type": "string", "nullable": true, "description": "WHO recommended name for the substance"}
+        }
+      },
+      "BindingSite": {
+        "type": "object",
+        "description": "A binding site on a target",
+        "properties": {
+          "site_id": {"type": "integer", "description": "Unique ID for the binding site"},
+          "site_name": {"type": "string", "description": "Name of the binding site"},
+          "target_chembl_id": {"type": "string", "nullable": true}
+        }
+      },
+      "CellLine": {
+        "type": "object",
+        "description": "A cell line used in assays",
+        "properties": {
+          "cell_chembl_id": {"type": "string", "description": "ChEMBL ID of the cell line"},
+          "cell_description": {"type": "string", "nullable": true},
+          "cell_id": {"type": "integer"},
+          "cell_name": {"type": "string", "description": "Name of the cell line"},
+          "cell_source_organism": {"type": "string", "nullable": true},
+          "cell_source_tax_id": {"type": "string", "nullable": true},
+          "cell_source_tissue": {"type": "string", "nullable": true},
+          "cellosaurus_id": {"type": "string", "nullable": true, "description": "Cellosaurus cell line identifier"},
+          "clo_id": {"type": "string", "nullable": true, "description": "Cell Line Ontology identifier"},
+          "efo_id": {"type": "string", "nullable": true}
+        }
+      },
+      "GoSlim": {
+        "type": "object",
+        "description": "Gene Ontology slim term for target classification",
+        "properties": {
+          "go_id": {"type": "string", "description": "Gene Ontology term ID"},
+          "protein_class_desc": {"type": "string", "nullable": true},
+          "parent_go_id": {"type": "string", "nullable": true},
+          "prot_class_id": {"type": "integer"}
+        }
+      },
+      "Metabolism": {
+        "type": "object",
+        "description": "Drug metabolism data linking substrate to metabolite via enzyme",
+        "properties": {
+          "met_id": {"type": "integer"},
+          "drug_chembl_id": {"type": "string", "nullable": true, "description": "ChEMBL ID of the drug being metabolized"},
+          "enzyme_chembl_id": {"type": "string", "nullable": true, "description": "ChEMBL ID of the metabolizing enzyme"},
+          "enzyme_name": {"type": "string", "nullable": true},
+          "met_conversion": {"type": "string", "nullable": true, "description": "Description of the metabolic conversion"},
+          "metabolite_chembl_id": {"type": "string", "nullable": true, "description": "ChEMBL ID of the metabolite"},
+          "metabolite_name": {"type": "string", "nullable": true},
+          "organism": {"type": "string", "nullable": true},
+          "pathway_id": {"type": "integer", "nullable": true},
+          "pathway_key": {"type": "string", "nullable": true},
+          "refs": {"type": "array", "items": {"type": "object"}},
+          "substrate_chembl_id": {"type": "string", "nullable": true, "description": "ChEMBL ID of the substrate molecule"},
+          "substrate_name": {"type": "string", "nullable": true},
+          "tax_id": {"type": "string", "nullable": true}
+        }
+      },
+      "ProteinClass": {
+        "type": "object",
+        "description": "Protein family classification in the hierarchy",
+        "properties": {
+          "prot_class_id": {"type": "integer"},
+          "class_level": {"type": "integer", "description": "Hierarchy level (0=root)"},
+          "l1": {"type": "string", "nullable": true, "description": "Level 1 classification"},
+          "l2": {"type": "string", "nullable": true, "description": "Level 2 classification"},
+          "l3": {"type": "string", "nullable": true, "description": "Level 3 classification"},
+          "l4": {"type": "string", "nullable": true, "description": "Level 4 classification"},
+          "l5": {"type": "string", "nullable": true, "description": "Level 5 classification"},
+          "l6": {"type": "string", "nullable": true, "description": "Level 6 classification"},
+          "l7": {"type": "string", "nullable": true, "description": "Level 7 classification"},
+          "l8": {"type": "string", "nullable": true, "description": "Level 8 classification"},
+          "parent_id": {"type": "integer", "nullable": true},
+          "protein_class_desc": {"type": "string", "description": "Full hierarchical description"}
+        }
+      },
+      "Tissue": {
+        "type": "object",
+        "description": "Tissue classification used in ChEMBL",
+        "properties": {
+          "tissue_chembl_id": {"type": "string", "description": "ChEMBL ID of the tissue"},
+          "bto_id": {"type": "string", "nullable": true, "description": "BRENDA Tissue Ontology identifier"},
+          "caloha_id": {"type": "string", "nullable": true},
+          "efo_id": {"type": "string", "nullable": true},
+          "pref_name": {"type": "string", "description": "Preferred tissue name"},
+          "uberon_id": {"type": "string", "nullable": true, "description": "UBERON ontology identifier"}
+        }
+      }
+    }
+  }
+}

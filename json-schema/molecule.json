@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.ebi.ac.uk/chembl/schema/molecule",
+  "title": "ChEMBL Molecule",
+  "description": "A chemical molecule in the ChEMBL database, including physicochemical properties, structural representations, and drug-like attributes.",
+  "type": "object",
+  "properties": {
+    "molecule_chembl_id": {
+      "type": "string",
+      "pattern": "^CHEMBL[0-9]+$",
+      "description": "Unique ChEMBL identifier for the molecule"
+    },
+    "pref_name": {
+      "type": ["string", "null"],
+      "description": "Preferred name for the molecule (INN, USAN, or other standard name)"
+    },
+    "max_phase": {
+      "type": ["number", "null"],
+      "enum": [null, 0, 0.5, 1, 2, 3, 4],
+      "description": "Maximum clinical development phase (4=approved, null=not progressed to clinic)"
+    },
+    "molecule_type": {
+      "type": ["string", "null"],
+      "enum": ["Small molecule", "Protein", "Antibody", "Oligosaccharide", "Oligonucleotide", "Cell", "Unknown", null],
+      "description": "Structural classification of the molecule"
+    },
+    "structure_type": {
+      "type": ["string", "null"],
+      "enum": ["MOL", "SEQ", "NONE", "BOTH", null],
+      "description": "Indicates whether the molecule has a small-molecule structure (MOL), sequence (SEQ), or neither"
+    },
+    "chirality": {
+      "type": ["integer", "null"],
+      "enum": [-1, 0, 1, 2, null],
+      "description": "Chirality: -1=undefined, 0=racemic mixture, 1=single stereoisomer, 2=achiral"
+    },
+    "natural_product": {
+      "type": ["integer", "null"],
+      "enum": [0, 1, null],
+      "description": "Natural product-derived flag"
+    },
+    "first_approval": {
+      "type": ["integer", "null"],
+      "minimum": 1900,
+      "maximum": 2100,
+      "description": "Year of earliest known regulatory approval"
+    },
+    "first_in_class": {
+      "type": ["integer", "null"],
+      "enum": [0, 1, null],
+      "description": "First-in-class compound flag"
+    },
+    "oral": {
+      "type": ["boolean", "null"],
+      "description": "Oral administration route known"
+    },
+    "parenteral": {
+      "type": ["boolean", "null"],
+      "description": "Parenteral administration route known"
+    },
+    "topical": {
+      "type": ["boolean", "null"],
+      "description": "Topical administration route known"
+    },
+    "black_box_warning": {
+      "type": ["integer", "null"],
+      "enum": [0, 1, null],
+      "description": "Black box warning flag"
+    },
+    "therapeutic_flag": {
+      "type": ["boolean", "null"],
+      "description": "Has therapeutic application"
+    },
+    "withdrawn_flag": {
+      "type": ["boolean", "null"],
+      "description": "Withdrawn from market in at least one country"
+    },
+    "prodrug": {
+      "type": ["integer", "null"],
+      "enum": [0, 1, null],
+      "description": "Prodrug flag"
+    },
+    "molecule_properties": {
+      "type": ["object", "null"],
+      "description": "Calculated physicochemical properties",
+      "properties": {
+        "alogp": {"type": ["number", "null"], "description": "Calculated ALogP"},
+        "aromatic_rings": {"type": ["integer", "null"]},
+        "full_mwt": {"type": ["number", "null"], "description": "Full molecular weight including salts"},
+        "hba": {"type": ["integer", "null"], "description": "Hydrogen bond acceptors (Lipinski)"},
+        "hba_lipinski": {"type": ["integer", "null"]},
+        "hbd": {"type": ["integer", "null"], "description": "Hydrogen bond donors (Lipinski)"},
+        "hbd_lipinski": {"type": ["integer", "null"]},
+        "heavy_atoms": {"type": ["integer", "null"]},
+        "molecular_species": {"type": ["string", "null"], "enum": ["ACID", "BASE", "NEUTRAL", "ZWITTERION", null]},
+        "mw_freebase": {"type": ["number", "null"]},
+        "mw_monoisotopic": {"type": ["number", "null"]},
+        "num_lipinski_ro5_violations": {"type": ["integer", "null"], "minimum": 0, "maximum": 4},
+        "psa": {"type": ["number", "null"], "description": "Polar surface area"},
+        "qed_weighted": {"type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "Quantitative Estimate of Drug-likeness"},
+        "rtb": {"type": ["integer", "null"], "description": "Rotatable bonds"}
+      }
+    },
+    "molecule_structures": {
+      "type": ["object", "null"],
+      "description": "Structural representations of the molecule",
+      "properties": {
+        "canonical_smiles": {"type": ["string", "null"]},
+        "molfile": {"type": ["string", "null"]},
+        "standard_inchi": {"type": ["string", "null"]},
+        "standard_inchi_key": {"type": ["string", "null"], "pattern": "^[A-Z]{14}-[A-Z]{10}-[A-Z]$"}
+      }
+    },
+    "molecule_synonyms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "molecule_synonym": {"type": "string"},
+          "syn_type": {"type": "string", "description": "Synonym type (TRADE_NAME, INN, USAN, BAN, etc.)"},
+          "synonyms": {"type": "string"}
+        }
+      }
+    },
+    "atc_classifications": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[A-Z][0-9]{2}[A-Z]{2}[0-9]{2}$"},
+      "description": "ATC classification codes"
+    }
+  },
+  "required": ["molecule_chembl_id"],
+  "examples": [
+    {
+      "molecule_chembl_id": "CHEMBL25",
+      "pref_name": "ASPIRIN",
+      "max_phase": 4,
+      "molecule_type": "Small molecule",
+      "structure_type": "MOL",
+      "chirality": 2,
+      "first_approval": 1950,
+      "oral": true,
+      "therapeutic_flag": true,
+      "withdrawn_flag": false,
+      "molecule_properties": {
+        "alogp": 1.31,
+        "aromatic_rings": 1,
+        "full_mwt": 180.16,
+        "hba": 3,
+        "hbd": 1,
+        "heavy_atoms": 13,
+        "molecular_species": "ACID",
+        "mw_freebase": 180.16,
+        "num_lipinski_ro5_violations": 0,
+        "psa": 63.6,
+        "qed_weighted": 0.55,
+        "rtb": 3
+      },
+      "molecule_structures": {
+        "canonical_smiles": "CC(=O)Oc1ccccc1C(=O)O",
+        "standard_inchi": "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)",
+        "standard_inchi_key": "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
+      },
+      "atc_classifications": ["A01AD05", "B01AC06", "N02BA01"]
+    }
+  ]
+}

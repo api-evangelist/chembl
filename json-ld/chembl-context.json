@@ -1,0 +1,200 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "chembl": "https://www.ebi.ac.uk/chembl/api/data/",
+    "schema": "https://schema.org/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "bao": "http://www.bioassayontology.org/bao#",
+    "sio": "http://semanticscience.org/resource/",
+    "obo": "http://purl.obolibrary.org/obo/",
+    "uniprot": "http://purl.uniprot.org/uniprot/",
+    "pubchem": "https://pubchem.ncbi.nlm.nih.gov/compound/",
+    "Activity": {
+      "@id": "bao:BAO_0000015",
+      "@type": "@id"
+    },
+    "activity_id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:integer"
+    },
+    "assay_chembl_id": {
+      "@id": "chembl:assay",
+      "@type": "@id"
+    },
+    "assay_description": {
+      "@id": "schema:description"
+    },
+    "assay_type": {
+      "@id": "bao:BAO_0002854"
+    },
+    "canonical_smiles": {
+      "@id": "sio:CHEMINF_000018"
+    },
+    "molecule_chembl_id": {
+      "@id": "chembl:molecule",
+      "@type": "@id"
+    },
+    "pchembl_value": {
+      "@id": "bao:BAO_0000190",
+      "@type": "xsd:decimal"
+    },
+    "standard_type": {
+      "@id": "bao:BAO_0000196"
+    },
+    "standard_units": {
+      "@id": "obo:UO_0000000"
+    },
+    "standard_value": {
+      "@id": "bao:BAO_0000183",
+      "@type": "xsd:decimal"
+    },
+    "target_chembl_id": {
+      "@id": "chembl:target",
+      "@type": "@id"
+    },
+    "target_organism": {
+      "@id": "schema:taxonRank"
+    },
+    "document_chembl_id": {
+      "@id": "schema:citation",
+      "@type": "@id"
+    },
+    "Molecule": {
+      "@id": "schema:MolecularEntity",
+      "@type": "@id"
+    },
+    "molecule_chembl_id_direct": {
+      "@id": "schema:identifier"
+    },
+    "pref_name": {
+      "@id": "schema:name"
+    },
+    "max_phase": {
+      "@id": "sio:SIO_000659",
+      "@type": "xsd:decimal"
+    },
+    "molecule_type": {
+      "@id": "schema:additionalType"
+    },
+    "first_approval": {
+      "@id": "schema:datePublished",
+      "@type": "xsd:gYear"
+    },
+    "oral": {
+      "@id": "schema:mechanismOfAction"
+    },
+    "withdrawn_flag": {
+      "@id": "schema:productionDate"
+    },
+    "molecule_structures": {
+      "@id": "sio:SIO_011120"
+    },
+    "canonical_smiles_mol": {
+      "@id": "sio:CHEMINF_000018"
+    },
+    "standard_inchi": {
+      "@id": "sio:CHEMINF_000113"
+    },
+    "standard_inchi_key": {
+      "@id": "sio:CHEMINF_000059"
+    },
+    "molecule_properties": {
+      "@id": "schema:additionalProperty"
+    },
+    "mw_freebase": {
+      "@id": "obo:CHEMINF_000198",
+      "@type": "xsd:decimal"
+    },
+    "alogp": {
+      "@id": "obo:CHEMINF_000395",
+      "@type": "xsd:decimal"
+    },
+    "psa": {
+      "@id": "obo:CHEMINF_000392",
+      "@type": "xsd:decimal"
+    },
+    "hbd": {
+      "@id": "obo:CHEMINF_000393",
+      "@type": "xsd:integer"
+    },
+    "hba": {
+      "@id": "obo:CHEMINF_000388",
+      "@type": "xsd:integer"
+    },
+    "Target": {
+      "@id": "bao:BAO_0000694",
+      "@type": "@id"
+    },
+    "target_chembl_id_direct": {
+      "@id": "schema:identifier"
+    },
+    "target_type": {
+      "@id": "bao:BAO_0003101"
+    },
+    "organism": {
+      "@id": "schema:taxonRank"
+    },
+    "tax_id": {
+      "@id": "obo:NCBITaxon_1"
+    },
+    "target_components": {
+      "@id": "bao:BAO_0000569"
+    },
+    "accession": {
+      "@id": "uniprot:"
+    },
+    "Assay": {
+      "@id": "bao:BAO_0000015",
+      "@type": "@id"
+    },
+    "assay_chembl_id_direct": {
+      "@id": "schema:identifier"
+    },
+    "Document": {
+      "@id": "schema:ScholarlyArticle",
+      "@type": "@id"
+    },
+    "document_chembl_id_direct": {
+      "@id": "schema:identifier"
+    },
+    "doi": {
+      "@id": "schema:sameAs"
+    },
+    "pubmed_id": {
+      "@id": "schema:sameAs"
+    },
+    "journal": {
+      "@id": "schema:isPartOf"
+    },
+    "year": {
+      "@id": "schema:datePublished",
+      "@type": "xsd:gYear"
+    },
+    "title": {
+      "@id": "schema:headline"
+    },
+    "authors": {
+      "@id": "schema:author"
+    },
+    "DrugIndication": {
+      "@id": "schema:MedicalIndication",
+      "@type": "@id"
+    },
+    "efo_id": {
+      "@id": "schema:sameAs"
+    },
+    "efo_term": {
+      "@id": "schema:name"
+    },
+    "mesh_heading": {
+      "@id": "schema:medicalCode"
+    },
+    "max_phase_for_ind": {
+      "@id": "schema:status",
+      "@type": "xsd:decimal"
+    }
+  }
+}

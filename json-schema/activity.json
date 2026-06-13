@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.ebi.ac.uk/chembl/schema/activity",
+  "title": "ChEMBL Activity",
+  "description": "A bioactivity measurement from a ChEMBL assay, linking a compound to a biological target with a quantitative or qualitative measurement.",
+  "type": "object",
+  "properties": {
+    "activity_id": {
+      "type": "integer",
+      "description": "Unique numeric ID for the activity record"
+    },
+    "assay_chembl_id": {
+      "type": "string",
+      "pattern": "^CHEMBL[0-9]+$",
+      "description": "ChEMBL ID of the assay"
+    },
+    "assay_description": {
+      "type": ["string", "null"],
+      "description": "Description of the assay as extracted from the source document"
+    },
+    "assay_type": {
+      "type": ["string", "null"],
+      "enum": ["B", "F", "A", "T", "P", "U", null],
+      "description": "Assay type code: B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified"
+    },
+    "bao_endpoint": {
+      "type": ["string", "null"],
+      "description": "BioAssay Ontology (BAO) endpoint term ID"
+    },
+    "bao_format": {
+      "type": ["string", "null"],
+      "description": "BioAssay Ontology format term ID"
+    },
+    "bao_label": {
+      "type": ["string", "null"],
+      "description": "Human-readable BAO endpoint label"
+    },
+    "canonical_smiles": {
+      "type": ["string", "null"],
+      "description": "Canonical SMILES representation of the tested compound"
+    },
+    "data_validity_comment": {
+      "type": ["string", "null"],
+      "description": "Comment on data validity or quality issues"
+    },
+    "document_chembl_id": {
+      "type": ["string", "null"],
+      "pattern": "^CHEMBL[0-9]+$",
+      "description": "ChEMBL ID of the source document"
+    },
+    "document_journal": {
+      "type": ["string", "null"],
+      "description": "Journal of the source publication"
+    },
+    "document_year": {
+      "type": ["integer", "null"],
+      "description": "Year of the source publication"
+    },
+    "molecule_chembl_id": {
+      "type": "string",
+      "pattern": "^CHEMBL[0-9]+$",
+      "description": "ChEMBL ID of the tested compound"
+    },
+    "pchembl_value": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 20,
+      "description": "Negative log10 of the molar activity value (comparable across activity types)"
+    },
+    "relation": {
+      "type": ["string", "null"],
+      "enum": ["=", ">", "<", ">=", "<=", "~", null],
+      "description": "Relationship qualifier for the original reported activity value"
+    },
+    "standard_flag": {
+      "type": ["boolean", "null"],
+      "description": "Whether this activity value was standardized"
+    },
+    "standard_relation": {
+      "type": ["string", "null"],
+      "enum": ["=", ">", "<", ">=", "<=", "~", null],
+      "description": "Standardized relationship qualifier"
+    },
+    "standard_text_value": {
+      "type": ["string", "null"],
+      "description": "Standardized text value for non-numeric activities"
+    },
+    "standard_type": {
+      "type": ["string", "null"],
+      "description": "Standardized activity type (e.g., IC50, Ki, EC50, Kd, Potency)"
+    },
+    "standard_units": {
+      "type": ["string", "null"],
+      "description": "Standardized units of the activity measurement (e.g., nM, uM)"
+    },
+    "standard_value": {
+      "type": ["number", "null"],
+      "description": "Standardized numeric activity value"
+    },
+    "target_chembl_id": {
+      "type": ["string", "null"],
+      "pattern": "^CHEMBL[0-9]+$",
+      "description": "ChEMBL ID of the biological target"
+    },
+    "target_organism": {
+      "type": ["string", "null"],
+      "description": "Organism of the biological target"
+    },
+    "target_pref_name": {
+      "type": ["string", "null"],
+      "description": "Preferred name of the biological target"
+    },
+    "target_tax_id": {
+      "type": ["string", "null"],
+      "description": "NCBI taxonomy ID of the target organism"
+    },
+    "type": {
+      "type": ["string", "null"],
+      "description": "Original activity type as reported in the source document"
+    },
+    "units": {
+      "type": ["string", "null"],
+      "description": "Original units as reported in the source document"
+    },
+    "value": {
+      "type": ["string", "null"],
+      "description": "Original numeric or text value as reported"
+    }
+  },
+  "required": ["activity_id", "assay_chembl_id", "molecule_chembl_id"],
+  "examples": [
+    {
+      "activity_id": 31863,
+      "assay_chembl_id": "CHEMBL1909072",
+      "assay_description": "Inhibition of human COX-2",
+      "assay_type": "B",
+      "canonical_smiles": "CC(=O)Oc1ccccc1C(=O)O",
+      "document_chembl_id": "CHEMBL1124375",
+      "document_journal": "J. Med. Chem.",
+      "document_year": 1999,
+      "molecule_chembl_id": "CHEMBL25",
+      "pchembl_value": 4.2,
+      "relation": "=",
+      "standard_relation": "=",
+      "standard_type": "IC50",
+      "standard_units": "nM",
+      "standard_value": 60000,
+      "target_chembl_id": "CHEMBL301",
+      "target_organism": "Homo sapiens",
+      "target_pref_name": "Cyclooxygenase-2",
+      "type": "IC50",
+      "units": "uM",
+      "value": "60"
+    }
+  ]
+}

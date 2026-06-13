@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "limit": 20,
+    "next": "/chembl/api/data/molecule?limit=20&offset=20",
+    "offset": 0,
+    "previous": null,
+    "total_count": 2921148
+  },
+  "molecules": [
+    {
+      "molecule_chembl_id": "CHEMBL25",
+      "pref_name": "ASPIRIN",
+      "max_phase": 4,
+      "molecule_type": "Small molecule",
+      "structure_type": "MOL",
+      "chirality": 2,
+      "natural_product": 0,
+      "first_approval": 1950,
+      "first_in_class": 0,
+      "oral": true,
+      "parenteral": true,
+      "topical": false,
+      "black_box_warning": 0,
+      "therapeutic_flag": true,
+      "withdrawn_flag": false,
+      "prodrug": 0,
+      "inorganic_flag": 0,
+      "usan_stem": null,
+      "usan_year": null,
+      "molecule_properties": {
+        "alogp": 1.31,
+        "aromatic_rings": 1,
+        "cx_logd": 0.89,
+        "cx_logp": 1.31,
+        "cx_most_apka": 3.49,
+        "cx_most_bpka": null,
+        "full_molformula": "C9H8O4",
+        "full_mwt": 180.16,
+        "hba": 3,
+        "hba_lipinski": 4,
+        "hbd": 1,
+        "hbd_lipinski": 1,
+        "heavy_atoms": 13,
+        "molecular_species": "ACID",
+        "mw_freebase": 180.16,
+        "mw_monoisotopic": 180.0423,
+        "np_likeness_score": -0.34,
+        "num_lipinski_ro5_violations": 0,
+        "num_ro5_violations": 0,
+        "psa": 63.6,
+        "qed_weighted": 0.55,
+        "ro3_pass": "N",
+        "rtb": 3
+      },
+      "molecule_structures": {
+        "canonical_smiles": "CC(=O)Oc1ccccc1C(=O)O",
+        "molfile": "\n     RDKit          2D\n\n 13 13  0  0  0  0  0  0  0  0999 V2000\n...",
+        "standard_inchi": "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)",
+        "standard_inchi_key": "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
+      },
+      "molecule_synonyms": [
+        {"molecule_synonym": "Aspirin", "syn_type": "INN", "synonyms": "ASPIRIN"},
+        {"molecule_synonym": "Bayer Aspirin", "syn_type": "TRADE_NAME", "synonyms": "BAYER ASPIRIN"},
+        {"molecule_synonym": "Acetylsalicylic acid", "syn_type": "OTHER", "synonyms": "ACETYLSALICYLIC ACID"}
+      ],
+      "atc_classifications": ["A01AD05", "B01AC06", "N02BA01"]
+    },
+    {
+      "molecule_chembl_id": "CHEMBL941",
+      "pref_name": "IBUPROFEN",
+      "max_phase": 4,
+      "molecule_type": "Small molecule",
+      "structure_type": "MOL",
+      "chirality": 0,
+      "natural_product": 0,
+      "first_approval": 1969,
+      "first_in_class": 0,
+      "oral": true,
+      "parenteral": false,
+      "topical": true,
+      "black_box_warning": 0,
+      "therapeutic_flag": true,
+      "withdrawn_flag": false,
+      "prodrug": 0,
+      "molecule_properties": {
+        "alogp": 3.97,
+        "aromatic_rings": 1,
+        "full_mwt": 206.28,
+        "hba": 1,
+        "hbd": 1,
+        "heavy_atoms": 15,
+        "molecular_species": "ACID",
+        "mw_freebase": 206.28,
+        "mw_monoisotopic": 206.1307,
+        "num_lipinski_ro5_violations": 0,
+        "psa": 37.3,
+        "qed_weighted": 0.67,
+        "rtb": 4
+      },
+      "molecule_structures": {
+        "canonical_smiles": "CC(C)Cc1ccc(cc1)C(C)C(=O)O",
+        "standard_inchi": "InChI=1S/C13H18O2/c1-9(2)8-11-4-6-12(7-5-11)10(3)13(14)15/h4-7,9-10H,8H2,1-3H3,(H,14,15)",
+        "standard_inchi_key": "HEFNNWSXXWATRW-UHFFFAOYSA-N"
+      },
+      "atc_classifications": ["G02CC01", "M01AE01", "M02AA13"]
+    }
+  ]
+}

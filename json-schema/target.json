@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.ebi.ac.uk/chembl/schema/target",
+  "title": "ChEMBL Target",
+  "description": "A biological target in ChEMBL, which can be a single protein, protein complex, organism, cell line, nucleic acid, or other biological entity.",
+  "type": "object",
+  "properties": {
+    "target_chembl_id": {
+      "type": "string",
+      "pattern": "^CHEMBL[0-9]+$",
+      "description": "Unique ChEMBL identifier for the target"
+    },
+    "pref_name": {
+      "type": "string",
+      "description": "Preferred name for the target (manually curated)"
+    },
+    "target_type": {
+      "type": "string",
+      "enum": [
+        "SINGLE PROTEIN",
+        "PROTEIN COMPLEX",
+        "PROTEIN FAMILY",
+        "PROTEIN COMPLEX GROUP",
+        "SELECTIVITY GROUP",
+        "ORGANISM",
+        "TISSUE",
+        "CELL-LINE",
+        "NUCLEIC-ACID",
+        "ADMET",
+        "SUBCELLULAR",
+        "METAL",
+        "CHIMERIC PROTEIN",
+        "PROTEIN PROTEIN INTERACTION",
+        "UNKNOWN"
+      ],
+      "description": "Classification of the target type"
+    },
+    "organism": {
+      "type": ["string", "null"],
+      "description": "Source organism of the target (e.g., Homo sapiens)"
+    },
+    "tax_id": {
+      "type": ["integer", "null"],
+      "description": "NCBI taxonomy ID of the target organism"
+    },
+    "species_group_flag": {
+      "type": ["boolean", "null"],
+      "description": "Indicates if the target represents a group of species rather than a single organism"
+    },
+    "target_components": {
+      "type": "array",
+      "description": "Protein components (sequences) that make up this target",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accession": {
+            "type": ["string", "null"],
+            "description": "UniProt accession number for the protein component"
+          },
+          "component_description": {
+            "type": ["string", "null"],
+            "description": "Description of the component"
+          },
+          "component_id": {
+            "type": "integer"
+          },
+          "component_type": {
+            "type": "string",
+            "enum": ["PROTEIN", "DNA", "RNA"],
+            "description": "Type of component sequence"
+          },
+          "relationship": {
+            "type": "string",
+            "description": "Relationship of this component to the target (e.g., SINGLE PROTEIN, SUBUNIT)"
+          },
+          "target_component_id": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "cross_references": {
+      "type": "array",
+      "description": "Cross-references to external databases",
+      "items": {
+        "type": "object",
+        "properties": {
+          "xref_id": {"type": "string"},
+          "xref_name": {"type": ["string", "null"]},
+          "xref_src": {"type": "string", "description": "Source database abbreviation (e.g., UniProt, Ensembl, HGNC)"}
+        }
+      }
+    }
+  },
+  "required": ["target_chembl_id", "pref_name", "target_type"],
+  "examples": [
+    {
+      "target_chembl_id": "CHEMBL301",
+      "pref_name": "Cyclooxygenase-2",
+      "target_type": "SINGLE PROTEIN",
+      "organism": "Homo sapiens",
+      "tax_id": 9606,
+      "species_group_flag": false,
+      "target_components": [
+        {
+          "accession": "P35354",
+          "component_description": "Prostaglandin G/H synthase 2",
+          "component_id": 382,
+          "component_type": "PROTEIN",
+          "relationship": "SINGLE PROTEIN",
+          "target_component_id": 382
+        }
+      ],
+      "cross_references": [
+        {
+          "xref_id": "P35354",
+          "xref_name": "PTGS2_HUMAN",
+          "xref_src": "UniProt"
+        },
+        {
+          "xref_id": "ENSG00000073756",
+          "xref_name": "PTGS2",
+          "xref_src": "Ensembl"
+        }
+      ]
+    }
+  ]
+}

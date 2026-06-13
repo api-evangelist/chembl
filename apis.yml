@@ -23,6 +23,8 @@ apis:
         url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
       - type: OpenAPI
         url: https://www.ebi.ac.uk/chembl/api/data/docs
+      - type: OpenAPI
+        url: openapi/openapi.json
       - type: TermsOfService
         url: https://www.ebi.ac.uk/about/terms-of-use/
     contact:

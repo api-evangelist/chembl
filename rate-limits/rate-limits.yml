@@ -1,0 +1,28 @@
+rateLimits:
+  documented: false
+  summary: >
+    ChEMBL does not publish explicit rate limits for its public REST API. As a
+    publicly funded EMBL-EBI resource, the API is intended for open access without
+    quotas or throttling. However, EMBL-EBI's general terms of service prohibit
+    usage patterns that would prevent other users from accessing services. Abusive
+    or excessive usage may result in IP-level blocking at the discretion of the
+    ChEMBL team.
+  policies:
+    - name: Fair Use Policy
+      description: Users must not employ methods that interfere with service availability for other users. Any attempt to use EMBL-EBI Data Resources and Tools to a level that prevents EMBL-EBI from providing services to others will result in the user being blocked.
+      source: https://www.ebi.ac.uk/about/terms-of-use/
+      enforcement: IP blocking for abusive usage
+    - name: Bulk Access Recommendation
+      description: For large-scale or bulk data access, EMBL-EBI recommends using FTP downloads rather than the REST API to reduce load on the API service.
+      source: https://www.ebi.ac.uk/chembl/
+      recommendation: Use FTP bulk downloads for large datasets
+  pagination:
+    defaultPageSize: 20
+    description: Results are paginated with a default of 20 records per page. Page size can be adjusted via the limit parameter.
+  recommendations:
+    - Use the official Python client (chembl_webresource_client) which handles pagination and retries gracefully
+    - For bulk data needs, prefer FTP downloads over repeated API calls
+    - Use POST with X-HTTP-Method-Override header for complex queries instead of very long GET URLs
+    - Cache responses locally when performing repeated lookups of the same entities
+  contact: chembl-help@ebi.ac.uk
+  termsUrl: https://www.ebi.ac.uk/about/terms-of-use/

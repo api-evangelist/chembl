@@ -1,0 +1,43 @@
+finops:
+  model: free-open-access
+  cost: $0
+  summary: >
+    ChEMBL is a publicly funded resource maintained by EMBL-EBI with no cost to
+    API consumers. There are no subscription tiers, usage-based charges, or premium
+    plans. All API access, data downloads, and cheminformatics utilities are provided
+    free of charge to both academic and commercial users. Funding comes from EMBL
+    member state contributions and public research grants including the Wellcome Trust
+    and BBSRC.
+  pricing:
+    - tier: Open Access
+      price: Free
+      currency: N/A
+      billing: None
+      features:
+        - Full ChEMBL Data REST API access
+        - Full Cheminformatics Utilities API access
+        - FTP bulk data downloads
+        - All response formats (JSON, XML, YAML, SDF, SVG)
+        - Python client library (open source, MIT license)
+  considerations:
+    - No API keys to manage or rotate
+    - No usage bills or overage charges
+    - No rate limit tiers to track
+    - Attribution in publications is expected per scientific community norms
+    - Commercial use permitted under CC BY-SA 3.0 license with attribution
+    - Self-hosting option: full database dumps available via FTP for organizations needing private instances
+  funding:
+    - EMBL member state contributions
+    - Wellcome Trust
+    - BBSRC (UK Research and Innovation)
+    - OpenTargets partnership
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+    commercial: true
+    attribution: required
+    shareAlike: true
+  contacts:
+    - type: General
+      email: chembl-help@ebi.ac.uk
+      url: https://www.ebi.ac.uk/chembl/

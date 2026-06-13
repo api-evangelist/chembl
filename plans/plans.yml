@@ -1,0 +1,31 @@
+plans:
+  - name: Free Open Access
+    description: ChEMBL is freely and openly accessible to all users including academic and commercial organizations. No registration, API key, or subscription is required to use the REST API. All data is released under Creative Commons Attribution-ShareAlike 3.0 Unported license.
+    url: https://www.ebi.ac.uk/chembl/
+    type: free
+    features:
+      - Full access to all ChEMBL Data API endpoints
+      - Full access to ChEMBL Cheminformatics Utilities API
+      - Supports JSON, XML, YAML, SDF, and SVG response formats
+      - Offset-based pagination with configurable page sizes
+      - Advanced filtering and full-text search via Elasticsearch
+      - Molecule similarity and substructure search
+      - No API key required
+      - No registration required
+      - Commercial use permitted (with attribution)
+    limits:
+      - Users must not use the API in a way that prevents others from accessing EMBL-EBI services
+      - Fair use expected; abusive usage may result in IP blocking
+    attribution:
+      - Attribution expected in publications, services, or products per good scientific practice
+      - Specific citation format available on the ChEMBL website
+    license:
+      name: Creative Commons Attribution-ShareAlike 3.0 Unported
+      url: https://creativecommons.org/licenses/by-sa/3.0/
+    termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+notes: >
+  ChEMBL is maintained by EMBL-EBI and is recognized as an ELIXIR Core Data Resource and
+  Global Core Biodata Resource. As a publicly funded research infrastructure, all data
+  and API access is provided at no cost. Bulk data downloads are also available via FTP.
+  The API is currently serving ChEMBL_37 (released May 2026), containing over 24.5 million
+  activities, ~2.9 million compounds, 101,100 publications, and 18,552 targets.

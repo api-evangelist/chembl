@@ -173,6 +173,8 @@ apis:
         description: Operational status and version of the cheminformatics utilities service
         url: https://www.ebi.ac.uk/chembl/api/utils/status
 common:
+  - type: DomainSecurity
+    url: security/chembl-domain-security.yml
   - type: Authentication
     value: None - public API, no key required
   - type: Formats

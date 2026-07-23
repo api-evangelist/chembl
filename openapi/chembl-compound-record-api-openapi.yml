@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: ChEMBL Data REST Activity Compound Record API
+  description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
+  version: ChEMBL_37
+  contact:
+    name: ChEMBL Team
+    email: chembl-help@ebi.ac.uk
+    url: https://www.ebi.ac.uk/chembl/
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+  termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+  x-logo:
+    url: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
+servers:
+- url: https://www.ebi.ac.uk/chembl/api/data
+  description: ChEMBL Production API Server
+tags:
+- name: Compound Record
+  description: Occurrence of a compound in a specific source document.
+paths:
+  /compound_record:
+    get:
+      tags:
+      - Compound Record
+      summary: List compound records
+      description: Retrieve compound records representing the occurrence of a compound in a specific document.
+      operationId: listCompoundRecords
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: molecule_chembl_id
+        in: query
+        description: Filter by molecule ChEMBL ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of compound records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  compound_records:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompoundRecord'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+  schemas:
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type: string
+          nullable: true
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    CompoundRecord:
+      type: object
+      description: Occurrence of a compound in a specific source document
+      properties:
+        record_id:
+          type: integer
+        compound_name:
+          type: string
+          nullable: true
+          description: Compound name as listed in the source document
+        document_chembl_id:
+          type: string
+        molecule_chembl_id:
+          type: string
+        src_compound_id:
+          type: string
+          nullable: true
+        src_id:
+          type: integer
+externalDocs:
+  description: ChEMBL Web Services Documentation
+  url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

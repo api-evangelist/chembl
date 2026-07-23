@@ -1,0 +1,440 @@
+openapi: 3.0.3
+info:
+  title: ChEMBL Data REST Activity Target API
+  description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
+  version: ChEMBL_37
+  contact:
+    name: ChEMBL Team
+    email: chembl-help@ebi.ac.uk
+    url: https://www.ebi.ac.uk/chembl/
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+  termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+  x-logo:
+    url: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
+servers:
+- url: https://www.ebi.ac.uk/chembl/api/data
+  description: ChEMBL Production API Server
+tags:
+- name: Target
+  description: Protein and non-protein targets defined in assays.
+paths:
+  /target:
+    get:
+      tags:
+      - Target
+      summary: List targets
+      description: Retrieve a paginated list of targets. Targets can be single proteins, protein complexes, organisms, cell lines, or other biological entities.
+      operationId: listTargets
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: target_chembl_id
+        in: query
+        description: Filter by target ChEMBL ID
+        schema:
+          type: string
+          example: CHEMBL301
+      - name: target_type
+        in: query
+        description: Filter by target type (e.g., SINGLE PROTEIN, PROTEIN COMPLEX)
+        schema:
+          type: string
+          example: SINGLE PROTEIN
+      - name: organism
+        in: query
+        description: Filter by organism (e.g., Homo sapiens)
+        schema:
+          type: string
+          example: Homo sapiens
+      - name: pref_name
+        in: query
+        description: Filter by preferred target name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of targets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  targets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Target'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /target/{target_chembl_id}:
+    get:
+      tags:
+      - Target
+      summary: Get target by ChEMBL ID
+      description: Retrieve a single target record by its ChEMBL ID.
+      operationId: getTarget
+      parameters:
+      - name: target_chembl_id
+        in: path
+        required: true
+        description: ChEMBL ID of the target
+        schema:
+          type: string
+          example: CHEMBL301
+      - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Target record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Target'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /target/search:
+    get:
+      tags:
+      - Target
+      summary: Search targets
+      description: Full-text search for targets by name or other text fields.
+      operationId: searchTargets
+      parameters:
+      - name: q
+        in: query
+        required: true
+        description: Search query string
+        schema:
+          type: string
+          example: kinase
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  targets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Target'
+  /go_slim:
+    get:
+      tags:
+      - Target
+      summary: List GO slim classifications
+      description: Retrieve gene ontology slim classifications used to annotate targets.
+      operationId: listGoSlim
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of GO slim entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  go_slims:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoSlim'
+  /protein_class:
+    get:
+      tags:
+      - Target
+      summary: List protein classifications
+      description: Retrieve hierarchical protein family classification information for targets.
+      operationId: listProteinClasses
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Paginated list of protein classifications
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  protein_classifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProteinClass'
+  /tissue:
+    get:
+      tags:
+      - Target
+      summary: List tissues
+      description: Retrieve tissue classification information.
+      operationId: listTissues
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: pref_name
+        in: query
+        description: Filter by tissue preferred name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of tissues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  tissues:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tissue'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+  schemas:
+    Error:
+      type: object
+      properties:
+        error_message:
+          type: string
+        status:
+          type: string
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type: string
+          nullable: true
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    Tissue:
+      type: object
+      description: Tissue classification used in ChEMBL
+      properties:
+        tissue_chembl_id:
+          type: string
+          description: ChEMBL ID of the tissue
+        bto_id:
+          type: string
+          nullable: true
+          description: BRENDA Tissue Ontology identifier
+        caloha_id:
+          type: string
+          nullable: true
+        efo_id:
+          type: string
+          nullable: true
+        pref_name:
+          type: string
+          description: Preferred tissue name
+        uberon_id:
+          type: string
+          nullable: true
+          description: UBERON ontology identifier
+    GoSlim:
+      type: object
+      description: Gene Ontology slim term for target classification
+      properties:
+        go_id:
+          type: string
+          description: Gene Ontology term ID
+        protein_class_desc:
+          type: string
+          nullable: true
+        parent_go_id:
+          type: string
+          nullable: true
+        prot_class_id:
+          type: integer
+    Target:
+      type: object
+      description: A biological target in ChEMBL
+      properties:
+        target_chembl_id:
+          type: string
+          description: Unique ChEMBL ID for the target
+          example: CHEMBL301
+        pref_name:
+          type: string
+          description: Preferred target name
+        target_type:
+          type: string
+          description: Target type (e.g., SINGLE PROTEIN, PROTEIN COMPLEX, ORGANISM, CELL-LINE)
+        organism:
+          type: string
+          nullable: true
+          description: Source organism of the target
+        tax_id:
+          type: integer
+          nullable: true
+          description: NCBI taxonomy ID of the target organism
+        species_group_flag:
+          type: boolean
+          nullable: true
+          description: Indicates target represents a group of species
+        score:
+          type: number
+          nullable: true
+          description: Relevance score for search results
+        target_components:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetComponent'
+          description: Protein components making up this target
+        cross_references:
+          type: array
+          items:
+            type: object
+            properties:
+              xref_id:
+                type: string
+              xref_name:
+                type: string
+              xref_src:
+                type: string
+          description: Cross-references to external databases (UniProt, Ensembl, etc.)
+    ProteinClass:
+      type: object
+      description: Protein family classification in the hierarchy
+      properties:
+        prot_class_id:
+          type: integer
+        class_level:
+          type: integer
+          description: Hierarchy level (0=root)
+        l1:
+          type: string
+          nullable: true
+          description: Level 1 classification
+        l2:
+          type: string
+          nullable: true
+          description: Level 2 classification
+        l3:
+          type: string
+          nullable: true
+          description: Level 3 classification
+        l4:
+          type: string
+          nullable: true
+          description: Level 4 classification
+        l5:
+          type: string
+          nullable: true
+          description: Level 5 classification
+        l6:
+          type: string
+          nullable: true
+          description: Level 6 classification
+        l7:
+          type: string
+          nullable: true
+          description: Level 7 classification
+        l8:
+          type: string
+          nullable: true
+          description: Level 8 classification
+        parent_id:
+          type: integer
+          nullable: true
+        protein_class_desc:
+          type: string
+          description: Full hierarchical description
+    TargetComponent:
+      type: object
+      description: A component (protein sequence) of a target
+      properties:
+        accession:
+          type: string
+          description: UniProt accession number
+        component_description:
+          type: string
+          nullable: true
+        component_id:
+          type: integer
+        component_type:
+          type: string
+          description: Component type (PROTEIN, DNA, RNA)
+        relationship:
+          type: string
+          description: Relationship of this component to the target
+        target_component_id:
+          type: integer
+  responses:
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+externalDocs:
+  description: ChEMBL Web Services Documentation
+  url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

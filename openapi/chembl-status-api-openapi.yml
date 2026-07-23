@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: ChEMBL Data REST Activity Status API
+  description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
+  version: ChEMBL_37
+  contact:
+    name: ChEMBL Team
+    email: chembl-help@ebi.ac.uk
+    url: https://www.ebi.ac.uk/chembl/
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+  termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+  x-logo:
+    url: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
+servers:
+- url: https://www.ebi.ac.uk/chembl/api/data
+  description: ChEMBL Production API Server
+tags:
+- name: Status
+  description: API operational status and ChEMBL database version information.
+paths:
+  /chembl_id_lookup:
+    get:
+      tags:
+      - Status
+      summary: ChEMBL ID lookup
+      description: Identify the entity type (molecule, assay, target, document, etc.) for a given ChEMBL ID.
+      operationId: chemblIdLookup
+      parameters:
+      - name: chembl_id
+        in: query
+        description: ChEMBL ID to look up
+        schema:
+          type: string
+          example: CHEMBL25
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: ChEMBL ID lookup result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  chembl_id_lookups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chembl_id:
+                          type: string
+                        entity_type:
+                          type: string
+                        resource_url:
+                          type: string
+                        status:
+                          type: string
+  /status:
+    get:
+      tags:
+      - Status
+      summary: Get API status
+      description: Retrieve API operational status and ChEMBL database version information including record counts.
+      operationId: getStatus
+      parameters:
+      - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: API status information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+  schemas:
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type: string
+          nullable: true
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    Status:
+      type: object
+      description: API and database status information
+      properties:
+        status:
+          type: string
+          description: API operational status
+          example: UP
+        chembl_db_version:
+          type: string
+          description: Current ChEMBL database version
+          example: ChEMBL_37
+        chembl_release_date:
+          type: string
+          format: date
+          description: Release date of current ChEMBL version
+        activities:
+          type: integer
+          description: Total number of activity records
+        compound_records:
+          type: integer
+          description: Total number of compound records
+        disinct_compounds:
+          type: integer
+          description: Total number of distinct compounds
+        publications:
+          type: integer
+          description: Total number of source publications
+        targets:
+          type: integer
+          description: Total number of targets
+externalDocs:
+  description: ChEMBL Web Services Documentation
+  url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

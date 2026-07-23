@@ -1,0 +1,441 @@
+openapi: 3.0.3
+info:
+  title: ChEMBL Data REST Activity Drug API
+  description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
+  version: ChEMBL_37
+  contact:
+    name: ChEMBL Team
+    email: chembl-help@ebi.ac.uk
+    url: https://www.ebi.ac.uk/chembl/
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+  termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+  x-logo:
+    url: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
+servers:
+- url: https://www.ebi.ac.uk/chembl/api/data
+  description: ChEMBL Production API Server
+tags:
+- name: Drug
+  description: Approved drug information including applicants, patent numbers, and research codes.
+paths:
+  /drug:
+    get:
+      tags:
+      - Drug
+      summary: List approved drugs
+      description: Retrieve a paginated list of approved drugs with information on applicants, patent numbers, research codes, and regulatory data.
+      operationId: listDrugs
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: molecule_chembl_id
+        in: query
+        description: Filter by molecule ChEMBL ID
+        schema:
+          type: string
+      - name: applicants
+        in: query
+        description: Filter by drug applicant name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of drugs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  drugs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Drug'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /metabolism:
+    get:
+      tags:
+      - Drug
+      summary: List metabolism data
+      description: Retrieve metabolic pathway data with substrate, product, and enzyme references.
+      operationId: listMetabolism
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: substrate_molecule_chembl_id
+        in: query
+        description: Filter by substrate molecule ChEMBL ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of metabolism records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  metabolisms:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Metabolism'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+  schemas:
+    MoleculeStructures:
+      type: object
+      description: Structural representations of a molecule
+      properties:
+        canonical_smiles:
+          type: string
+          nullable: true
+          description: Canonical SMILES representation
+        molfile:
+          type: string
+          nullable: true
+          description: MDL/Symyx molfile structure representation
+        standard_inchi:
+          type: string
+          nullable: true
+          description: Standard InChI representation
+        standard_inchi_key:
+          type: string
+          nullable: true
+          description: Standard InChIKey (27-character hash)
+    Error:
+      type: object
+      properties:
+        error_message:
+          type: string
+        status:
+          type: string
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type: string
+          nullable: true
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    MoleculeProperties:
+      type: object
+      description: Calculated physicochemical properties of a molecule
+      properties:
+        alogp:
+          type: number
+          nullable: true
+          description: Calculated ALogP
+        aromatic_rings:
+          type: integer
+          nullable: true
+          description: Number of aromatic rings
+        cx_logd:
+          type: number
+          nullable: true
+          description: ChemAxon LogD at pH 7.4
+        cx_logp:
+          type: number
+          nullable: true
+          description: ChemAxon LogP
+        cx_most_apka:
+          type: number
+          nullable: true
+          description: Most acidic pKa (ChemAxon)
+        cx_most_bpka:
+          type: number
+          nullable: true
+          description: Most basic pKa (ChemAxon)
+        full_molformula:
+          type: string
+          nullable: true
+          description: Molecular formula including all salt and solvent components
+        full_mwt:
+          type: number
+          nullable: true
+          description: Molecular weight of parent plus all salt and solvent components
+        hba:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond acceptors (Lipinski definition)
+        hba_lipinski:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond acceptors (Lipinski HBA definition)
+        hbd:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond donors (Lipinski definition)
+        hbd_lipinski:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond donors (Lipinski HBD definition)
+        heavy_atoms:
+          type: integer
+          nullable: true
+          description: Number of heavy (non-hydrogen) atoms
+        molecular_species:
+          type: string
+          nullable: true
+          description: Classification of the molecular species (ACID, BASE, NEUTRAL, ZWITTERION)
+        mw_freebase:
+          type: number
+          nullable: true
+          description: Molecular weight of the freebase/parent form
+        mw_monoisotopic:
+          type: number
+          nullable: true
+          description: Monoisotopic molecular weight
+        np_likeness_score:
+          type: number
+          nullable: true
+          description: Natural product-likeness score
+        num_lipinski_ro5_violations:
+          type: integer
+          nullable: true
+          description: Number of violations of Lipinski's Rule of Five
+        num_ro5_violations:
+          type: integer
+          nullable: true
+          description: Number of Lipinski Rule of Five violations
+        psa:
+          type: number
+          nullable: true
+          description: Polar surface area
+        qed_weighted:
+          type: number
+          nullable: true
+          description: Quantitative Estimate of Drug-likeness (QED) score
+        ro3_pass:
+          type: string
+          nullable: true
+          description: Indicates whether the compound satisfies the Rule of Three (fragment-like)
+        rtb:
+          type: integer
+          nullable: true
+          description: Number of rotatable bonds
+    Metabolism:
+      type: object
+      description: Drug metabolism data linking substrate to metabolite via enzyme
+      properties:
+        met_id:
+          type: integer
+        drug_chembl_id:
+          type: string
+          nullable: true
+          description: ChEMBL ID of the drug being metabolized
+        enzyme_chembl_id:
+          type: string
+          nullable: true
+          description: ChEMBL ID of the metabolizing enzyme
+        enzyme_name:
+          type: string
+          nullable: true
+        met_conversion:
+          type: string
+          nullable: true
+          description: Description of the metabolic conversion
+        metabolite_chembl_id:
+          type: string
+          nullable: true
+          description: ChEMBL ID of the metabolite
+        metabolite_name:
+          type: string
+          nullable: true
+        organism:
+          type: string
+          nullable: true
+        pathway_id:
+          type: integer
+          nullable: true
+        pathway_key:
+          type: string
+          nullable: true
+        refs:
+          type: array
+          items:
+            type: object
+        substrate_chembl_id:
+          type: string
+          nullable: true
+          description: ChEMBL ID of the substrate molecule
+        substrate_name:
+          type: string
+          nullable: true
+        tax_id:
+          type: string
+          nullable: true
+    Drug:
+      type: object
+      description: An approved drug with regulatory and patent information
+      properties:
+        molecule_chembl_id:
+          type: string
+          description: ChEMBL ID of the drug molecule
+        applicants:
+          type: string
+          nullable: true
+          description: Drug applicant/manufacturer name
+        atc_classification:
+          type: string
+          nullable: true
+          description: ATC classification code
+        availability_type:
+          type: integer
+          nullable: true
+          description: Availability type (0=discontinued, 1=prescription only, 2=over-the-counter)
+        biotherapeutic:
+          type: object
+          nullable: true
+        black_box:
+          type: integer
+          nullable: true
+          description: Black box warning flag
+        chirality:
+          type: integer
+          nullable: true
+        development_phase:
+          type: integer
+          nullable: true
+        drug_type:
+          type: integer
+          nullable: true
+        first_approval:
+          type: integer
+          nullable: true
+        helm_notation:
+          type: string
+          nullable: true
+        indication_class:
+          type: string
+          nullable: true
+        molecule_properties:
+          $ref: '#/components/schemas/MoleculeProperties'
+        molecule_structures:
+          $ref: '#/components/schemas/MoleculeStructures'
+        molecule_synonyms:
+          type: array
+          items:
+            type: object
+        natural_product:
+          type: integer
+          nullable: true
+        oral:
+          type: boolean
+          nullable: true
+        parenteral:
+          type: boolean
+          nullable: true
+        patent_expire_date:
+          type: string
+          nullable: true
+          format: date
+        pref_name:
+          type: string
+          nullable: true
+        prodrug:
+          type: integer
+          nullable: true
+        research_codes:
+          type: array
+          items:
+            type: string
+          nullable: true
+        sc_patent:
+          type: string
+          nullable: true
+        synonyms:
+          type: array
+          items:
+            type: string
+        topical:
+          type: boolean
+          nullable: true
+        usan_stem:
+          type: string
+          nullable: true
+        usan_year:
+          type: integer
+          nullable: true
+        withdrawn_class:
+          type: string
+          nullable: true
+        withdrawn_country:
+          type: string
+          nullable: true
+        withdrawn_flag:
+          type: boolean
+          nullable: true
+        withdrawn_reason:
+          type: string
+          nullable: true
+        withdrawn_year:
+          type: integer
+          nullable: true
+  responses:
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+externalDocs:
+  description: ChEMBL Web Services Documentation
+  url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

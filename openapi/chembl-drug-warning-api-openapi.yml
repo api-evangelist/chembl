@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: ChEMBL Data REST Activity Drug Warning API
+  description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
+  version: ChEMBL_37
+  contact:
+    name: ChEMBL Team
+    email: chembl-help@ebi.ac.uk
+    url: https://www.ebi.ac.uk/chembl/
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+  termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+  x-logo:
+    url: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
+servers:
+- url: https://www.ebi.ac.uk/chembl/api/data
+  description: ChEMBL Production API Server
+tags:
+- name: Drug Warning
+  description: Safety information for withdrawn or black-box warned drugs.
+paths:
+  /drug_warning:
+    get:
+      tags:
+      - Drug Warning
+      summary: List drug warnings
+      description: Retrieve safety information for drugs that have been withdrawn or carry black-box warnings.
+      operationId: listDrugWarnings
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: molecule_chembl_id
+        in: query
+        description: Filter by molecule ChEMBL ID
+        schema:
+          type: string
+      - name: warning_type
+        in: query
+        description: Filter by warning type
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of drug warnings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  drug_warnings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DrugWarning'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+  schemas:
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type: string
+          nullable: true
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    DrugWarning:
+      type: object
+      description: Safety warning information for a drug
+      properties:
+        warning_id:
+          type: integer
+          description: Unique ID for the warning record
+        efo_id:
+          type: string
+          nullable: true
+        efo_term:
+          type: string
+          nullable: true
+        molecule_chembl_id:
+          type: string
+          description: ChEMBL ID of the drug
+        parent_molecule_chembl_id:
+          type: string
+          nullable: true
+        warning_class:
+          type: string
+          nullable: true
+          description: Class of the drug warning
+        warning_country:
+          type: string
+          nullable: true
+          description: Country where the warning applies
+        warning_refs:
+          type: array
+          items:
+            type: object
+        warning_type:
+          type: string
+          nullable: true
+          description: Type of warning (e.g., BLACK BOX WARNING, WITHDRAWN)
+        warning_year:
+          type: integer
+          nullable: true
+          description: Year the warning was issued
+externalDocs:
+  description: ChEMBL Web Services Documentation
+  url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

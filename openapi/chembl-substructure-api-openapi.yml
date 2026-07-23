@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: ChEMBL Data REST Activity Substructure API
+  description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
+  version: ChEMBL_37
+  contact:
+    name: ChEMBL Team
+    email: chembl-help@ebi.ac.uk
+    url: https://www.ebi.ac.uk/chembl/
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+  termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+  x-logo:
+    url: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
+servers:
+- url: https://www.ebi.ac.uk/chembl/api/data
+  description: ChEMBL Production API Server
+tags:
+- name: Substructure
+  description: Molecular substructure searching.
+paths:
+  /substructure/{smiles}:
+    get:
+      tags:
+      - Substructure
+      summary: Substructure search
+      description: Search for molecules containing a given SMILES substructure.
+      operationId: substructureSearch
+      parameters:
+      - name: smiles
+        in: path
+        required: true
+        description: SMILES string representing the substructure query (URL-encoded)
+        schema:
+          type: string
+          example: c1ccccc1
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Molecules containing the query substructure
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  molecules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Molecule'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+  schemas:
+    MoleculeStructures:
+      type: object
+      description: Structural representations of a molecule
+      properties:
+        canonical_smiles:
+          type: string
+          nullable: true
+          description: Canonical SMILES representation
+        molfile:
+          type: string
+          nullable: true
+          description: MDL/Symyx molfile structure representation
+        standard_inchi:
+          type: string
+          nullable: true
+          description: Standard InChI representation
+        standard_inchi_key:
+          type: string
+          nullable: true
+          description: Standard InChIKey (27-character hash)
+    Molecule:
+      type: object
+      description: A chemical molecule in the ChEMBL database
+      properties:
+        molecule_chembl_id:
+          type: string
+          description: Unique ChEMBL ID for the molecule
+          example: CHEMBL25
+        pref_name:
+          type: string
+          nullable: true
+          description: Preferred name for the molecule
+          example: ASPIRIN
+        max_phase:
+          type: number
+          nullable: true
+          description: Maximum clinical development phase (4 = approved, null = not progressed)
+        molecule_type:
+          type: string
+          nullable: true
+          description: Type of molecule (Small molecule, Protein, Antibody, Oligosaccharide, Oligonucleotide, Cell, Unknown)
+        structure_type:
+          type: string
+          nullable: true
+          description: Indicates structure type (MOL, SEQ, NONE)
+        chirality:
+          type: integer
+          nullable: true
+          description: 'Chirality: -1=not defined, 0=racemic, 1=single stereoisomer, 2=achiral molecule'
+        natural_product:
+          type: integer
+          nullable: true
+          description: Natural product flag (1=natural product derived)
+        first_approval:
+          type: integer
+          nullable: true
+          description: Year of earliest known approval
+        first_in_class:
+          type: integer
+          nullable: true
+          description: First in class flag (1=first compound of its class)
+        oral:
+          type: boolean
+          nullable: true
+          description: Oral administration route
+        parenteral:
+          type: boolean
+          nullable: true
+          description: Parenteral administration route
+        topical:
+          type: boolean
+          nullable: true
+          description: Topical administration route
+        black_box_warning:
+          type: integer
+          nullable: true
+          description: Black box warning flag (1=has black box warning)
+        therapeutic_flag:
+          type: boolean
+          nullable: true
+          description: Therapeutic application flag
+        withdrawn_flag:
+          type: boolean
+          nullable: true
+          description: Withdrawn from market in at least one country
+        prodrug:
+          type: integer
+          nullable: true
+          description: Prodrug flag (1=is a prodrug)
+        inorganic_flag:
+          type: integer
+          nullable: true
+          description: Inorganic molecule flag
+        usan_year:
+          type: integer
+          nullable: true
+          description: Year of USAN/INN name application
+        usan_stem:
+          type: string
+          nullable: true
+          description: USAN stem
+        usan_stem_definition:
+          type: string
+          nullable: true
+          description: Definition of the USAN stem
+        molecule_properties:
+          $ref: '#/components/schemas/MoleculeProperties'
+        molecule_structures:
+          $ref: '#/components/schemas/MoleculeStructures'
+        molecule_synonyms:
+          type: array
+          items:
+            type: object
+            properties:
+              molecule_synonym:
+                type: string
+              syn_type:
+                type: string
+              synonyms:
+                type: string
+          description: List of synonyms and trade names
+        atc_classifications:
+          type: array
+          items:
+            type: string
+          description: ATC classification codes
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type: string
+          nullable: true
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    MoleculeProperties:
+      type: object
+      description: Calculated physicochemical properties of a molecule
+      properties:
+        alogp:
+          type: number
+          nullable: true
+          description: Calculated ALogP
+        aromatic_rings:
+          type: integer
+          nullable: true
+          description: Number of aromatic rings
+        cx_logd:
+          type: number
+          nullable: true
+          description: ChemAxon LogD at pH 7.4
+        cx_logp:
+          type: number
+          nullable: true
+          description: ChemAxon LogP
+        cx_most_apka:
+          type: number
+          nullable: true
+          description: Most acidic pKa (ChemAxon)
+        cx_most_bpka:
+          type: number
+          nullable: true
+          description: Most basic pKa (ChemAxon)
+        full_molformula:
+          type: string
+          nullable: true
+          description: Molecular formula including all salt and solvent components
+        full_mwt:
+          type: number
+          nullable: true
+          description: Molecular weight of parent plus all salt and solvent components
+        hba:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond acceptors (Lipinski definition)
+        hba_lipinski:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond acceptors (Lipinski HBA definition)
+        hbd:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond donors (Lipinski definition)
+        hbd_lipinski:
+          type: integer
+          nullable: true
+          description: Number of hydrogen bond donors (Lipinski HBD definition)
+        heavy_atoms:
+          type: integer
+          nullable: true
+          description: Number of heavy (non-hydrogen) atoms
+        molecular_species:
+          type: string
+          nullable: true
+          description: Classification of the molecular species (ACID, BASE, NEUTRAL, ZWITTERION)
+        mw_freebase:
+          type: number
+          nullable: true
+          description: Molecular weight of the freebase/parent form
+        mw_monoisotopic:
+          type: number
+          nullable: true
+          description: Monoisotopic molecular weight
+        np_likeness_score:
+          type: number
+          nullable: true
+          description: Natural product-likeness score
+        num_lipinski_ro5_violations:
+          type: integer
+          nullable: true
+          description: Number of violations of Lipinski's Rule of Five
+        num_ro5_violations:
+          type: integer
+          nullable: true
+          description: Number of Lipinski Rule of Five violations
+        psa:
+          type: number
+          nullable: true
+          description: Polar surface area
+        qed_weighted:
+          type: number
+          nullable: true
+          description: Quantitative Estimate of Drug-likeness (QED) score
+        ro3_pass:
+          type: string
+          nullable: true
+          description: Indicates whether the compound satisfies the Rule of Three (fragment-like)
+        rtb:
+          type: integer
+          nullable: true
+          description: Number of rotatable bonds
+externalDocs:
+  description: ChEMBL Web Services Documentation
+  url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

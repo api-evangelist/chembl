@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: ChEMBL Data REST Activity API
+  description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
+  version: ChEMBL_37
+  contact:
+    name: ChEMBL Team
+    email: chembl-help@ebi.ac.uk
+    url: https://www.ebi.ac.uk/chembl/
+  license:
+    name: Creative Commons Attribution-ShareAlike 3.0 Unported
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+  termsOfService: https://www.ebi.ac.uk/about/terms-of-use/
+  x-logo:
+    url: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
+servers:
+- url: https://www.ebi.ac.uk/chembl/api/data
+  description: ChEMBL Production API Server
+tags:
+- name: Activity
+  description: Activity values recorded in assays, linking molecules to targets with quantitative bioactivity measurements.
+paths:
+  /activity:
+    get:
+      tags:
+      - Activity
+      summary: List activities
+      description: Retrieve a paginated list of activity records. Activities link molecules to targets with quantitative bioactivity measurements (IC50, Ki, EC50, etc.).
+      operationId: listActivities
+      parameters:
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: molecule_chembl_id
+        in: query
+        description: Filter by ChEMBL ID of the compound
+        schema:
+          type: string
+          example: CHEMBL25
+      - name: target_chembl_id
+        in: query
+        description: Filter by ChEMBL ID of the target
+        schema:
+          type: string
+          example: CHEMBL301
+      - name: assay_chembl_id
+        in: query
+        description: Filter by ChEMBL ID of the assay
+        schema:
+          type: string
+      - name: standard_type
+        in: query
+        description: Filter by activity type (e.g., IC50, Ki, EC50, Kd)
+        schema:
+          type: string
+          example: IC50
+      - name: standard_value__lte
+        in: query
+        description: Filter by standard value less than or equal to
+        schema:
+          type: number
+      - name: standard_value__gte
+        in: query
+        description: Filter by standard value greater than or equal to
+        schema:
+          type: number
+      - name: assay_type
+        in: query
+        description: Filter by assay type (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)
+        schema:
+          type: string
+          enum:
+          - B
+          - F
+          - A
+          - T
+          - P
+          - U
+      responses:
+        '200':
+          description: Successful response with paginated list of activities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  activities:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /activity/{activity_id}:
+    get:
+      tags:
+      - Activity
+      summary: Get activity by ID
+      description: Retrieve a single activity record by its unique activity ID.
+      operationId: getActivity
+      parameters:
+      - name: activity_id
+        in: path
+        required: true
+        description: Unique numeric activity ID
+        schema:
+          type: integer
+          example: 31863
+      - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Activity record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /activity/search:
+    get:
+      tags:
+      - Activity
+      summary: Search activities
+      description: Full-text search for activities using query string.
+      operationId: searchActivities
+      parameters:
+      - name: q
+        in: query
+        required: true
+        description: Search query string
+        schema:
+          type: string
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  activities:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+  schemas:
+    Error:
+      type: object
+      properties:
+        error_message:
+          type: string
+        status:
+          type: string
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type: string
+          nullable: true
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    Activity:
+      type: object
+      description: A bioactivity measurement linking a compound to a target through an assay
+      properties:
+        activity_id:
+          type: integer
+          description: Unique ID for the activity record
+        assay_chembl_id:
+          type: string
+          description: ChEMBL ID of the assay
+        assay_description:
+          type: string
+          description: Description of the assay
+        assay_type:
+          type: string
+          description: Assay type code (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)
+        bao_endpoint:
+          type: string
+          description: BioAssay Ontology (BAO) endpoint term ID
+        bao_format:
+          type: string
+          description: BioAssay Ontology (BAO) format term ID
+        bao_label:
+          type: string
+          description: Human-readable BAO endpoint label
+        canonical_smiles:
+          type: string
+          description: Canonical SMILES representation of the compound
+        data_validity_comment:
+          type: string
+          nullable: true
+          description: Comment on data validity/quality
+        document_chembl_id:
+          type: string
+          description: ChEMBL ID of the source document
+        document_journal:
+          type: string
+          description: Journal of the source publication
+        document_year:
+          type: integer
+          nullable: true
+          description: Year of the source publication
+        molecule_chembl_id:
+          type: string
+          description: ChEMBL ID of the tested compound
+        pchembl_value:
+          type: number
+          nullable: true
+          description: Negative log10 of the molar activity value (-log10 of standard value in M)
+        relation:
+          type: string
+          nullable: true
+          description: Relationship qualifier for the activity value (=, >, <, >=, <=, ~)
+        standard_flag:
+          type: boolean
+          nullable: true
+          description: Whether the activity was standardized
+        standard_relation:
+          type: string
+          nullable: true
+          description: Standardized relationship qualifier
+        standard_text_value:
+          type: string
+          nullable: true
+          description: Standardized text value for non-numeric activities
+        standard_type:
+          type: string
+          nullable: true
+          description: Standardized activity type (e.g., IC50, Ki, EC50, Kd)
+        standard_units:
+          type: string
+          nullable: true
+          description: Standardized units of the activity measurement
+        standard_value:
+          type: number
+          nullable: true
+          description: Standardized numeric activity value
+        target_chembl_id:
+          type: string
+          description: ChEMBL ID of the biological target
+        target_organism:
+          type: string
+          nullable: true
+          description: Organism of the biological target
+        target_pref_name:
+          type: string
+          nullable: true
+          description: Preferred name of the biological target
+        target_tax_id:
+          type: string
+          nullable: true
+          description: NCBI taxonomy ID of the target organism
+        type:
+          type: string
+          nullable: true
+          description: Original activity type as reported in the source document
+        units:
+          type: string
+          nullable: true
+          description: Original units as reported in the source document
+        value:
+          type: string
+          nullable: true
+          description: Original numeric or text value as reported in the source document
+  responses:
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+externalDocs:
+  description: ChEMBL Web Services Documentation
+  url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

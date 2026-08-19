@@ -16,7 +16,7 @@ image: https://www.ebi.ac.uk/chembl/static/chembl/img/chembl_logo.png
 url: https://www.ebi.ac.uk/chembl/
 created: '2026-06-13'
 modified: '2026-06-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: chembl:chembl-activity-api
   name: ChEMBL Activity API

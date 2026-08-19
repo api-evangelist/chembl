@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity ATC Classification API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ATC Classification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ATC classifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/atc_class",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "who_atc_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ATC code"
+              }
+            ]
+          },
+          "docs": "Retrieve WHO Anatomical Therapeutic Chemical (ATC) classification records."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

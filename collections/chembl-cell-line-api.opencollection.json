@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Cell Line API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cell Line",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List cell lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/cell_line",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "cell_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cell line name"
+              }
+            ]
+          },
+          "docs": "Retrieve cell line information used in assays."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

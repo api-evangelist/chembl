@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "2d1605c7-c0a1-40bc-b816-06e243fcd157",
+      "name": "Substructure",
+      "description": {
+        "content": "Molecular substructure searching.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4dd1e016-4538-409a-a32f-e223baf18a5b",
+          "name": "Substructure search",
+          "request": {
+            "name": "Substructure search",
+            "description": {
+              "content": "Search for molecules containing a given SMILES substructure.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "substructure",
+                ":smiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "smiles",
+                  "description": "(Required) SMILES string representing the substructure query (URL-encoded)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6747a2c4-6b64-498d-a5f5-562160f21338",
+              "name": "Molecules containing the query substructure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "substructure",
+                    ":smiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "smiles",
+                      "description": "(Required) SMILES string representing the substructure query (URL-encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 2954,\n    \"next\": \"string\",\n    \"offset\": 5025,\n    \"previous\": \"string\",\n    \"total_count\": 8519\n  },\n  \"molecules\": [\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 337.4975083863896,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 8081,\n      \"natural_product\": 4189,\n      \"first_approval\": 9714,\n      \"first_in_class\": 5754,\n      \"oral\": false,\n      \"parenteral\": false,\n      \"topical\": false,\n      \"black_box_warning\": 9543,\n      \"therapeutic_flag\": false,\n      \"withdrawn_flag\": true,\n      \"prodrug\": 93,\n      \"inorganic_flag\": 4416,\n      \"usan_year\": 9915,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 3970.072242744046,\n        \"aromatic_rings\": 9777,\n        \"cx_logd\": 6578.3755006831325,\n        \"cx_logp\": 3887.307492184111,\n        \"cx_most_apka\": 7407.372563685955,\n        \"cx_most_bpka\": 6188.653136824992,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 49.261010098696765,\n        \"hba\": 5465,\n        \"hba_lipinski\": 845,\n        \"hbd\": 2289,\n        \"hbd_lipinski\": 9344,\n        \"heavy_atoms\": 5911,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 8722.979670391136,\n        \"mw_monoisotopic\": 1816.7573626385404,\n        \"np_likeness_score\": 1818.0282260617641,\n        \"num_lipinski_ro5_violations\": 2217,\n        \"num_ro5_violations\": 1010,\n        \"psa\": 2545.750872799666,\n        \"qed_weighted\": 6582.491328543594,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 7878\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 6428.98422463821,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 4446,\n      \"natural_product\": 9864,\n      \"first_approval\": 5228,\n      \"first_in_class\": 606,\n      \"oral\": false,\n      \"parenteral\": true,\n      \"topical\": false,\n      \"black_box_warning\": 2208,\n      \"therapeutic_flag\": false,\n      \"withdrawn_flag\": true,\n      \"prodrug\": 9128,\n      \"inorganic_flag\": 769,\n      \"usan_year\": 7702,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 7944.426556765893,\n        \"aromatic_rings\": 5416,\n        \"cx_logd\": 6533.955835849794,\n        \"cx_logp\": 9010.947015272613,\n        \"cx_most_apka\": 8538.216609191233,\n        \"cx_most_bpka\": 7310.892901769352,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 8772.1351713144,\n        \"hba\": 2066,\n        \"hba_lipinski\": 2606,\n        \"hbd\": 6403,\n        \"hbd_lipinski\": 2270,\n        \"heavy_atoms\": 6719,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 2935.7212033332626,\n        \"mw_monoisotopic\": 7545.530852639448,\n        \"np_likeness_score\": 2377.8160195961163,\n        \"num_lipinski_ro5_violations\": 9587,\n        \"num_ro5_violations\": 1826,\n        \"psa\": 2841.563550551429,\n        \"qed_weighted\": 2508.4479809704476,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 6288\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "14f1bd4b-e6b4-41e4-a724-fd5985cc0af0",
+    "name": "ChEMBL Data REST Activity Substructure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

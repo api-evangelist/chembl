@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Drug Warning API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Drug Warning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List drug warnings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/drug_warning",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "molecule_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by molecule ChEMBL ID"
+              },
+              {
+                "name": "warning_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by warning type"
+              }
+            ]
+          },
+          "docs": "Retrieve safety information for drugs that have been withdrawn or carry black-box warnings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

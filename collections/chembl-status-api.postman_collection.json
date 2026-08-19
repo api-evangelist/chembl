@@ -1,0 +1,226 @@
+{
+  "item": [
+    {
+      "id": "d6d53a27-6cce-4dd8-a4b7-3af4c42f2eb8",
+      "name": "Status",
+      "description": {
+        "content": "API operational status and ChEMBL database version information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "63d2591e-c677-411f-954d-fe8100456e72",
+          "name": "ChEMBL ID lookup",
+          "request": {
+            "name": "ChEMBL ID lookup",
+            "description": {
+              "content": "Identify the entity type (molecule, assay, target, document, etc.) for a given ChEMBL ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chembl_id_lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "chembl_id",
+                  "value": "<string>",
+                  "description": "ChEMBL ID to look up"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4145d102-a8fe-4607-b5f8-2fef787de7c7",
+              "name": "ChEMBL ID lookup result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chembl_id_lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 637,\n    \"next\": \"string\",\n    \"offset\": 6296,\n    \"previous\": \"string\",\n    \"total_count\": 3697\n  },\n  \"chembl_id_lookups\": [\n    {\n      \"chembl_id\": \"string\",\n      \"entity_type\": \"string\",\n      \"resource_url\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"chembl_id\": \"string\",\n      \"entity_type\": \"string\",\n      \"resource_url\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b0ec262-96a3-494c-8a08-12e30a05433b",
+          "name": "Get API status",
+          "request": {
+            "name": "Get API status",
+            "description": {
+              "content": "Retrieve API operational status and ChEMBL database version information including record counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "afc05c88-1290-4013-ba37-cfd904bfe19c",
+              "name": "API status information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"UP\",\n  \"chembl_db_version\": \"ChEMBL_37\",\n  \"chembl_release_date\": \"1977-03-17\",\n  \"activities\": 4232,\n  \"compound_records\": 8637,\n  \"disinct_compounds\": 5129,\n  \"publications\": 6989,\n  \"targets\": 3203\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "413091fc-3762-4146-b2b7-62ff1ee7b608",
+    "name": "ChEMBL Data REST Activity Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

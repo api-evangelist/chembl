@@ -1,0 +1,881 @@
+{
+  "item": [
+    {
+      "id": "4331648d-305e-4e74-88b3-b9a454f0e839",
+      "name": "Target",
+      "description": {
+        "content": "Protein and non-protein targets defined in assays.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6610eab-2000-4ca4-9cc4-9cce9e4d569a",
+          "name": "List targets",
+          "request": {
+            "name": "List targets",
+            "description": {
+              "content": "Retrieve a paginated list of targets. Targets can be single proteins, protein complexes, organisms, cell lines, or other biological entities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "target"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by target ChEMBL ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_type",
+                  "value": "<string>",
+                  "description": "Filter by target type (e.g., SINGLE PROTEIN, PROTEIN COMPLEX)"
+                },
+                {
+                  "disabled": false,
+                  "key": "organism",
+                  "value": "<string>",
+                  "description": "Filter by organism (e.g., Homo sapiens)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_name",
+                  "value": "<string>",
+                  "description": "Filter by preferred target name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5910628f-29a5-478e-a430-d1a28d030f5d",
+              "name": "Paginated list of targets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "target"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "CHEMBL301"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "SINGLE PROTEIN"
+                    },
+                    {
+                      "key": "organism",
+                      "value": "Homo sapiens"
+                    },
+                    {
+                      "key": "pref_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 3102,\n    \"next\": \"string\",\n    \"offset\": 1834,\n    \"previous\": \"string\",\n    \"total_count\": 1571\n  },\n  \"targets\": [\n    {\n      \"target_chembl_id\": \"CHEMBL301\",\n      \"pref_name\": \"string\",\n      \"target_type\": \"string\",\n      \"organism\": \"string\",\n      \"tax_id\": 9704,\n      \"species_group_flag\": false,\n      \"score\": 1947.174413586714,\n      \"target_components\": [\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 1865,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 4351\n        },\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 8852,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 4642\n        }\n      ],\n      \"cross_references\": [\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        },\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        }\n      ]\n    },\n    {\n      \"target_chembl_id\": \"CHEMBL301\",\n      \"pref_name\": \"string\",\n      \"target_type\": \"string\",\n      \"organism\": \"string\",\n      \"tax_id\": 2145,\n      \"species_group_flag\": false,\n      \"score\": 5251.69356541347,\n      \"target_components\": [\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 5167,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 934\n        },\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 295,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 9031\n        }\n      ],\n      \"cross_references\": [\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        },\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cd2a377-6b38-4f33-b21a-079370b47647",
+              "name": "Bad request - invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "target"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "CHEMBL301"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "SINGLE PROTEIN"
+                    },
+                    {
+                      "key": "organism",
+                      "value": "Homo sapiens"
+                    },
+                    {
+                      "key": "pref_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d47fb78b-4ab7-448b-abfa-7ff47b6c651a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "target"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "CHEMBL301"
+                    },
+                    {
+                      "key": "target_type",
+                      "value": "SINGLE PROTEIN"
+                    },
+                    {
+                      "key": "organism",
+                      "value": "Homo sapiens"
+                    },
+                    {
+                      "key": "pref_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff58a231-35c8-45e1-bafe-d060335da187",
+          "name": "Get target by ChEMBL ID",
+          "request": {
+            "name": "Get target by ChEMBL ID",
+            "description": {
+              "content": "Retrieve a single target record by its ChEMBL ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "target",
+                ":target_chembl_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "target_chembl_id",
+                  "description": "(Required) ChEMBL ID of the target"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f967e0b-07ea-4f85-ae91-10da9aa77859",
+              "name": "Target record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "target",
+                    ":target_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_chembl_id",
+                      "description": "(Required) ChEMBL ID of the target"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"target_chembl_id\": \"CHEMBL301\",\n  \"pref_name\": \"string\",\n  \"target_type\": \"string\",\n  \"organism\": \"string\",\n  \"tax_id\": 9447,\n  \"species_group_flag\": true,\n  \"score\": 3727.589783520159,\n  \"target_components\": [\n    {\n      \"accession\": \"string\",\n      \"component_description\": \"string\",\n      \"component_id\": 7956,\n      \"component_type\": \"string\",\n      \"relationship\": \"string\",\n      \"target_component_id\": 6393\n    },\n    {\n      \"accession\": \"string\",\n      \"component_description\": \"string\",\n      \"component_id\": 8410,\n      \"component_type\": \"string\",\n      \"relationship\": \"string\",\n      \"target_component_id\": 21\n    }\n  ],\n  \"cross_references\": [\n    {\n      \"xref_id\": \"string\",\n      \"xref_name\": \"string\",\n      \"xref_src\": \"string\"\n    },\n    {\n      \"xref_id\": \"string\",\n      \"xref_name\": \"string\",\n      \"xref_src\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "372aef50-c40a-4282-92d1-896656c081e9",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "target",
+                    ":target_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_chembl_id",
+                      "description": "(Required) ChEMBL ID of the target"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26666f81-26a7-496b-a1ec-3d4541eb7c3c",
+          "name": "Search targets",
+          "request": {
+            "name": "Search targets",
+            "description": {
+              "content": "Full-text search for targets by name or other text fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "target",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "023ba7eb-92f0-4044-9741-58b9f586654c",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "target",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "kinase"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 7017,\n    \"next\": \"string\",\n    \"offset\": 1308,\n    \"previous\": \"string\",\n    \"total_count\": 4344\n  },\n  \"targets\": [\n    {\n      \"target_chembl_id\": \"CHEMBL301\",\n      \"pref_name\": \"string\",\n      \"target_type\": \"string\",\n      \"organism\": \"string\",\n      \"tax_id\": 5276,\n      \"species_group_flag\": false,\n      \"score\": 4070.70571780863,\n      \"target_components\": [\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 7608,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 4109\n        },\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 9206,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 2050\n        }\n      ],\n      \"cross_references\": [\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        },\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        }\n      ]\n    },\n    {\n      \"target_chembl_id\": \"CHEMBL301\",\n      \"pref_name\": \"string\",\n      \"target_type\": \"string\",\n      \"organism\": \"string\",\n      \"tax_id\": 6123,\n      \"species_group_flag\": false,\n      \"score\": 5014.493240829508,\n      \"target_components\": [\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 4452,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 244\n        },\n        {\n          \"accession\": \"string\",\n          \"component_description\": \"string\",\n          \"component_id\": 959,\n          \"component_type\": \"string\",\n          \"relationship\": \"string\",\n          \"target_component_id\": 1420\n        }\n      ],\n      \"cross_references\": [\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        },\n        {\n          \"xref_id\": \"string\",\n          \"xref_name\": \"string\",\n          \"xref_src\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81ad7a21-c587-466c-9cb9-6d2b192b4ebf",
+          "name": "List GO slim classifications",
+          "request": {
+            "name": "List GO slim classifications",
+            "description": {
+              "content": "Retrieve gene ontology slim classifications used to annotate targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "go_slim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c85270aa-d0b6-4452-8695-50a86b7b1130",
+              "name": "Paginated list of GO slim entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "go_slim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 3590,\n    \"next\": \"string\",\n    \"offset\": 3738,\n    \"previous\": \"string\",\n    \"total_count\": 513\n  },\n  \"go_slims\": [\n    {\n      \"go_id\": \"string\",\n      \"protein_class_desc\": \"string\",\n      \"parent_go_id\": \"string\",\n      \"prot_class_id\": 3420\n    },\n    {\n      \"go_id\": \"string\",\n      \"protein_class_desc\": \"string\",\n      \"parent_go_id\": \"string\",\n      \"prot_class_id\": 6921\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b69a8a47-01cb-40a7-b7fe-5034d8e0b497",
+          "name": "List protein classifications",
+          "request": {
+            "name": "List protein classifications",
+            "description": {
+              "content": "Retrieve hierarchical protein family classification information for targets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "protein_class"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd6607f2-7684-4171-a6e2-8a3b1f5b3873",
+              "name": "Paginated list of protein classifications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "protein_class"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 8327,\n    \"next\": \"string\",\n    \"offset\": 9380,\n    \"previous\": \"string\",\n    \"total_count\": 2247\n  },\n  \"protein_classifications\": [\n    {\n      \"prot_class_id\": 2269,\n      \"class_level\": 2556,\n      \"l1\": \"string\",\n      \"l2\": \"string\",\n      \"l3\": \"string\",\n      \"l4\": \"string\",\n      \"l5\": \"string\",\n      \"l6\": \"string\",\n      \"l7\": \"string\",\n      \"l8\": \"string\",\n      \"parent_id\": 6693,\n      \"protein_class_desc\": \"string\"\n    },\n    {\n      \"prot_class_id\": 7201,\n      \"class_level\": 8067,\n      \"l1\": \"string\",\n      \"l2\": \"string\",\n      \"l3\": \"string\",\n      \"l4\": \"string\",\n      \"l5\": \"string\",\n      \"l6\": \"string\",\n      \"l7\": \"string\",\n      \"l8\": \"string\",\n      \"parent_id\": 4114,\n      \"protein_class_desc\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3678bc0-23fa-4051-94ff-78dd06ff784e",
+          "name": "List tissues",
+          "request": {
+            "name": "List tissues",
+            "description": {
+              "content": "Retrieve tissue classification information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tissue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_name",
+                  "value": "<string>",
+                  "description": "Filter by tissue preferred name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac5a1086-6a8f-4f93-9215-e13a89ff6453",
+              "name": "Paginated list of tissues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tissue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pref_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 7116,\n    \"next\": \"string\",\n    \"offset\": 9611,\n    \"previous\": \"string\",\n    \"total_count\": 289\n  },\n  \"tissues\": [\n    {\n      \"tissue_chembl_id\": \"string\",\n      \"bto_id\": \"string\",\n      \"caloha_id\": \"string\",\n      \"efo_id\": \"string\",\n      \"pref_name\": \"string\",\n      \"uberon_id\": \"string\"\n    },\n    {\n      \"tissue_chembl_id\": \"string\",\n      \"bto_id\": \"string\",\n      \"caloha_id\": \"string\",\n      \"efo_id\": \"string\",\n      \"pref_name\": \"string\",\n      \"uberon_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "48d9cf4e-a6a5-4b70-9c92-3afef87383ee",
+    "name": "ChEMBL Data REST Activity Target API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

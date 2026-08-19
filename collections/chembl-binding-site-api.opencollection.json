@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Binding Site API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Binding Site",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List binding sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/binding_site",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve target binding site definitions used in assays."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,866 @@
+{
+  "item": [
+    {
+      "id": "4c344651-8ec5-4e47-9027-7b7889cd8e5d",
+      "name": "Molecule",
+      "description": {
+        "content": "Chemical molecules including properties, structural representations, synonyms, and drug-like properties.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0b6b8d0-80a4-4e0b-963a-04150ca7c7f8",
+          "name": "List molecules",
+          "request": {
+            "name": "List molecules",
+            "description": {
+              "content": "Retrieve a paginated list of molecules. Includes chemical properties, structural representations (SMILES, InChI), synonyms, and drug-like properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "molecule"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by ChEMBL molecule ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "pref_name",
+                  "value": "<string>",
+                  "description": "Filter by preferred molecule name"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_phase",
+                  "value": "<integer>",
+                  "description": "Filter by maximum clinical development phase (4 = approved)"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_type",
+                  "value": "<string>",
+                  "description": "Filter by molecule type"
+                },
+                {
+                  "disabled": false,
+                  "key": "therapeutic_flag",
+                  "value": "<boolean>",
+                  "description": "Filter for molecules with therapeutic applications"
+                },
+                {
+                  "disabled": false,
+                  "key": "withdrawn_flag",
+                  "value": "<boolean>",
+                  "description": "Filter for withdrawn drugs"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bbdaa64-bf06-49dc-bacd-eb9e2c22a9fc",
+              "name": "Paginated list of molecules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "molecule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "pref_name",
+                      "value": "ASPIRIN"
+                    },
+                    {
+                      "key": "max_phase",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "molecule_type",
+                      "value": "Small molecule"
+                    },
+                    {
+                      "key": "therapeutic_flag",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "withdrawn_flag",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 3074,\n    \"next\": \"string\",\n    \"offset\": 9496,\n    \"previous\": \"string\",\n    \"total_count\": 3289\n  },\n  \"molecules\": [\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 5629.546541568025,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 2610,\n      \"natural_product\": 7314,\n      \"first_approval\": 3510,\n      \"first_in_class\": 139,\n      \"oral\": true,\n      \"parenteral\": false,\n      \"topical\": false,\n      \"black_box_warning\": 9332,\n      \"therapeutic_flag\": false,\n      \"withdrawn_flag\": false,\n      \"prodrug\": 5874,\n      \"inorganic_flag\": 6739,\n      \"usan_year\": 958,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 5877.726999142714,\n        \"aromatic_rings\": 752,\n        \"cx_logd\": 6197.243957757789,\n        \"cx_logp\": 6621.026964222818,\n        \"cx_most_apka\": 1193.3002574936702,\n        \"cx_most_bpka\": 2062.7751202816135,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 4378.865528734051,\n        \"hba\": 94,\n        \"hba_lipinski\": 1076,\n        \"hbd\": 1272,\n        \"hbd_lipinski\": 4564,\n        \"heavy_atoms\": 6130,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 9907.87535748601,\n        \"mw_monoisotopic\": 2565.672739411269,\n        \"np_likeness_score\": 1235.5743851519107,\n        \"num_lipinski_ro5_violations\": 8776,\n        \"num_ro5_violations\": 608,\n        \"psa\": 916.3767866246752,\n        \"qed_weighted\": 9816.345321061226,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 2391\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 9371.00317722358,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 2760,\n      \"natural_product\": 5728,\n      \"first_approval\": 5934,\n      \"first_in_class\": 2242,\n      \"oral\": false,\n      \"parenteral\": false,\n      \"topical\": true,\n      \"black_box_warning\": 8333,\n      \"therapeutic_flag\": false,\n      \"withdrawn_flag\": true,\n      \"prodrug\": 9769,\n      \"inorganic_flag\": 4380,\n      \"usan_year\": 4279,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 5148.459941652906,\n        \"aromatic_rings\": 9728,\n        \"cx_logd\": 4191.288979641999,\n        \"cx_logp\": 8551.415088876443,\n        \"cx_most_apka\": 4541.988918080553,\n        \"cx_most_bpka\": 9376.761121006635,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 7623.002957076394,\n        \"hba\": 5286,\n        \"hba_lipinski\": 9422,\n        \"hbd\": 9583,\n        \"hbd_lipinski\": 3426,\n        \"heavy_atoms\": 3666,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 4987.239197752878,\n        \"mw_monoisotopic\": 467.6251744652549,\n        \"np_likeness_score\": 6834.264122444758,\n        \"num_lipinski_ro5_violations\": 3575,\n        \"num_ro5_violations\": 4591,\n        \"psa\": 4235.468305219781,\n        \"qed_weighted\": 4204.825314255734,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 1545\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ba60fb1-a3e7-4f9e-ab7d-fa814383fcb8",
+              "name": "Bad request - invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "molecule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "pref_name",
+                      "value": "ASPIRIN"
+                    },
+                    {
+                      "key": "max_phase",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "molecule_type",
+                      "value": "Small molecule"
+                    },
+                    {
+                      "key": "therapeutic_flag",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "withdrawn_flag",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11e301b7-2c45-42d2-8ebf-603db425b892",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "molecule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "pref_name",
+                      "value": "ASPIRIN"
+                    },
+                    {
+                      "key": "max_phase",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "molecule_type",
+                      "value": "Small molecule"
+                    },
+                    {
+                      "key": "therapeutic_flag",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "withdrawn_flag",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98bbf39f-3520-449d-987a-68bc684025bf",
+          "name": "Get molecule by ChEMBL ID",
+          "request": {
+            "name": "Get molecule by ChEMBL ID",
+            "description": {
+              "content": "Retrieve a single molecule record by its ChEMBL ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "molecule",
+                ":molecule_chembl_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "molecule_chembl_id",
+                  "description": "(Required) ChEMBL ID of the molecule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07b74fdb-e7ee-4ff8-a24f-7063d8ba2c7a",
+              "name": "Molecule record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "molecule",
+                    ":molecule_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "molecule_chembl_id",
+                      "description": "(Required) ChEMBL ID of the molecule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"molecule_chembl_id\": \"CHEMBL25\",\n  \"pref_name\": \"ASPIRIN\",\n  \"max_phase\": 1029.9694984158102,\n  \"molecule_type\": \"string\",\n  \"structure_type\": \"string\",\n  \"chirality\": 6003,\n  \"natural_product\": 2043,\n  \"first_approval\": 7405,\n  \"first_in_class\": 3324,\n  \"oral\": true,\n  \"parenteral\": true,\n  \"topical\": false,\n  \"black_box_warning\": 7586,\n  \"therapeutic_flag\": true,\n  \"withdrawn_flag\": false,\n  \"prodrug\": 7795,\n  \"inorganic_flag\": 6042,\n  \"usan_year\": 5453,\n  \"usan_stem\": \"string\",\n  \"usan_stem_definition\": \"string\",\n  \"molecule_properties\": {\n    \"alogp\": 4932.01332440498,\n    \"aromatic_rings\": 5052,\n    \"cx_logd\": 9262.957428238598,\n    \"cx_logp\": 1613.3664248376733,\n    \"cx_most_apka\": 1483.945709114367,\n    \"cx_most_bpka\": 4894.086793958395,\n    \"full_molformula\": \"string\",\n    \"full_mwt\": 2254.6904006056534,\n    \"hba\": 750,\n    \"hba_lipinski\": 9405,\n    \"hbd\": 2554,\n    \"hbd_lipinski\": 6673,\n    \"heavy_atoms\": 5881,\n    \"molecular_species\": \"string\",\n    \"mw_freebase\": 655.506527411841,\n    \"mw_monoisotopic\": 8687.28664003796,\n    \"np_likeness_score\": 9176.328549838527,\n    \"num_lipinski_ro5_violations\": 7293,\n    \"num_ro5_violations\": 6000,\n    \"psa\": 3878.394349871672,\n    \"qed_weighted\": 3084.81287720189,\n    \"ro3_pass\": \"string\",\n    \"rtb\": 3563\n  },\n  \"molecule_structures\": {\n    \"canonical_smiles\": \"string\",\n    \"molfile\": \"string\",\n    \"standard_inchi\": \"string\",\n    \"standard_inchi_key\": \"string\"\n  },\n  \"molecule_synonyms\": [\n    {\n      \"molecule_synonym\": \"string\",\n      \"syn_type\": \"string\",\n      \"synonyms\": \"string\"\n    },\n    {\n      \"molecule_synonym\": \"string\",\n      \"syn_type\": \"string\",\n      \"synonyms\": \"string\"\n    }\n  ],\n  \"atc_classifications\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b82b6c82-5cce-4741-8bca-76fcfcb00f9f",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "molecule",
+                    ":molecule_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "molecule_chembl_id",
+                      "description": "(Required) ChEMBL ID of the molecule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a043f50b-f07a-4465-ae4f-6a3198dcd97e",
+          "name": "Search molecules",
+          "request": {
+            "name": "Search molecules",
+            "description": {
+              "content": "Full-text search for molecules by name, synonym, or other text fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "molecule",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search query string (molecule name, synonym, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adbfc0a9-bd7f-4689-a0ea-db3311c2706e",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "molecule",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "aspirin"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 7230,\n    \"next\": \"string\",\n    \"offset\": 7605,\n    \"previous\": \"string\",\n    \"total_count\": 9479\n  },\n  \"molecules\": [\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 3703.007636083981,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 3329,\n      \"natural_product\": 3527,\n      \"first_approval\": 5961,\n      \"first_in_class\": 1545,\n      \"oral\": true,\n      \"parenteral\": true,\n      \"topical\": true,\n      \"black_box_warning\": 157,\n      \"therapeutic_flag\": false,\n      \"withdrawn_flag\": false,\n      \"prodrug\": 9798,\n      \"inorganic_flag\": 9958,\n      \"usan_year\": 4581,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 8923.582936218945,\n        \"aromatic_rings\": 7661,\n        \"cx_logd\": 7487.155572131806,\n        \"cx_logp\": 980.4333589521331,\n        \"cx_most_apka\": 5866.313694187448,\n        \"cx_most_bpka\": 7928.687915827591,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 9306.972580606434,\n        \"hba\": 6202,\n        \"hba_lipinski\": 8309,\n        \"hbd\": 9152,\n        \"hbd_lipinski\": 6871,\n        \"heavy_atoms\": 6818,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 2459.5502388244895,\n        \"mw_monoisotopic\": 8986.73869327866,\n        \"np_likeness_score\": 2941.2174588683547,\n        \"num_lipinski_ro5_violations\": 1494,\n        \"num_ro5_violations\": 6047,\n        \"psa\": 9756.096899175867,\n        \"qed_weighted\": 7592.4495193085295,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 5070\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 4621.282392910836,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 695,\n      \"natural_product\": 2021,\n      \"first_approval\": 4136,\n      \"first_in_class\": 7612,\n      \"oral\": false,\n      \"parenteral\": false,\n      \"topical\": false,\n      \"black_box_warning\": 6260,\n      \"therapeutic_flag\": true,\n      \"withdrawn_flag\": false,\n      \"prodrug\": 522,\n      \"inorganic_flag\": 3050,\n      \"usan_year\": 3003,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 8113.832422072259,\n        \"aromatic_rings\": 5621,\n        \"cx_logd\": 3025.268848532339,\n        \"cx_logp\": 4347.033539583183,\n        \"cx_most_apka\": 4528.489627695368,\n        \"cx_most_bpka\": 8719.932002124115,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 2946.9491121418246,\n        \"hba\": 9737,\n        \"hba_lipinski\": 3481,\n        \"hbd\": 1309,\n        \"hbd_lipinski\": 9530,\n        \"heavy_atoms\": 7563,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 4095.149275883061,\n        \"mw_monoisotopic\": 166.89357433836483,\n        \"np_likeness_score\": 4041.699680907773,\n        \"num_lipinski_ro5_violations\": 7385,\n        \"num_ro5_violations\": 5137,\n        \"psa\": 9115.255062440798,\n        \"qed_weighted\": 1931.649872247021,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 3604\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dae7f0f-5549-4731-a581-e5011044b716",
+          "name": "Get molecule structure image",
+          "request": {
+            "name": "Get molecule structure image",
+            "description": {
+              "content": "Retrieve an SVG structural image for a given molecule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "image",
+                ":molecule_chembl_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "500",
+                  "description": "Image dimensions in pixels (e.g., 500 for 500x500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ignore_coords",
+                  "value": "false",
+                  "description": "Ignore existing coordinates and recalculate layout"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "molecule_chembl_id",
+                  "description": "(Required) ChEMBL ID of the molecule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/svg+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd19aad1-fdc4-456a-8a24-f231f126c3be",
+              "name": "SVG structure image",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    ":molecule_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensions",
+                      "value": "500"
+                    },
+                    {
+                      "key": "ignore_coords",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "molecule_chembl_id",
+                      "description": "(Required) ChEMBL ID of the molecule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/svg+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/svg+xml"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd497131-e63f-4e48-8766-799b285e9f42",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "image",
+                    ":molecule_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimensions",
+                      "value": "500"
+                    },
+                    {
+                      "key": "ignore_coords",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "molecule_chembl_id",
+                      "description": "(Required) ChEMBL ID of the molecule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1ea455d-ab46-4118-ae96-69726b81982b",
+          "name": "List cross-reference sources",
+          "request": {
+            "name": "List cross-reference sources",
+            "description": {
+              "content": "Retrieve cross-reference source definitions for external chemical and biological databases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "xref_source"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "029ae553-fc67-4673-992d-1affa3a79ef5",
+              "name": "Paginated list of cross-reference sources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "xref_source"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 4395,\n    \"next\": \"string\",\n    \"offset\": 3561,\n    \"previous\": \"string\",\n    \"total_count\": 1303\n  },\n  \"xref_sources\": [\n    {\n      \"xref_src_db\": \"string\",\n      \"xref_src_description\": \"string\",\n      \"xref_src_url\": \"https://xDbbduJlGBm.gjcwWxXZbRdFst-vcrfDLn7y9OnKixUMSNcG.fPFqjRTQJkEmw.vVvC2zoETqSJhil072TtNgLh1tbXVyj\"\n    },\n    {\n      \"xref_src_db\": \"string\",\n      \"xref_src_description\": \"string\",\n      \"xref_src_url\": \"https://anhIkJxOkADbtdZrw.wnWkKStZsdgtlP-9sNpwYTn4nVttYo9k61J+e\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8fc61b51-dd00-426b-b704-9b425dd2137e",
+    "name": "ChEMBL Data REST Activity Molecule API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

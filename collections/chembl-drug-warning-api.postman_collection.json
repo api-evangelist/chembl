@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "05fe8317-98e8-4d3d-ad3d-0c33430bc810",
+      "name": "Drug Warning",
+      "description": {
+        "content": "Safety information for withdrawn or black-box warned drugs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1df37f9a-6639-4626-bae0-ce44e57c8e22",
+          "name": "List drug warnings",
+          "request": {
+            "name": "List drug warnings",
+            "description": {
+              "content": "Retrieve safety information for drugs that have been withdrawn or carry black-box warnings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "drug_warning"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by molecule ChEMBL ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "warning_type",
+                  "value": "<string>",
+                  "description": "Filter by warning type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ccf9320b-ffc2-486e-a0ea-da86c6d32b9c",
+              "name": "Paginated list of drug warnings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drug_warning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "warning_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 3574,\n    \"next\": \"string\",\n    \"offset\": 7121,\n    \"previous\": \"string\",\n    \"total_count\": 6769\n  },\n  \"drug_warnings\": [\n    {\n      \"warning_id\": 2175,\n      \"efo_id\": \"string\",\n      \"efo_term\": \"string\",\n      \"molecule_chembl_id\": \"string\",\n      \"parent_molecule_chembl_id\": \"string\",\n      \"warning_class\": \"string\",\n      \"warning_country\": \"string\",\n      \"warning_type\": \"string\",\n      \"warning_year\": 6116\n    },\n    {\n      \"warning_id\": 8550,\n      \"efo_id\": \"string\",\n      \"efo_term\": \"string\",\n      \"molecule_chembl_id\": \"string\",\n      \"parent_molecule_chembl_id\": \"string\",\n      \"warning_class\": \"string\",\n      \"warning_country\": \"string\",\n      \"warning_type\": \"string\",\n      \"warning_year\": 2561\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "89b7cdc0-9623-4bac-9173-6d1927995c9f",
+    "name": "ChEMBL Data REST Activity Drug Warning API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

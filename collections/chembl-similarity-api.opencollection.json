@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Similarity API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Similarity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Similarity search by SMILES",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/similarity/:smiles/:similarity",
+            "params": [
+              {
+                "name": "smiles",
+                "value": "",
+                "type": "path",
+                "description": "SMILES string of the query molecule (URL-encoded)"
+              },
+              {
+                "name": "similarity",
+                "value": "",
+                "type": "path",
+                "description": "Minimum Tanimoto similarity score (40-100)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Search for molecules similar to a given SMILES string using Tanimoto coefficient. Returns molecules above the specified similarity threshold."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

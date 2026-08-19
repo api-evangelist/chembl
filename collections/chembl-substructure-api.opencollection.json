@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Substructure API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Substructure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Substructure search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/substructure/:smiles",
+            "params": [
+              {
+                "name": "smiles",
+                "value": "",
+                "type": "path",
+                "description": "SMILES string representing the substructure query (URL-encoded)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Search for molecules containing a given SMILES substructure."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

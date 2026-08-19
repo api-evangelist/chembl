@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "d4049cca-4699-4f71-a709-1ac99769f4cf",
+      "name": "Cell Line",
+      "description": {
+        "content": "Cell line information used in assays.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de05be8f-3ebe-4e9a-a3bd-4c9deb3efb9e",
+          "name": "List cell lines",
+          "request": {
+            "name": "List cell lines",
+            "description": {
+              "content": "Retrieve cell line information used in assays.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cell_line"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "cell_name",
+                  "value": "<string>",
+                  "description": "Filter by cell line name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77450130-4656-41eb-b05d-165ab46973fe",
+              "name": "Paginated list of cell lines",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cell_line"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "cell_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 6027,\n    \"next\": \"string\",\n    \"offset\": 3021,\n    \"previous\": \"string\",\n    \"total_count\": 5029\n  },\n  \"cell_lines\": [\n    {\n      \"cell_chembl_id\": \"string\",\n      \"cell_description\": \"string\",\n      \"cell_id\": 6750,\n      \"cell_name\": \"string\",\n      \"cell_source_organism\": \"string\",\n      \"cell_source_tax_id\": \"string\",\n      \"cell_source_tissue\": \"string\",\n      \"cellosaurus_id\": \"string\",\n      \"clo_id\": \"string\",\n      \"efo_id\": \"string\"\n    },\n    {\n      \"cell_chembl_id\": \"string\",\n      \"cell_description\": \"string\",\n      \"cell_id\": 8528,\n      \"cell_name\": \"string\",\n      \"cell_source_organism\": \"string\",\n      \"cell_source_tax_id\": \"string\",\n      \"cell_source_tissue\": \"string\",\n      \"cellosaurus_id\": \"string\",\n      \"clo_id\": \"string\",\n      \"efo_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0c861d35-2009-4d78-b79d-2809615cdcbb",
+    "name": "ChEMBL Data REST Activity Cell Line API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

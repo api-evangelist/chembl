@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Assay API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assay",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List assays",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/assay",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "assay_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ChEMBL assay ID"
+              },
+              {
+                "name": "assay_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by assay type"
+              },
+              {
+                "name": "target_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target ChEMBL ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of assays. Each assay describes an experimental protocol and associated results from source documents."
+        },
+        {
+          "info": {
+            "name": "Get assay by ChEMBL ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/assay/:assay_chembl_id",
+            "params": [
+              {
+                "name": "assay_chembl_id",
+                "value": "",
+                "type": "path",
+                "description": "ChEMBL ID of the assay"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve a single assay by its ChEMBL ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Molecule API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Molecule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List molecules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/molecule",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "molecule_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ChEMBL molecule ID"
+              },
+              {
+                "name": "pref_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by preferred molecule name"
+              },
+              {
+                "name": "max_phase",
+                "value": "",
+                "type": "query",
+                "description": "Filter by maximum clinical development phase (4 = approved)"
+              },
+              {
+                "name": "molecule_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by molecule type"
+              },
+              {
+                "name": "therapeutic_flag",
+                "value": "",
+                "type": "query",
+                "description": "Filter for molecules with therapeutic applications"
+              },
+              {
+                "name": "withdrawn_flag",
+                "value": "",
+                "type": "query",
+                "description": "Filter for withdrawn drugs"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of molecules. Includes chemical properties, structural representations (SMILES, InChI), synonyms, and drug-like properties."
+        },
+        {
+          "info": {
+            "name": "Get molecule by ChEMBL ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/molecule/:molecule_chembl_id",
+            "params": [
+              {
+                "name": "molecule_chembl_id",
+                "value": "",
+                "type": "path",
+                "description": "ChEMBL ID of the molecule"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve a single molecule record by its ChEMBL ID."
+        },
+        {
+          "info": {
+            "name": "Search molecules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/molecule/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query string (molecule name, synonym, etc.)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Full-text search for molecules by name, synonym, or other text fields."
+        },
+        {
+          "info": {
+            "name": "Get molecule structure image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/image/:molecule_chembl_id",
+            "params": [
+              {
+                "name": "molecule_chembl_id",
+                "value": "",
+                "type": "path",
+                "description": "ChEMBL ID of the molecule"
+              },
+              {
+                "name": "dimensions",
+                "value": "",
+                "type": "query",
+                "description": "Image dimensions in pixels (e.g., 500 for 500x500)"
+              },
+              {
+                "name": "ignore_coords",
+                "value": "",
+                "type": "query",
+                "description": "Ignore existing coordinates and recalculate layout"
+              }
+            ]
+          },
+          "docs": "Retrieve an SVG structural image for a given molecule."
+        },
+        {
+          "info": {
+            "name": "List cross-reference sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/xref_source",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve cross-reference source definitions for external chemical and biological databases."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

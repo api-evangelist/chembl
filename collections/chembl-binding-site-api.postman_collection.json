@@ -1,0 +1,134 @@
+{
+  "item": [
+    {
+      "id": "2ecfc277-36b9-4c12-be9e-c2dca3708e8f",
+      "name": "Binding Site",
+      "description": {
+        "content": "Target binding site definitions used in assays.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8cc82367-a2dc-46b8-84c5-fcb6ce38b0e2",
+          "name": "List binding sites",
+          "request": {
+            "name": "List binding sites",
+            "description": {
+              "content": "Retrieve target binding site definitions used in assays.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "binding_site"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b2c4e48-9ce8-4fee-aafd-3ab054f6de32",
+              "name": "Paginated list of binding sites",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "binding_site"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 8849,\n    \"next\": \"string\",\n    \"offset\": 9981,\n    \"previous\": \"string\",\n    \"total_count\": 5286\n  },\n  \"binding_sites\": [\n    {\n      \"site_id\": 3084,\n      \"site_name\": \"string\",\n      \"target_chembl_id\": \"string\"\n    },\n    {\n      \"site_id\": 3236,\n      \"site_name\": \"string\",\n      \"target_chembl_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "06c4505a-a406-4209-ad76-08e0f1bf830b",
+    "name": "ChEMBL Data REST Activity Binding Site API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "22b922e8-0807-430f-a28f-cd077dfb1037",
+      "name": "Drug Indication",
+      "description": {
+        "content": "Drug-disease associations with clinical trial and regulatory references.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce9bd4ea-09b3-47bf-9452-2461d7938431",
+          "name": "List drug indications",
+          "request": {
+            "name": "List drug indications",
+            "description": {
+              "content": "Retrieve drug-disease associations with clinical trial phase information and regulatory references.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "drug_indication"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by molecule ChEMBL ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_phase_for_ind",
+                  "value": "<integer>",
+                  "description": "Filter by maximum clinical phase for the indication"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a0bdeb2-7576-4319-9ca6-7aba80174b66",
+              "name": "Paginated list of drug indications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drug_indication"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "max_phase_for_ind",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 8127,\n    \"next\": \"string\",\n    \"offset\": 1137,\n    \"previous\": \"string\",\n    \"total_count\": 7846\n  },\n  \"drug_indications\": [\n    {\n      \"drugind_id\": 6012,\n      \"efo_id\": \"string\",\n      \"efo_term\": \"string\",\n      \"indication_refs\": [\n        {\n          \"ref_id\": \"string\",\n          \"ref_type\": \"string\",\n          \"ref_url\": \"string\"\n        },\n        {\n          \"ref_id\": \"string\",\n          \"ref_type\": \"string\",\n          \"ref_url\": \"string\"\n        }\n      ],\n      \"max_phase_for_ind\": 4121.761500036396,\n      \"mesh_heading\": \"string\",\n      \"mesh_id\": \"string\",\n      \"molecule_chembl_id\": \"string\"\n    },\n    {\n      \"drugind_id\": 6479,\n      \"efo_id\": \"string\",\n      \"efo_term\": \"string\",\n      \"indication_refs\": [\n        {\n          \"ref_id\": \"string\",\n          \"ref_type\": \"string\",\n          \"ref_url\": \"string\"\n        },\n        {\n          \"ref_id\": \"string\",\n          \"ref_type\": \"string\",\n          \"ref_url\": \"string\"\n        }\n      ],\n      \"max_phase_for_ind\": 5204.699852732655,\n      \"mesh_heading\": \"string\",\n      \"mesh_id\": \"string\",\n      \"molecule_chembl_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "51dfdbf3-0a74-4025-bcd3-7818243c3afc",
+    "name": "ChEMBL Data REST Activity Drug Indication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

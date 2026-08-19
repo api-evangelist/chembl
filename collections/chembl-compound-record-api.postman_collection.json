@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "1ca08494-e936-423f-9cde-7410466e2808",
+      "name": "Compound Record",
+      "description": {
+        "content": "Occurrence of a compound in a specific source document.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d9c79d0-62e9-43b0-a329-551cb375d967",
+          "name": "List compound records",
+          "request": {
+            "name": "List compound records",
+            "description": {
+              "content": "Retrieve compound records representing the occurrence of a compound in a specific document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "compound_record"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by molecule ChEMBL ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dde987c-e06b-4a3a-b553-10883c75e869",
+              "name": "Paginated list of compound records",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "compound_record"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 6664,\n    \"next\": \"string\",\n    \"offset\": 2053,\n    \"previous\": \"string\",\n    \"total_count\": 1615\n  },\n  \"compound_records\": [\n    {\n      \"record_id\": 4439,\n      \"compound_name\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"molecule_chembl_id\": \"string\",\n      \"src_compound_id\": \"string\",\n      \"src_id\": 7055\n    },\n    {\n      \"record_id\": 380,\n      \"compound_name\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"molecule_chembl_id\": \"string\",\n      \"src_compound_id\": \"string\",\n      \"src_id\": 3988\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b0737d1a-cc47-414a-a793-1c3f039a9eb6",
+    "name": "ChEMBL Data REST Activity Compound Record API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

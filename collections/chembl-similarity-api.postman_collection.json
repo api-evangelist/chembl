@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "cf8501b2-5643-456f-a40e-40c3a09aac6e",
+      "name": "Similarity",
+      "description": {
+        "content": "Molecule similarity searching using Tanimoto coefficient.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4937b822-7f3b-4c5a-a00c-02fcf35ecd3d",
+          "name": "Similarity search by SMILES",
+          "request": {
+            "name": "Similarity search by SMILES",
+            "description": {
+              "content": "Search for molecules similar to a given SMILES string using Tanimoto coefficient. Returns molecules above the specified similarity threshold.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "similarity",
+                ":smiles",
+                ":similarity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "smiles",
+                  "description": "(Required) SMILES string of the query molecule (URL-encoded)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "similarity",
+                  "description": "(Required) Minimum Tanimoto similarity score (40-100)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1694fab-fd95-48ce-b098-bb6e1ea89690",
+              "name": "Similar molecules above the specified threshold",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "similarity",
+                    ":smiles",
+                    ":similarity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "smiles",
+                      "description": "(Required) SMILES string of the query molecule (URL-encoded)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "similarity",
+                      "description": "(Required) Minimum Tanimoto similarity score (40-100)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 638,\n    \"next\": \"string\",\n    \"offset\": 6095,\n    \"previous\": \"string\",\n    \"total_count\": 4618\n  },\n  \"molecules\": [\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 531.0943043221239,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 6023,\n      \"natural_product\": 3611,\n      \"first_approval\": 3692,\n      \"first_in_class\": 8158,\n      \"oral\": true,\n      \"parenteral\": true,\n      \"topical\": true,\n      \"black_box_warning\": 9825,\n      \"therapeutic_flag\": false,\n      \"withdrawn_flag\": true,\n      \"prodrug\": 7491,\n      \"inorganic_flag\": 2069,\n      \"usan_year\": 2231,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 1658.1523542444777,\n        \"aromatic_rings\": 9737,\n        \"cx_logd\": 2167.713838927016,\n        \"cx_logp\": 5016.36052162078,\n        \"cx_most_apka\": 1336.2576676666238,\n        \"cx_most_bpka\": 6883.366990611092,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 7461.512974101171,\n        \"hba\": 6856,\n        \"hba_lipinski\": 8103,\n        \"hbd\": 8342,\n        \"hbd_lipinski\": 9720,\n        \"heavy_atoms\": 3982,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 7337.866387493032,\n        \"mw_monoisotopic\": 6207.455223729138,\n        \"np_likeness_score\": 9776.065640621979,\n        \"num_lipinski_ro5_violations\": 6339,\n        \"num_ro5_violations\": 9407,\n        \"psa\": 7688.88096231106,\n        \"qed_weighted\": 2071.392989168572,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 1153\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"molecule_chembl_id\": \"CHEMBL25\",\n      \"pref_name\": \"ASPIRIN\",\n      \"max_phase\": 3144.9380530045446,\n      \"molecule_type\": \"string\",\n      \"structure_type\": \"string\",\n      \"chirality\": 1634,\n      \"natural_product\": 4938,\n      \"first_approval\": 2489,\n      \"first_in_class\": 7055,\n      \"oral\": false,\n      \"parenteral\": true,\n      \"topical\": true,\n      \"black_box_warning\": 8073,\n      \"therapeutic_flag\": false,\n      \"withdrawn_flag\": false,\n      \"prodrug\": 2057,\n      \"inorganic_flag\": 4275,\n      \"usan_year\": 545,\n      \"usan_stem\": \"string\",\n      \"usan_stem_definition\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 3971.724615760349,\n        \"aromatic_rings\": 117,\n        \"cx_logd\": 8922.675665813764,\n        \"cx_logp\": 5115.843635901611,\n        \"cx_most_apka\": 2474.7864670527974,\n        \"cx_most_bpka\": 4743.434161528896,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 6670.058715636631,\n        \"hba\": 5258,\n        \"hba_lipinski\": 4446,\n        \"hbd\": 851,\n        \"hbd_lipinski\": 8400,\n        \"heavy_atoms\": 9136,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 4860.572910419854,\n        \"mw_monoisotopic\": 4453.799945651629,\n        \"np_likeness_score\": 1013.8627348218299,\n        \"num_lipinski_ro5_violations\": 7381,\n        \"num_ro5_violations\": 6819,\n        \"psa\": 822.5308787787367,\n        \"qed_weighted\": 1610.2831601309065,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 9459\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"molecule_synonyms\": [\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        },\n        {\n          \"molecule_synonym\": \"string\",\n          \"syn_type\": \"string\",\n          \"synonyms\": \"string\"\n        }\n      ],\n      \"atc_classifications\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4bf06907-4fa1-4c28-a2e3-aa20f47d21fd",
+    "name": "ChEMBL Data REST Activity Similarity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

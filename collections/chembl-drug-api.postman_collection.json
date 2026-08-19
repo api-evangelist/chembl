@@ -1,0 +1,378 @@
+{
+  "item": [
+    {
+      "id": "3159514c-9708-4abc-b413-68d8b18037ea",
+      "name": "Drug",
+      "description": {
+        "content": "Approved drug information including applicants, patent numbers, and research codes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77389feb-bfb3-42d6-a5a3-1acff72e522b",
+          "name": "List approved drugs",
+          "request": {
+            "name": "List approved drugs",
+            "description": {
+              "content": "Retrieve a paginated list of approved drugs with information on applicants, patent numbers, research codes, and regulatory data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "drug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by molecule ChEMBL ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "applicants",
+                  "value": "<string>",
+                  "description": "Filter by drug applicant name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f74f0370-b53a-4bb6-bf5d-94e1118d18bb",
+              "name": "Paginated list of drugs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "applicants",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 8142,\n    \"next\": \"string\",\n    \"offset\": 1914,\n    \"previous\": \"string\",\n    \"total_count\": 3669\n  },\n  \"drugs\": [\n    {\n      \"molecule_chembl_id\": \"string\",\n      \"applicants\": \"string\",\n      \"atc_classification\": \"string\",\n      \"availability_type\": 5166,\n      \"biotherapeutic\": {},\n      \"black_box\": 271,\n      \"chirality\": 1782,\n      \"development_phase\": 2023,\n      \"drug_type\": 7178,\n      \"first_approval\": 7325,\n      \"helm_notation\": \"string\",\n      \"indication_class\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 374.8318270687356,\n        \"aromatic_rings\": 8659,\n        \"cx_logd\": 3584.3403237479733,\n        \"cx_logp\": 4586.220541785162,\n        \"cx_most_apka\": 3567.124521871,\n        \"cx_most_bpka\": 547.9630080742847,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 3769.9865356267014,\n        \"hba\": 2664,\n        \"hba_lipinski\": 5698,\n        \"hbd\": 9459,\n        \"hbd_lipinski\": 7479,\n        \"heavy_atoms\": 4108,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 8677.151734749343,\n        \"mw_monoisotopic\": 51.449356773661805,\n        \"np_likeness_score\": 1441.858127483331,\n        \"num_lipinski_ro5_violations\": 3557,\n        \"num_ro5_violations\": 451,\n        \"psa\": 3509.621115184205,\n        \"qed_weighted\": 6429.354506985165,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 1393\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"natural_product\": 2358,\n      \"oral\": true,\n      \"parenteral\": true,\n      \"patent_expire_date\": \"2011-08-17\",\n      \"pref_name\": \"string\",\n      \"prodrug\": 8492,\n      \"research_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sc_patent\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"topical\": true,\n      \"usan_stem\": \"string\",\n      \"usan_year\": 2835,\n      \"withdrawn_class\": \"string\",\n      \"withdrawn_country\": \"string\",\n      \"withdrawn_flag\": false,\n      \"withdrawn_reason\": \"string\",\n      \"withdrawn_year\": 9232\n    },\n    {\n      \"molecule_chembl_id\": \"string\",\n      \"applicants\": \"string\",\n      \"atc_classification\": \"string\",\n      \"availability_type\": 4384,\n      \"biotherapeutic\": {},\n      \"black_box\": 109,\n      \"chirality\": 4541,\n      \"development_phase\": 4488,\n      \"drug_type\": 2345,\n      \"first_approval\": 9925,\n      \"helm_notation\": \"string\",\n      \"indication_class\": \"string\",\n      \"molecule_properties\": {\n        \"alogp\": 781.4052577020858,\n        \"aromatic_rings\": 2696,\n        \"cx_logd\": 5996.923945635686,\n        \"cx_logp\": 1894.4939947736739,\n        \"cx_most_apka\": 4948.381872734801,\n        \"cx_most_bpka\": 4568.325090095105,\n        \"full_molformula\": \"string\",\n        \"full_mwt\": 4606.564923023478,\n        \"hba\": 8381,\n        \"hba_lipinski\": 4901,\n        \"hbd\": 7843,\n        \"hbd_lipinski\": 4743,\n        \"heavy_atoms\": 5385,\n        \"molecular_species\": \"string\",\n        \"mw_freebase\": 2194.9618570610796,\n        \"mw_monoisotopic\": 1335.1753858887162,\n        \"np_likeness_score\": 9913.451317261686,\n        \"num_lipinski_ro5_violations\": 4012,\n        \"num_ro5_violations\": 7587,\n        \"psa\": 490.3196257499998,\n        \"qed_weighted\": 4761.71536601041,\n        \"ro3_pass\": \"string\",\n        \"rtb\": 6766\n      },\n      \"molecule_structures\": {\n        \"canonical_smiles\": \"string\",\n        \"molfile\": \"string\",\n        \"standard_inchi\": \"string\",\n        \"standard_inchi_key\": \"string\"\n      },\n      \"natural_product\": 9749,\n      \"oral\": false,\n      \"parenteral\": false,\n      \"patent_expire_date\": \"2009-08-21\",\n      \"pref_name\": \"string\",\n      \"prodrug\": 9452,\n      \"research_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sc_patent\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"topical\": false,\n      \"usan_stem\": \"string\",\n      \"usan_year\": 9593,\n      \"withdrawn_class\": \"string\",\n      \"withdrawn_country\": \"string\",\n      \"withdrawn_flag\": true,\n      \"withdrawn_reason\": \"string\",\n      \"withdrawn_year\": 7309\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54a54645-f7cc-4165-b283-9e12a935b59f",
+              "name": "Bad request - invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "applicants",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b121c89f-7ff6-47b7-91da-01d66f8bdf45",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "applicants",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bac1c5ba-8315-47a9-a933-597303b120c6",
+          "name": "List metabolism data",
+          "request": {
+            "name": "List metabolism data",
+            "description": {
+              "content": "Retrieve metabolic pathway data with substrate, product, and enzyme references.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metabolism"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "substrate_molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by substrate molecule ChEMBL ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4785af23-82f5-4f1e-bebc-ac1c772b807f",
+              "name": "Paginated list of metabolism records",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metabolism"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "substrate_molecule_chembl_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 7094,\n    \"next\": \"string\",\n    \"offset\": 320,\n    \"previous\": \"string\",\n    \"total_count\": 9417\n  },\n  \"metabolisms\": [\n    {\n      \"met_id\": 866,\n      \"drug_chembl_id\": \"string\",\n      \"enzyme_chembl_id\": \"string\",\n      \"enzyme_name\": \"string\",\n      \"met_conversion\": \"string\",\n      \"metabolite_chembl_id\": \"string\",\n      \"metabolite_name\": \"string\",\n      \"organism\": \"string\",\n      \"pathway_id\": 7623,\n      \"pathway_key\": \"string\",\n      \"substrate_chembl_id\": \"string\",\n      \"substrate_name\": \"string\",\n      \"tax_id\": \"string\"\n    },\n    {\n      \"met_id\": 6913,\n      \"drug_chembl_id\": \"string\",\n      \"enzyme_chembl_id\": \"string\",\n      \"enzyme_name\": \"string\",\n      \"met_conversion\": \"string\",\n      \"metabolite_chembl_id\": \"string\",\n      \"metabolite_name\": \"string\",\n      \"organism\": \"string\",\n      \"pathway_id\": 8290,\n      \"pathway_key\": \"string\",\n      \"substrate_chembl_id\": \"string\",\n      \"substrate_name\": \"string\",\n      \"tax_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1cd1241b-2f88-4fdf-9d0f-c5e0e594efbf",
+    "name": "ChEMBL Data REST Activity Drug API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

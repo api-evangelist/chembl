@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "55a09de3-283a-4eda-9d5b-b6097e628338",
+      "name": "Mechanism",
+      "description": {
+        "content": "Mechanism of action information for approved drugs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ff93fc6-b698-4bb1-8e8a-fc96c4c9adc3",
+          "name": "List mechanisms of action",
+          "request": {
+            "name": "List mechanisms of action",
+            "description": {
+              "content": "Retrieve mechanism of action information for approved drugs, including target, action type, and selectivity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mechanism"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by molecule ChEMBL ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by target ChEMBL ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbed7a56-3cf3-4745-a197-8081f817e284",
+              "name": "Paginated list of drug mechanisms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mechanism"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 2556,\n    \"next\": \"string\",\n    \"offset\": 1908,\n    \"previous\": \"string\",\n    \"total_count\": 4618\n  },\n  \"mechanisms\": [\n    {\n      \"mec_id\": 9032,\n      \"action_type\": \"string\",\n      \"binding_site_comment\": \"string\",\n      \"direct_interaction\": false,\n      \"disease_efficacy\": false,\n      \"mechanism_comment\": \"string\",\n      \"mechanism_of_action\": \"string\",\n      \"molecular_mechanism\": false,\n      \"molecule_chembl_id\": \"string\",\n      \"selectivity_comment\": \"string\",\n      \"site_id\": 3247,\n      \"target_chembl_id\": \"string\"\n    },\n    {\n      \"mec_id\": 2963,\n      \"action_type\": \"string\",\n      \"binding_site_comment\": \"string\",\n      \"direct_interaction\": false,\n      \"disease_efficacy\": false,\n      \"mechanism_comment\": \"string\",\n      \"mechanism_of_action\": \"string\",\n      \"molecular_mechanism\": false,\n      \"molecule_chembl_id\": \"string\",\n      \"selectivity_comment\": \"string\",\n      \"site_id\": 8728,\n      \"target_chembl_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "84f9644d-f14c-43f4-8ff6-4f2c25d80b8a",
+    "name": "ChEMBL Data REST Activity Mechanism API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

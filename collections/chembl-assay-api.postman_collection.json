@@ -1,0 +1,433 @@
+{
+  "item": [
+    {
+      "id": "1e108179-d5ac-4cd1-bdaf-cacb3bda723a",
+      "name": "Assay",
+      "description": {
+        "content": "Experimental protocols and result details from source documents and datasets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "233e3a7f-b7c5-4cf1-8057-622ed74203cb",
+          "name": "List assays",
+          "request": {
+            "name": "List assays",
+            "description": {
+              "content": "Retrieve a paginated list of assays. Each assay describes an experimental protocol and associated results from source documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "assay_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by ChEMBL assay ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "assay_type",
+                  "value": "<string>",
+                  "description": "Filter by assay type"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by target ChEMBL ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1f3b979-1b0b-4ba7-806b-374d4afa4586",
+              "name": "Paginated list of assays",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "assay_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assay_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 3122,\n    \"next\": \"string\",\n    \"offset\": 1173,\n    \"previous\": \"string\",\n    \"total_count\": 2437\n  },\n  \"assays\": [\n    {\n      \"assay_category\": \"string\",\n      \"assay_cell_type\": \"string\",\n      \"assay_chembl_id\": \"string\",\n      \"assay_description\": \"string\",\n      \"assay_organism\": \"string\",\n      \"assay_strain\": \"string\",\n      \"assay_subcellular_fraction\": \"string\",\n      \"assay_tax_id\": \"string\",\n      \"assay_tissue\": \"string\",\n      \"assay_type\": \"string\",\n      \"assay_type_description\": \"string\",\n      \"bao_format\": \"string\",\n      \"bao_label\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"relationship_description\": \"string\",\n      \"relationship_type\": \"string\",\n      \"src_assay_id\": \"string\",\n      \"src_id\": 9553,\n      \"target_chembl_id\": \"string\",\n      \"tissue_chembl_id\": \"string\",\n      \"variant_sequence\": \"string\"\n    },\n    {\n      \"assay_category\": \"string\",\n      \"assay_cell_type\": \"string\",\n      \"assay_chembl_id\": \"string\",\n      \"assay_description\": \"string\",\n      \"assay_organism\": \"string\",\n      \"assay_strain\": \"string\",\n      \"assay_subcellular_fraction\": \"string\",\n      \"assay_tax_id\": \"string\",\n      \"assay_tissue\": \"string\",\n      \"assay_type\": \"string\",\n      \"assay_type_description\": \"string\",\n      \"bao_format\": \"string\",\n      \"bao_label\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"relationship_description\": \"string\",\n      \"relationship_type\": \"string\",\n      \"src_assay_id\": \"string\",\n      \"src_id\": 4470,\n      \"target_chembl_id\": \"string\",\n      \"tissue_chembl_id\": \"string\",\n      \"variant_sequence\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9be33d67-90c7-48dc-b30a-8fba0b8e9f40",
+              "name": "Bad request - invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "assay_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assay_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac3d9601-f788-4c78-b45e-c31284703646",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "assay_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assay_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18539ce0-f0a9-4022-9fec-f0281012fdec",
+          "name": "Get assay by ChEMBL ID",
+          "request": {
+            "name": "Get assay by ChEMBL ID",
+            "description": {
+              "content": "Retrieve a single assay by its ChEMBL ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assay",
+                ":assay_chembl_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assay_chembl_id",
+                  "description": "(Required) ChEMBL ID of the assay"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efeff591-bcb5-498e-a4bf-95de1ccd1964",
+              "name": "Assay record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assay",
+                    ":assay_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assay_chembl_id",
+                      "description": "(Required) ChEMBL ID of the assay"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assay_category\": \"string\",\n  \"assay_cell_type\": \"string\",\n  \"assay_chembl_id\": \"string\",\n  \"assay_description\": \"string\",\n  \"assay_organism\": \"string\",\n  \"assay_strain\": \"string\",\n  \"assay_subcellular_fraction\": \"string\",\n  \"assay_tax_id\": \"string\",\n  \"assay_tissue\": \"string\",\n  \"assay_type\": \"string\",\n  \"assay_type_description\": \"string\",\n  \"bao_format\": \"string\",\n  \"bao_label\": \"string\",\n  \"document_chembl_id\": \"string\",\n  \"relationship_description\": \"string\",\n  \"relationship_type\": \"string\",\n  \"src_assay_id\": \"string\",\n  \"src_id\": 9350,\n  \"target_chembl_id\": \"string\",\n  \"tissue_chembl_id\": \"string\",\n  \"variant_sequence\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "631fc62b-f61e-43c1-8950-32a71c471536",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assay",
+                    ":assay_chembl_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assay_chembl_id",
+                      "description": "(Required) ChEMBL ID of the assay"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "86ea870f-49ec-4863-bf21-564e4a45aab4",
+    "name": "ChEMBL Data REST Activity Assay API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

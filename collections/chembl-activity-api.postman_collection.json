@@ -1,0 +1,619 @@
+{
+  "item": [
+    {
+      "id": "9a9fdfa8-bf38-45e7-a3b1-e0f28b137fef",
+      "name": "Activity",
+      "description": {
+        "content": "Activity values recorded in assays, linking molecules to targets with quantitative bioactivity measurements.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c595f674-dfa4-4a4e-a86f-fdbf9ea95f14",
+          "name": "List activities",
+          "request": {
+            "name": "List activities",
+            "description": {
+              "content": "Retrieve a paginated list of activity records. Activities link molecules to targets with quantitative bioactivity measurements (IC50, Ki, EC50, etc.).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "molecule_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by ChEMBL ID of the compound"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by ChEMBL ID of the target"
+                },
+                {
+                  "disabled": false,
+                  "key": "assay_chembl_id",
+                  "value": "<string>",
+                  "description": "Filter by ChEMBL ID of the assay"
+                },
+                {
+                  "disabled": false,
+                  "key": "standard_type",
+                  "value": "<string>",
+                  "description": "Filter by activity type (e.g., IC50, Ki, EC50, Kd)"
+                },
+                {
+                  "disabled": false,
+                  "key": "standard_value__lte",
+                  "value": "<number>",
+                  "description": "Filter by standard value less than or equal to"
+                },
+                {
+                  "disabled": false,
+                  "key": "standard_value__gte",
+                  "value": "<number>",
+                  "description": "Filter by standard value greater than or equal to"
+                },
+                {
+                  "disabled": false,
+                  "key": "assay_type",
+                  "value": "<string>",
+                  "description": "Filter by assay type (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8da0221b-0183-414c-9f38-72c70ca0948a",
+              "name": "Successful response with paginated list of activities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "CHEMBL301"
+                    },
+                    {
+                      "key": "assay_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "standard_type",
+                      "value": "IC50"
+                    },
+                    {
+                      "key": "standard_value__lte",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "standard_value__gte",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "assay_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 617,\n    \"next\": \"string\",\n    \"offset\": 2758,\n    \"previous\": \"string\",\n    \"total_count\": 7361\n  },\n  \"activities\": [\n    {\n      \"activity_id\": 6387,\n      \"assay_chembl_id\": \"string\",\n      \"assay_description\": \"string\",\n      \"assay_type\": \"string\",\n      \"bao_endpoint\": \"string\",\n      \"bao_format\": \"string\",\n      \"bao_label\": \"string\",\n      \"canonical_smiles\": \"string\",\n      \"data_validity_comment\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"document_journal\": \"string\",\n      \"document_year\": 7721,\n      \"molecule_chembl_id\": \"string\",\n      \"pchembl_value\": 6307.578846666541,\n      \"relation\": \"string\",\n      \"standard_flag\": true,\n      \"standard_relation\": \"string\",\n      \"standard_text_value\": \"string\",\n      \"standard_type\": \"string\",\n      \"standard_units\": \"string\",\n      \"standard_value\": 9066.11726104821,\n      \"target_chembl_id\": \"string\",\n      \"target_organism\": \"string\",\n      \"target_pref_name\": \"string\",\n      \"target_tax_id\": \"string\",\n      \"type\": \"string\",\n      \"units\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"activity_id\": 9938,\n      \"assay_chembl_id\": \"string\",\n      \"assay_description\": \"string\",\n      \"assay_type\": \"string\",\n      \"bao_endpoint\": \"string\",\n      \"bao_format\": \"string\",\n      \"bao_label\": \"string\",\n      \"canonical_smiles\": \"string\",\n      \"data_validity_comment\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"document_journal\": \"string\",\n      \"document_year\": 2914,\n      \"molecule_chembl_id\": \"string\",\n      \"pchembl_value\": 2024.4241160413624,\n      \"relation\": \"string\",\n      \"standard_flag\": true,\n      \"standard_relation\": \"string\",\n      \"standard_text_value\": \"string\",\n      \"standard_type\": \"string\",\n      \"standard_units\": \"string\",\n      \"standard_value\": 4006.06957647752,\n      \"target_chembl_id\": \"string\",\n      \"target_organism\": \"string\",\n      \"target_pref_name\": \"string\",\n      \"target_tax_id\": \"string\",\n      \"type\": \"string\",\n      \"units\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "333d4fca-87f8-4dc1-9c9f-c67484b3ce79",
+              "name": "Bad request - invalid query parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "CHEMBL301"
+                    },
+                    {
+                      "key": "assay_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "standard_type",
+                      "value": "IC50"
+                    },
+                    {
+                      "key": "standard_value__lte",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "standard_value__gte",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "assay_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3be9109c-7e6f-4166-a9b0-f168eea3f97f",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "molecule_chembl_id",
+                      "value": "CHEMBL25"
+                    },
+                    {
+                      "key": "target_chembl_id",
+                      "value": "CHEMBL301"
+                    },
+                    {
+                      "key": "assay_chembl_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "standard_type",
+                      "value": "IC50"
+                    },
+                    {
+                      "key": "standard_value__lte",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "standard_value__gte",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "assay_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d699315-e4e9-47ff-b232-8a596cabc901",
+          "name": "Get activity by ID",
+          "request": {
+            "name": "Get activity by ID",
+            "description": {
+              "content": "Retrieve a single activity record by its unique activity ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "activity",
+                ":activity_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "activity_id",
+                  "description": "(Required) Unique numeric activity ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e316d703-3dc6-418c-b3ca-2ef59785d7a4",
+              "name": "Activity record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity",
+                    ":activity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "activity_id",
+                      "description": "(Required) Unique numeric activity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activity_id\": 4870,\n  \"assay_chembl_id\": \"string\",\n  \"assay_description\": \"string\",\n  \"assay_type\": \"string\",\n  \"bao_endpoint\": \"string\",\n  \"bao_format\": \"string\",\n  \"bao_label\": \"string\",\n  \"canonical_smiles\": \"string\",\n  \"data_validity_comment\": \"string\",\n  \"document_chembl_id\": \"string\",\n  \"document_journal\": \"string\",\n  \"document_year\": 9931,\n  \"molecule_chembl_id\": \"string\",\n  \"pchembl_value\": 2549.6432908204715,\n  \"relation\": \"string\",\n  \"standard_flag\": false,\n  \"standard_relation\": \"string\",\n  \"standard_text_value\": \"string\",\n  \"standard_type\": \"string\",\n  \"standard_units\": \"string\",\n  \"standard_value\": 3570.5607901074663,\n  \"target_chembl_id\": \"string\",\n  \"target_organism\": \"string\",\n  \"target_pref_name\": \"string\",\n  \"target_tax_id\": \"string\",\n  \"type\": \"string\",\n  \"units\": \"string\",\n  \"value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47a02c7d-2eac-42ab-abed-bcd2ff734f3b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity",
+                    ":activity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "activity_id",
+                      "description": "(Required) Unique numeric activity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee7af5b8-9a3b-4798-800b-3c3c78f52d10",
+          "name": "Search activities",
+          "request": {
+            "name": "Search activities",
+            "description": {
+              "content": "Full-text search for activities using query string.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "activity",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9aeb7a9f-3b94-4ce0-8aff-af67a4a58647",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 617,\n    \"next\": \"string\",\n    \"offset\": 2758,\n    \"previous\": \"string\",\n    \"total_count\": 7361\n  },\n  \"activities\": [\n    {\n      \"activity_id\": 6387,\n      \"assay_chembl_id\": \"string\",\n      \"assay_description\": \"string\",\n      \"assay_type\": \"string\",\n      \"bao_endpoint\": \"string\",\n      \"bao_format\": \"string\",\n      \"bao_label\": \"string\",\n      \"canonical_smiles\": \"string\",\n      \"data_validity_comment\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"document_journal\": \"string\",\n      \"document_year\": 7721,\n      \"molecule_chembl_id\": \"string\",\n      \"pchembl_value\": 6307.578846666541,\n      \"relation\": \"string\",\n      \"standard_flag\": true,\n      \"standard_relation\": \"string\",\n      \"standard_text_value\": \"string\",\n      \"standard_type\": \"string\",\n      \"standard_units\": \"string\",\n      \"standard_value\": 9066.11726104821,\n      \"target_chembl_id\": \"string\",\n      \"target_organism\": \"string\",\n      \"target_pref_name\": \"string\",\n      \"target_tax_id\": \"string\",\n      \"type\": \"string\",\n      \"units\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"activity_id\": 9938,\n      \"assay_chembl_id\": \"string\",\n      \"assay_description\": \"string\",\n      \"assay_type\": \"string\",\n      \"bao_endpoint\": \"string\",\n      \"bao_format\": \"string\",\n      \"bao_label\": \"string\",\n      \"canonical_smiles\": \"string\",\n      \"data_validity_comment\": \"string\",\n      \"document_chembl_id\": \"string\",\n      \"document_journal\": \"string\",\n      \"document_year\": 2914,\n      \"molecule_chembl_id\": \"string\",\n      \"pchembl_value\": 2024.4241160413624,\n      \"relation\": \"string\",\n      \"standard_flag\": true,\n      \"standard_relation\": \"string\",\n      \"standard_text_value\": \"string\",\n      \"standard_type\": \"string\",\n      \"standard_units\": \"string\",\n      \"standard_value\": 4006.06957647752,\n      \"target_chembl_id\": \"string\",\n      \"target_organism\": \"string\",\n      \"target_pref_name\": \"string\",\n      \"target_tax_id\": \"string\",\n      \"type\": \"string\",\n      \"units\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3e096352-b8ee-4205-9348-d00fdbffeff1",
+    "name": "ChEMBL Data REST Activity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

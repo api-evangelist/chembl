@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity Target API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Target",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/target",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "target_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target ChEMBL ID"
+              },
+              {
+                "name": "target_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target type (e.g., SINGLE PROTEIN, PROTEIN COMPLEX)"
+              },
+              {
+                "name": "organism",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organism (e.g., Homo sapiens)"
+              },
+              {
+                "name": "pref_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by preferred target name"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of targets. Targets can be single proteins, protein complexes, organisms, cell lines, or other biological entities."
+        },
+        {
+          "info": {
+            "name": "Get target by ChEMBL ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/target/:target_chembl_id",
+            "params": [
+              {
+                "name": "target_chembl_id",
+                "value": "",
+                "type": "path",
+                "description": "ChEMBL ID of the target"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve a single target record by its ChEMBL ID."
+        },
+        {
+          "info": {
+            "name": "Search targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/target/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query string"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Full-text search for targets by name or other text fields."
+        },
+        {
+          "info": {
+            "name": "List GO slim classifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/go_slim",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve gene ontology slim classifications used to annotate targets."
+        },
+        {
+          "info": {
+            "name": "List protein classifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/protein_class",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve hierarchical protein family classification information for targets."
+        },
+        {
+          "info": {
+            "name": "List tissues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/tissue",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "pref_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tissue preferred name"
+              }
+            ]
+          },
+          "docs": "Retrieve tissue classification information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

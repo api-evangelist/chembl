@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "9649ca7d-665e-48e3-a8f6-859354fa1cbd",
+      "name": "ATC Classification",
+      "description": {
+        "content": "WHO Anatomical Therapeutic Chemical classification for drugs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b14421b6-23b2-4c4c-ab86-502004fd893d",
+          "name": "List ATC classifications",
+          "request": {
+            "name": "List ATC classifications",
+            "description": {
+              "content": "Retrieve WHO Anatomical Therapeutic Chemical (ATC) classification records.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "atc_class"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "who_atc_code",
+                  "value": "<string>",
+                  "description": "Filter by ATC code"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35e73c8e-90e8-4782-a2d7-0f66da507aa6",
+              "name": "Paginated list of ATC classifications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "atc_class"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "who_atc_code",
+                      "value": "A10BA02"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 6511,\n    \"next\": \"string\",\n    \"offset\": 5815,\n    \"previous\": \"string\",\n    \"total_count\": 5292\n  },\n  \"atc_classifications\": [\n    {\n      \"who_atc_code\": \"A10BA02\",\n      \"level1\": \"string\",\n      \"level1_description\": \"string\",\n      \"level2\": \"string\",\n      \"level2_description\": \"string\",\n      \"level3\": \"string\",\n      \"level3_description\": \"string\",\n      \"level4\": \"string\",\n      \"level4_description\": \"string\",\n      \"level5\": \"string\",\n      \"who_name\": \"string\"\n    },\n    {\n      \"who_atc_code\": \"A10BA02\",\n      \"level1\": \"string\",\n      \"level1_description\": \"string\",\n      \"level2\": \"string\",\n      \"level2_description\": \"string\",\n      \"level3\": \"string\",\n      \"level3_description\": \"string\",\n      \"level4\": \"string\",\n      \"level4_description\": \"string\",\n      \"level5\": \"string\",\n      \"who_name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d3ea8367-bec4-4da8-a366-b772841a78f3",
+    "name": "ChEMBL Data REST Activity ATC Classification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

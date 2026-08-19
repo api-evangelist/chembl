@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ChEMBL Data REST Activity API",
+    "version": "ChEMBL_37"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/activity",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "molecule_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ChEMBL ID of the compound"
+              },
+              {
+                "name": "target_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ChEMBL ID of the target"
+              },
+              {
+                "name": "assay_chembl_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ChEMBL ID of the assay"
+              },
+              {
+                "name": "standard_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by activity type (e.g., IC50, Ki, EC50, Kd)"
+              },
+              {
+                "name": "standard_value__lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by standard value less than or equal to"
+              },
+              {
+                "name": "standard_value__gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter by standard value greater than or equal to"
+              },
+              {
+                "name": "assay_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by assay type (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of activity records. Activities link molecules to targets with quantitative bioactivity measurements (IC50, Ki, EC50, etc.)."
+        },
+        {
+          "info": {
+            "name": "Get activity by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/activity/:activity_id",
+            "params": [
+              {
+                "name": "activity_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique numeric activity ID"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve a single activity record by its unique activity ID."
+        },
+        {
+          "info": {
+            "name": "Search activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.ebi.ac.uk/chembl/api/data/activity/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query string"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (default 20, max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Full-text search for activities using query string."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

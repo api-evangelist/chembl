@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "cb7881f5-a00b-4a7b-9f48-592379b6543b",
+      "name": "Document",
+      "description": {
+        "content": "Source documents and datasets from which assay data is derived.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e7617cf-90a1-4a2c-8b4e-6bc8bda08d4f",
+          "name": "List documents",
+          "request": {
+            "name": "List documents",
+            "description": {
+              "content": "Retrieve source documents and datasets from which assay data is derived.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "document"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return per page (default 20, max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "journal",
+                  "value": "<string>",
+                  "description": "Filter by journal abbreviation"
+                },
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Filter by publication year"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b2e25dd-7ca7-4365-8a68-716749175d3e",
+              "name": "Paginated list of documents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "document"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "journal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 2725,\n    \"next\": \"string\",\n    \"offset\": 739,\n    \"previous\": \"string\",\n    \"total_count\": 8563\n  },\n  \"documents\": [\n    {\n      \"doc_id\": 8059,\n      \"document_chembl_id\": \"string\",\n      \"abstract\": \"string\",\n      \"authors\": \"string\",\n      \"doi\": \"string\",\n      \"first_page\": \"string\",\n      \"issue\": \"string\",\n      \"journal\": \"string\",\n      \"journal_full_title\": \"string\",\n      \"last_page\": \"string\",\n      \"patent_id\": \"string\",\n      \"pubmed_id\": 6707,\n      \"src_id\": 7325,\n      \"title\": \"string\",\n      \"volume\": \"string\",\n      \"year\": 3482\n    },\n    {\n      \"doc_id\": 362,\n      \"document_chembl_id\": \"string\",\n      \"abstract\": \"string\",\n      \"authors\": \"string\",\n      \"doi\": \"string\",\n      \"first_page\": \"string\",\n      \"issue\": \"string\",\n      \"journal\": \"string\",\n      \"journal_full_title\": \"string\",\n      \"last_page\": \"string\",\n      \"patent_id\": \"string\",\n      \"pubmed_id\": 532,\n      \"src_id\": 1698,\n      \"title\": \"string\",\n      \"volume\": \"string\",\n      \"year\": 2430\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.ebi.ac.uk/chembl/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "950e2571-1737-4b22-a365-8c457228f424",
+    "name": "ChEMBL Data REST Activity Document API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.\n\nContact Support:\n Name: ChEMBL Team\n Email: chembl-help@ebi.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

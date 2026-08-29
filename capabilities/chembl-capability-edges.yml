@@ -1,0 +1,64 @@
+slug: chembl
+provider: ChEMBL
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Pharmaceuticals & Life Sciences
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Compound Record
+  spec_file: chembl-compound-record-api-openapi.yml
+  capability_id: BC-1500.60
+  capability_id_l1: BC-1500
+  capability_name: Compound & Library Management
+  confidence: 0.75
+  evidence: GET /compound_record listCompoundRecords List compound records
+  reason: Compound records in a curated bioactive-molecule repository — compound and library management
+    within drug discovery.
+- tag: Activity
+  spec_file: chembl-activity-api-openapi.yml
+  capability_id: BC-1500.20
+  capability_id_l1: BC-1500
+  capability_name: Hit Discovery Management
+  confidence: 0.7
+  evidence: GET /activity listActivities List activities — 'bioactivity measurements' for 'drug discovery
+    research'
+  reason: Bioactivity measurement data from screening assays, explicitly positioned to support drug discovery;
+    maps to hit discovery/screening data.
+- tag: Assay
+  spec_file: chembl-assay-api-openapi.yml
+  capability_id: BC-1500.20
+  capability_id_l1: BC-1500
+  capability_name: Hit Discovery Management
+  confidence: 0.7
+  evidence: GET /assay listAssays List assays — 'assay data' supporting 'drug discovery research'
+  reason: Assay records underpinning bioactivity screening, i.e. hit discovery/high-throughput screening
+    data in a drug discovery context.
+- tag: Molecule
+  spec_file: chembl-molecule-api-openapi.yml
+  capability_id: BC-1500.60
+  capability_id_l1: BC-1500
+  capability_name: Compound & Library Management
+  confidence: 0.7
+  evidence: GET /molecule listMolecules; GET /molecule/{molecule_chembl_id} getMolecule; schemas MoleculeStructures,
+    MoleculeProperties — "over 2.9 million distinct compounds"
+  reason: 'This is a curated compound repository surface: listing, retrieving, searching and rendering
+    chemical structures. That is Compound & Library Management within drug discovery, not a downstream
+    pharma operational capability.'
+- tag: Target
+  spec_file: chembl-target-api-openapi.yml
+  capability_id: BC-1500.10
+  capability_id_l1: BC-1500
+  capability_name: Target Identification & Validation Management
+  confidence: 0.7
+  evidence: GET /target listTargets; GET /protein_class listProteinClasses; GET /go_slim listGoSlim; schemas
+    Target, TargetComponent, ProteinClass
+  reason: The surface is a drug-target catalogue with protein classification and GO annotation, i.e. reference
+    data for target identification and validation in drug discovery.

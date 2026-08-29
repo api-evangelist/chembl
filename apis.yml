@@ -337,6 +337,9 @@ apis:
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
 common:
+  - type: CapabilityMap
+    url: capabilities/chembl-capability-edges.yml
+    name: ChEMBL Business Capability Map
   - type: AgenticAccess
     url: agentic-access/chembl-agentic-access.yml
   - type: DomainSecurity

@@ -152,6 +152,8 @@ apis:
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
+  - Documents
+  tags_raw:
   - Document
   properties:
   - type: OpenAPI

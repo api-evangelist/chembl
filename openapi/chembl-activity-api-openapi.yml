@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ChEMBL Data REST Activity API
   description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
@@ -151,6 +151,170 @@ paths:
                     items:
                       $ref: '#/components/schemas/Activity'
 components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Activity:
+      type: object
+      description: A bioactivity measurement linking a compound to a target through an assay
+      properties:
+        activity_id:
+          type: integer
+          description: Unique ID for the activity record
+        assay_chembl_id:
+          type: string
+          description: ChEMBL ID of the assay
+        assay_description:
+          type: string
+          description: Description of the assay
+        assay_type:
+          type: string
+          description: Assay type code (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)
+        bao_endpoint:
+          type: string
+          description: BioAssay Ontology (BAO) endpoint term ID
+        bao_format:
+          type: string
+          description: BioAssay Ontology (BAO) format term ID
+        bao_label:
+          type: string
+          description: Human-readable BAO endpoint label
+        canonical_smiles:
+          type: string
+          description: Canonical SMILES representation of the compound
+        data_validity_comment:
+          type:
+          - string
+          - 'null'
+          description: Comment on data validity/quality
+        document_chembl_id:
+          type: string
+          description: ChEMBL ID of the source document
+        document_journal:
+          type: string
+          description: Journal of the source publication
+        document_year:
+          type:
+          - integer
+          - 'null'
+          description: Year of the source publication
+        molecule_chembl_id:
+          type: string
+          description: ChEMBL ID of the tested compound
+        pchembl_value:
+          type:
+          - number
+          - 'null'
+          description: Negative log10 of the molar activity value (-log10 of standard value in M)
+        relation:
+          type:
+          - string
+          - 'null'
+          description: Relationship qualifier for the activity value (=, >, <, >=, <=, ~)
+        standard_flag:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the activity was standardized
+        standard_relation:
+          type:
+          - string
+          - 'null'
+          description: Standardized relationship qualifier
+        standard_text_value:
+          type:
+          - string
+          - 'null'
+          description: Standardized text value for non-numeric activities
+        standard_type:
+          type:
+          - string
+          - 'null'
+          description: Standardized activity type (e.g., IC50, Ki, EC50, Kd)
+        standard_units:
+          type:
+          - string
+          - 'null'
+          description: Standardized units of the activity measurement
+        standard_value:
+          type:
+          - number
+          - 'null'
+          description: Standardized numeric activity value
+        target_chembl_id:
+          type: string
+          description: ChEMBL ID of the biological target
+        target_organism:
+          type:
+          - string
+          - 'null'
+          description: Organism of the biological target
+        target_pref_name:
+          type:
+          - string
+          - 'null'
+          description: Preferred name of the biological target
+        target_tax_id:
+          type:
+          - string
+          - 'null'
+          description: NCBI taxonomy ID of the target organism
+        type:
+          type:
+          - string
+          - 'null'
+          description: Original activity type as reported in the source document
+        units:
+          type:
+          - string
+          - 'null'
+          description: Original units as reported in the source document
+        value:
+          type:
+          - string
+          - 'null'
+          description: Original numeric or text value as reported in the source document
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    Error:
+      type: object
+      properties:
+        error_message:
+          type: string
+        status:
+          type: string
   parameters:
     offset:
       name: offset
@@ -181,152 +345,6 @@ components:
         default: 20
         maximum: 1000
         minimum: 1
-  schemas:
-    Error:
-      type: object
-      properties:
-        error_message:
-          type: string
-        status:
-          type: string
-    Meta:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type: string
-          nullable: true
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type: string
-          nullable: true
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
-    Activity:
-      type: object
-      description: A bioactivity measurement linking a compound to a target through an assay
-      properties:
-        activity_id:
-          type: integer
-          description: Unique ID for the activity record
-        assay_chembl_id:
-          type: string
-          description: ChEMBL ID of the assay
-        assay_description:
-          type: string
-          description: Description of the assay
-        assay_type:
-          type: string
-          description: Assay type code (B=Binding, F=Functional, A=ADME, T=Toxicity, P=Physicochemical, U=Unclassified)
-        bao_endpoint:
-          type: string
-          description: BioAssay Ontology (BAO) endpoint term ID
-        bao_format:
-          type: string
-          description: BioAssay Ontology (BAO) format term ID
-        bao_label:
-          type: string
-          description: Human-readable BAO endpoint label
-        canonical_smiles:
-          type: string
-          description: Canonical SMILES representation of the compound
-        data_validity_comment:
-          type: string
-          nullable: true
-          description: Comment on data validity/quality
-        document_chembl_id:
-          type: string
-          description: ChEMBL ID of the source document
-        document_journal:
-          type: string
-          description: Journal of the source publication
-        document_year:
-          type: integer
-          nullable: true
-          description: Year of the source publication
-        molecule_chembl_id:
-          type: string
-          description: ChEMBL ID of the tested compound
-        pchembl_value:
-          type: number
-          nullable: true
-          description: Negative log10 of the molar activity value (-log10 of standard value in M)
-        relation:
-          type: string
-          nullable: true
-          description: Relationship qualifier for the activity value (=, >, <, >=, <=, ~)
-        standard_flag:
-          type: boolean
-          nullable: true
-          description: Whether the activity was standardized
-        standard_relation:
-          type: string
-          nullable: true
-          description: Standardized relationship qualifier
-        standard_text_value:
-          type: string
-          nullable: true
-          description: Standardized text value for non-numeric activities
-        standard_type:
-          type: string
-          nullable: true
-          description: Standardized activity type (e.g., IC50, Ki, EC50, Kd)
-        standard_units:
-          type: string
-          nullable: true
-          description: Standardized units of the activity measurement
-        standard_value:
-          type: number
-          nullable: true
-          description: Standardized numeric activity value
-        target_chembl_id:
-          type: string
-          description: ChEMBL ID of the biological target
-        target_organism:
-          type: string
-          nullable: true
-          description: Organism of the biological target
-        target_pref_name:
-          type: string
-          nullable: true
-          description: Preferred name of the biological target
-        target_tax_id:
-          type: string
-          nullable: true
-          description: NCBI taxonomy ID of the target organism
-        type:
-          type: string
-          nullable: true
-          description: Original activity type as reported in the source document
-        units:
-          type: string
-          nullable: true
-          description: Original units as reported in the source document
-        value:
-          type: string
-          nullable: true
-          description: Original numeric or text value as reported in the source document
-  responses:
-    BadRequest:
-      description: Bad request - invalid query parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

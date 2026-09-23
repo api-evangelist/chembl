@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ChEMBL Data REST Activity Document API
+  title: ChEMBL Data REST Document API
   description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
   version: ChEMBL_37
   contact:
@@ -95,15 +95,17 @@ components:
           type: integer
           description: Number of records returned per page
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the next page of results
         offset:
           type: integer
           description: Number of records skipped
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the previous page of results
         total_count:
           type: integer
@@ -118,48 +120,61 @@ components:
           type: string
           description: Unique ChEMBL ID for the document
         abstract:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         authors:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         doi:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Digital Object Identifier
         first_page:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         issue:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         journal:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         journal_full_title:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         last_page:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         patent_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         pubmed_id:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           description: PubMed ID if from a journal article
         src_id:
           type: integer
         title:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         volume:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         year:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

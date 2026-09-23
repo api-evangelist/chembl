@@ -1,27 +1,12 @@
 {
   "provider": "chembl",
   "sources": [
-    "chembl-activity-api-openapi.yml",
-    "chembl-assay-api-openapi.yml",
-    "chembl-atc-classification-api-openapi.yml",
-    "chembl-binding-site-api-openapi.yml",
-    "chembl-cell-line-api-openapi.yml",
-    "chembl-compound-record-api-openapi.yml",
-    "chembl-document-api-openapi.yml",
-    "chembl-drug-api-openapi.yml",
-    "chembl-drug-indication-api-openapi.yml",
-    "chembl-drug-warning-api-openapi.yml",
-    "chembl-mechanism-api-openapi.yml",
-    "chembl-molecule-api-openapi.yml",
-    "chembl-similarity-api-openapi.yml",
-    "chembl-status-api-openapi.yml",
-    "chembl-substructure-api-openapi.yml",
-    "chembl-target-api-openapi.yml"
+    "_original/openapi.json"
   ],
   "outputs": [
+    "chembl-atc-classification-api-openapi.yml",
     "chembl-activity-api-openapi.yml",
     "chembl-assay-api-openapi.yml",
-    "chembl-atc-classification-api-openapi.yml",
     "chembl-binding-site-api-openapi.yml",
     "chembl-cell-line-api-openapi.yml",
     "chembl-compound-record-api-openapi.yml",
@@ -39,6 +24,27 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "chembl-activity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-assay-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-atc-classification-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-binding-site-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-cell-line-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-compound-record-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-document-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-drug-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-drug-indication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-drug-warning-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-mechanism-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-molecule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-similarity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-substructure-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chembl-target-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ChEMBL Data REST Activity ATC Classification API
+  title: ChEMBL Data REST ATC Classification API
   description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
   version: ChEMBL_37
   contact:
@@ -52,72 +52,6 @@ paths:
                     items:
                       $ref: '#/components/schemas/AtcClass'
 components:
-  schemas:
-    AtcClass:
-      type: object
-      description: WHO ATC classification entry
-      properties:
-        who_atc_code:
-          type: string
-          description: WHO ATC classification code
-          example: A10BA02
-        level1:
-          type: string
-          nullable: true
-          description: First level ATC code (Anatomical main group)
-        level1_description:
-          type: string
-          nullable: true
-        level2:
-          type: string
-          nullable: true
-          description: Second level ATC code (Therapeutic subgroup)
-        level2_description:
-          type: string
-          nullable: true
-        level3:
-          type: string
-          nullable: true
-          description: Third level ATC code (Pharmacological subgroup)
-        level3_description:
-          type: string
-          nullable: true
-        level4:
-          type: string
-          nullable: true
-          description: Fourth level ATC code (Chemical subgroup)
-        level4_description:
-          type: string
-          nullable: true
-        level5:
-          type: string
-          nullable: true
-          description: Fifth level ATC code (Chemical substance)
-        who_name:
-          type: string
-          nullable: true
-          description: WHO recommended name for the substance
-    Meta:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type: string
-          nullable: true
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type: string
-          nullable: true
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
   parameters:
     offset:
       name: offset
@@ -148,6 +82,84 @@ components:
         default: 20
         maximum: 1000
         minimum: 1
+  schemas:
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+    AtcClass:
+      type: object
+      description: WHO ATC classification entry
+      properties:
+        who_atc_code:
+          type: string
+          description: WHO ATC classification code
+          example: A10BA02
+        level1:
+          type:
+          - string
+          - 'null'
+          description: First level ATC code (Anatomical main group)
+        level1_description:
+          type:
+          - string
+          - 'null'
+        level2:
+          type:
+          - string
+          - 'null'
+          description: Second level ATC code (Therapeutic subgroup)
+        level2_description:
+          type:
+          - string
+          - 'null'
+        level3:
+          type:
+          - string
+          - 'null'
+          description: Third level ATC code (Pharmacological subgroup)
+        level3_description:
+          type:
+          - string
+          - 'null'
+        level4:
+          type:
+          - string
+          - 'null'
+          description: Fourth level ATC code (Chemical subgroup)
+        level4_description:
+          type:
+          - string
+          - 'null'
+        level5:
+          type:
+          - string
+          - 'null'
+          description: Fifth level ATC code (Chemical substance)
+        who_name:
+          type:
+          - string
+          - 'null'
+          description: WHO recommended name for the substance
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

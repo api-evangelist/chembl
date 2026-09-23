@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ChEMBL Data REST Activity Mechanism API
+  title: ChEMBL Data REST Mechanism API
   description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
   version: ChEMBL_37
   contact:
@@ -95,15 +95,17 @@ components:
           type: integer
           description: Number of records returned per page
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the next page of results
         offset:
           type: integer
           description: Number of records skipped
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the previous page of results
         total_count:
           type: integer
@@ -116,30 +118,37 @@ components:
           type: integer
           description: Unique ID for the mechanism record
         action_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Action type (e.g., INHIBITOR, AGONIST, ANTAGONIST, MODULATOR)
         binding_site_comment:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         direct_interaction:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Indicates a direct interaction with the target
         disease_efficacy:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Indicates the mechanism is responsible for clinical efficacy
         mechanism_comment:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         mechanism_of_action:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Free-text description of the mechanism of action
         molecular_mechanism:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         molecule_chembl_id:
           type: string
           description: ChEMBL ID of the drug
@@ -148,14 +157,17 @@ components:
           items:
             type: object
         selectivity_comment:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         site_id:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         target_chembl_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: ChEMBL ID of the mechanism target
 externalDocs:
   description: ChEMBL Web Services Documentation

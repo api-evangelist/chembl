@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ChEMBL Data REST Activity Drug Indication API
+  title: ChEMBL Data REST Drug Indication API
   description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
   version: ChEMBL_37
   contact:
@@ -96,15 +96,17 @@ components:
           type: integer
           description: Number of records returned per page
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the next page of results
         offset:
           type: integer
           description: Number of records skipped
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the previous page of results
         total_count:
           type: integer
@@ -117,12 +119,14 @@ components:
           type: integer
           description: Unique ID for the drug indication record
         efo_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: EFO (Experimental Factor Ontology) term ID
         efo_term:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: EFO ontology term for the disease/indication
         indication_refs:
           type: array
@@ -136,16 +140,19 @@ components:
               ref_url:
                 type: string
         max_phase_for_ind:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Maximum clinical phase reached for this specific indication
         mesh_heading:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: MeSH heading for the disease indication
         mesh_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: MeSH term ID
         molecule_chembl_id:
           type: string

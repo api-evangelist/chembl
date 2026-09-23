@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ChEMBL Data REST Activity Assay API
+  title: ChEMBL Data REST Assay API
   description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
   version: ChEMBL_37
   contact:
@@ -97,6 +97,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     offset:
       name: offset
@@ -128,13 +141,6 @@ components:
         maximum: 1000
         minimum: 1
   schemas:
-    Error:
-      type: object
-      properties:
-        error_message:
-          type: string
-        status:
-          type: string
     Meta:
       type: object
       description: Pagination metadata for list responses
@@ -143,15 +149,17 @@ components:
           type: integer
           description: Number of records returned per page
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the next page of results
         offset:
           type: integer
           description: Number of records skipped
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the previous page of results
         total_count:
           type: integer
@@ -161,12 +169,14 @@ components:
       description: An experimental assay describing the protocol used to measure bioactivity
       properties:
         assay_category:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Assay category (e.g., screening, confirmatory, summary)
         assay_cell_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cell type used in the assay
         assay_chembl_id:
           type: string
@@ -175,84 +185,93 @@ components:
           type: string
           description: Description of the assay as curated from the source document
         assay_organism:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Organism from which the assay target comes
         assay_strain:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Strain of organism used in the assay
         assay_subcellular_fraction:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Subcellular fraction used in the assay
         assay_tax_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: NCBI taxonomy ID of the assay organism
         assay_tissue:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Tissue from which the assay is derived
         assay_type:
           type: string
           description: Assay type code
         assay_type_description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Description of the assay type
         bao_format:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: BioAssay Ontology format classification
         bao_label:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: BioAssay Ontology format label
         document_chembl_id:
           type: string
           description: ChEMBL ID of the source document
         relationship_description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Description of the target-assay relationship
         relationship_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Relationship between the assay and its molecular target
         src_assay_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Assay ID from the source database
         src_id:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           description: Source database ID
         target_chembl_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: ChEMBL ID of the assay target
         tissue_chembl_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: ChEMBL ID of the tissue
         variant_sequence:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Sequence mutation information for variant assays
-  responses:
-    BadRequest:
-      description: Bad request - invalid query parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        error_message:
+          type: string
+        status:
+          type: string
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

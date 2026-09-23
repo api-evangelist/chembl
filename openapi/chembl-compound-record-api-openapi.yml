@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ChEMBL Data REST Activity Compound Record API
+  title: ChEMBL Data REST Compound Record API
   description: ChEMBL is a manually curated database of bioactive molecules with drug-like properties, maintained by the EMBL-EBI. This REST API provides programmatic access to bioactive molecules, drug targets, bioactivity measurements, approved drugs, assay data, and clinical trial compound information. ChEMBL_37 contains over 2.9 million distinct compounds, 24.5 million activities, and 18,552 targets.
   version: ChEMBL_37
   contact:
@@ -90,15 +90,17 @@ components:
           type: integer
           description: Number of records returned per page
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the next page of results
         offset:
           type: integer
           description: Number of records skipped
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: URL for the previous page of results
         total_count:
           type: integer
@@ -110,16 +112,18 @@ components:
         record_id:
           type: integer
         compound_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Compound name as listed in the source document
         document_chembl_id:
           type: string
         molecule_chembl_id:
           type: string
         src_compound_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         src_id:
           type: integer
 externalDocs:

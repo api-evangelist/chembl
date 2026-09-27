@@ -98,27 +98,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    BadRequest:
-      description: Bad request - invalid query parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     format:
       name: format
       in: query
@@ -140,7 +132,22 @@ components:
         default: 20
         maximum: 1000
         minimum: 1
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
+    Error:
+      type: object
+      properties:
+        error_message:
+          type: string
+        status:
+          type: string
     Meta:
       type: object
       description: Pagination metadata for list responses
@@ -265,13 +272,6 @@ components:
           - string
           - 'null'
           description: Sequence mutation information for variant assays
-    Error:
-      type: object
-      properties:
-        error_message:
-          type: string
-        status:
-          type: string
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

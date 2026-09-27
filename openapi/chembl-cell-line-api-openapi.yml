@@ -51,60 +51,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/CellLine'
 components:
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    format:
-      name: format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        - yaml
-        - jsonp
-        default: json
-    limit:
-      name: limit
-      in: query
-      description: Number of records to return per page (default 20, max 1000)
-      schema:
-        type: integer
-        default: 20
-        maximum: 1000
-        minimum: 1
   schemas:
-    Meta:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
     CellLine:
       type: object
       description: A cell line used in assays
@@ -147,6 +94,59 @@ components:
           type:
           - string
           - 'null'
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
+  parameters:
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

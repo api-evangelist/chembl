@@ -58,14 +58,6 @@ paths:
                       $ref: '#/components/schemas/DrugIndication'
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     format:
       name: format
       in: query
@@ -87,6 +79,14 @@ components:
         default: 20
         maximum: 1000
         minimum: 1
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
     Meta:
       type: object

@@ -46,21 +46,37 @@ paths:
                     items:
                       $ref: '#/components/schemas/BindingSite'
 components:
+  parameters:
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
-    BindingSite:
-      type: object
-      description: A binding site on a target
-      properties:
-        site_id:
-          type: integer
-          description: Unique ID for the binding site
-        site_name:
-          type: string
-          description: Name of the binding site
-        target_chembl_id:
-          type:
-          - string
-          - 'null'
     Meta:
       type: object
       description: Pagination metadata for list responses
@@ -84,36 +100,20 @@ components:
         total_count:
           type: integer
           description: Total number of records matching the query
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    format:
-      name: format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        - yaml
-        - jsonp
-        default: json
-    limit:
-      name: limit
-      in: query
-      description: Number of records to return per page (default 20, max 1000)
-      schema:
-        type: integer
-        default: 20
-        maximum: 1000
-        minimum: 1
+    BindingSite:
+      type: object
+      description: A binding site on a target
+      properties:
+        site_id:
+          type: integer
+          description: Unique ID for the binding site
+        site_name:
+          type: string
+          description: Name of the binding site
+        target_chembl_id:
+          type:
+          - string
+          - 'null'
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

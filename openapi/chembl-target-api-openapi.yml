@@ -210,20 +210,24 @@ paths:
                     items:
                       $ref: '#/components/schemas/Tissue'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid query parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    GoSlim:
+      type: object
+      description: Gene Ontology slim term for target classification
+      properties:
+        go_id:
+          type: string
+          description: Gene Ontology term ID
+        protein_class_desc:
+          type:
+          - string
+          - 'null'
+        parent_go_id:
+          type:
+          - string
+          - 'null'
+        prot_class_id:
+          type: integer
     Target:
       type: object
       description: A biological target in ChEMBL
@@ -275,6 +279,27 @@ components:
               xref_src:
                 type: string
           description: Cross-references to external databases (UniProt, Ensembl, etc.)
+    TargetComponent:
+      type: object
+      description: A component (protein sequence) of a target
+      properties:
+        accession:
+          type: string
+          description: UniProt accession number
+        component_description:
+          type:
+          - string
+          - 'null'
+        component_id:
+          type: integer
+        component_type:
+          type: string
+          description: Component type (PROTEIN, DNA, RNA)
+        relationship:
+          type: string
+          description: Relationship of this component to the target
+        target_component_id:
+          type: integer
     ProteinClass:
       type: object
       description: Protein family classification in the hierarchy
@@ -331,13 +356,29 @@ components:
         protein_class_desc:
           type: string
           description: Full hierarchical description
-    Error:
+    Meta:
       type: object
+      description: Pagination metadata for list responses
       properties:
-        error_message:
-          type: string
-        status:
-          type: string
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
     Tissue:
       type: object
       description: Tissue classification used in ChEMBL
@@ -366,68 +407,44 @@ components:
           - string
           - 'null'
           description: UBERON ontology identifier
-    Meta:
+    Error:
       type: object
-      description: Pagination metadata for list responses
       properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
-    GoSlim:
-      type: object
-      description: Gene Ontology slim term for target classification
-      properties:
-        go_id:
+        error_message:
           type: string
-          description: Gene Ontology term ID
-        protein_class_desc:
-          type:
-          - string
-          - 'null'
-        parent_go_id:
-          type:
-          - string
-          - 'null'
-        prot_class_id:
-          type: integer
-    TargetComponent:
-      type: object
-      description: A component (protein sequence) of a target
-      properties:
-        accession:
+        status:
           type: string
-          description: UniProt accession number
-        component_description:
-          type:
-          - string
-          - 'null'
-        component_id:
-          type: integer
-        component_type:
-          type: string
-          description: Component type (PROTEIN, DNA, RNA)
-        relationship:
-          type: string
-          description: Relationship of this component to the target
-        target_component_id:
-          type: integer
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
     format:
       name: format
       in: query
@@ -440,23 +457,6 @@ components:
         - yaml
         - jsonp
         default: json
-    limit:
-      name: limit
-      in: query
-      description: Number of records to return per page (default 20, max 1000)
-      schema:
-        type: integer
-        default: 20
-        maximum: 1000
-        minimum: 1
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

@@ -57,29 +57,6 @@ paths:
                       $ref: '#/components/schemas/DrugWarning'
 components:
   schemas:
-    Meta:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
     DrugWarning:
       type: object
       description: Safety warning information for a drug
@@ -126,15 +103,30 @@ components:
           - integer
           - 'null'
           description: Year the warning was issued
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     limit:
       name: limit
       in: query
@@ -156,6 +148,14 @@ components:
         - yaml
         - jsonp
         default: json
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

@@ -51,28 +51,37 @@ paths:
                     items:
                       $ref: '#/components/schemas/CompoundRecord'
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
-    CompoundRecord:
-      type: object
-      description: Occurrence of a compound in a specific source document
-      properties:
-        record_id:
-          type: integer
-        compound_name:
-          type:
-          - string
-          - 'null'
-          description: Compound name as listed in the source document
-        document_chembl_id:
-          type: string
-        molecule_chembl_id:
-          type: string
-        src_compound_id:
-          type:
-          - string
-          - 'null'
-        src_id:
-          type: integer
     Meta:
       type: object
       description: Pagination metadata for list responses
@@ -96,36 +105,27 @@ components:
         total_count:
           type: integer
           description: Total number of records matching the query
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    limit:
-      name: limit
-      in: query
-      description: Number of records to return per page (default 20, max 1000)
-      schema:
-        type: integer
-        default: 20
-        maximum: 1000
-        minimum: 1
-    format:
-      name: format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        - yaml
-        - jsonp
-        default: json
+    CompoundRecord:
+      type: object
+      description: Occurrence of a compound in a specific source document
+      properties:
+        record_id:
+          type: integer
+        compound_name:
+          type:
+          - string
+          - 'null'
+          description: Compound name as listed in the source document
+        document_chembl_id:
+          type: string
+        molecule_chembl_id:
+          type: string
+        src_compound_id:
+          type:
+          - string
+          - 'null'
+        src_id:
+          type: integer
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

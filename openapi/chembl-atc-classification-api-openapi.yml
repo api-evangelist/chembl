@@ -52,6 +52,36 @@ paths:
                     items:
                       $ref: '#/components/schemas/AtcClass'
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
     Meta:
       type: object
@@ -130,36 +160,6 @@ components:
           - string
           - 'null'
           description: WHO recommended name for the substance
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    limit:
-      name: limit
-      in: query
-      description: Number of records to return per page (default 20, max 1000)
-      schema:
-        type: integer
-        default: 20
-        maximum: 1000
-        minimum: 1
-    format:
-      name: format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        - yaml
-        - jsonp
-        default: json
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

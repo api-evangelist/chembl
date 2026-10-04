@@ -164,7 +164,60 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Number of records to return per page (default 20, max 1000)
+      schema:
+        type: integer
+        default: 20
+        maximum: 1000
+        minimum: 1
+    format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        - yaml
+        - jsonp
+        default: json
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
     Activity:
       type: object
       description: A bioactivity measurement linking a compound to a target through an assay
@@ -285,29 +338,6 @@ components:
           - string
           - 'null'
           description: Original numeric or text value as reported in the source document
-    Meta:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
     Error:
       type: object
       properties:
@@ -315,36 +345,6 @@ components:
           type: string
         status:
           type: string
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    limit:
-      name: limit
-      in: query
-      description: Number of records to return per page (default 20, max 1000)
-      schema:
-        type: integer
-        default: 20
-        maximum: 1000
-        minimum: 1
-    format:
-      name: format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        - yaml
-        - jsonp
-        default: json
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

@@ -230,154 +230,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Meta:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
-    Molecule:
-      type: object
-      description: A chemical molecule in the ChEMBL database
-      properties:
-        molecule_chembl_id:
-          type: string
-          description: Unique ChEMBL ID for the molecule
-          example: CHEMBL25
-        pref_name:
-          type:
-          - string
-          - 'null'
-          description: Preferred name for the molecule
-          example: ASPIRIN
-        max_phase:
-          type:
-          - number
-          - 'null'
-          description: Maximum clinical development phase (4 = approved, null = not progressed)
-        molecule_type:
-          type:
-          - string
-          - 'null'
-          description: Type of molecule (Small molecule, Protein, Antibody, Oligosaccharide, Oligonucleotide, Cell, Unknown)
-        structure_type:
-          type:
-          - string
-          - 'null'
-          description: Indicates structure type (MOL, SEQ, NONE)
-        chirality:
-          type:
-          - integer
-          - 'null'
-          description: 'Chirality: -1=not defined, 0=racemic, 1=single stereoisomer, 2=achiral molecule'
-        natural_product:
-          type:
-          - integer
-          - 'null'
-          description: Natural product flag (1=natural product derived)
-        first_approval:
-          type:
-          - integer
-          - 'null'
-          description: Year of earliest known approval
-        first_in_class:
-          type:
-          - integer
-          - 'null'
-          description: First in class flag (1=first compound of its class)
-        oral:
-          type:
-          - boolean
-          - 'null'
-          description: Oral administration route
-        parenteral:
-          type:
-          - boolean
-          - 'null'
-          description: Parenteral administration route
-        topical:
-          type:
-          - boolean
-          - 'null'
-          description: Topical administration route
-        black_box_warning:
-          type:
-          - integer
-          - 'null'
-          description: Black box warning flag (1=has black box warning)
-        therapeutic_flag:
-          type:
-          - boolean
-          - 'null'
-          description: Therapeutic application flag
-        withdrawn_flag:
-          type:
-          - boolean
-          - 'null'
-          description: Withdrawn from market in at least one country
-        prodrug:
-          type:
-          - integer
-          - 'null'
-          description: Prodrug flag (1=is a prodrug)
-        inorganic_flag:
-          type:
-          - integer
-          - 'null'
-          description: Inorganic molecule flag
-        usan_year:
-          type:
-          - integer
-          - 'null'
-          description: Year of USAN/INN name application
-        usan_stem:
-          type:
-          - string
-          - 'null'
-          description: USAN stem
-        usan_stem_definition:
-          type:
-          - string
-          - 'null'
-          description: Definition of the USAN stem
-        molecule_properties:
-          $ref: '#/components/schemas/MoleculeProperties'
-        molecule_structures:
-          $ref: '#/components/schemas/MoleculeStructures'
-        molecule_synonyms:
-          type: array
-          items:
-            type: object
-            properties:
-              molecule_synonym:
-                type: string
-              syn_type:
-                type: string
-              synonyms:
-                type: string
-          description: List of synonyms and trade names
-        atc_classifications:
-          type: array
-          items:
-            type: string
-          description: ATC classification codes
     MoleculeStructures:
       type: object
       description: Structural representations of a molecule
@@ -402,6 +254,29 @@ components:
           - string
           - 'null'
           description: Standard InChIKey (27-character hash)
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
     MoleculeProperties:
       type: object
       description: Calculated physicochemical properties of a molecule
@@ -528,15 +403,132 @@ components:
           type: string
         status:
           type: string
+    Molecule:
+      type: object
+      description: A chemical molecule in the ChEMBL database
+      properties:
+        molecule_chembl_id:
+          type: string
+          description: Unique ChEMBL ID for the molecule
+          example: CHEMBL25
+        pref_name:
+          type:
+          - string
+          - 'null'
+          description: Preferred name for the molecule
+          example: ASPIRIN
+        max_phase:
+          type:
+          - number
+          - 'null'
+          description: Maximum clinical development phase (4 = approved, null = not progressed)
+        molecule_type:
+          type:
+          - string
+          - 'null'
+          description: Type of molecule (Small molecule, Protein, Antibody, Oligosaccharide, Oligonucleotide, Cell, Unknown)
+        structure_type:
+          type:
+          - string
+          - 'null'
+          description: Indicates structure type (MOL, SEQ, NONE)
+        chirality:
+          type:
+          - integer
+          - 'null'
+          description: 'Chirality: -1=not defined, 0=racemic, 1=single stereoisomer, 2=achiral molecule'
+        natural_product:
+          type:
+          - integer
+          - 'null'
+          description: Natural product flag (1=natural product derived)
+        first_approval:
+          type:
+          - integer
+          - 'null'
+          description: Year of earliest known approval
+        first_in_class:
+          type:
+          - integer
+          - 'null'
+          description: First in class flag (1=first compound of its class)
+        oral:
+          type:
+          - boolean
+          - 'null'
+          description: Oral administration route
+        parenteral:
+          type:
+          - boolean
+          - 'null'
+          description: Parenteral administration route
+        topical:
+          type:
+          - boolean
+          - 'null'
+          description: Topical administration route
+        black_box_warning:
+          type:
+          - integer
+          - 'null'
+          description: Black box warning flag (1=has black box warning)
+        therapeutic_flag:
+          type:
+          - boolean
+          - 'null'
+          description: Therapeutic application flag
+        withdrawn_flag:
+          type:
+          - boolean
+          - 'null'
+          description: Withdrawn from market in at least one country
+        prodrug:
+          type:
+          - integer
+          - 'null'
+          description: Prodrug flag (1=is a prodrug)
+        inorganic_flag:
+          type:
+          - integer
+          - 'null'
+          description: Inorganic molecule flag
+        usan_year:
+          type:
+          - integer
+          - 'null'
+          description: Year of USAN/INN name application
+        usan_stem:
+          type:
+          - string
+          - 'null'
+          description: USAN stem
+        usan_stem_definition:
+          type:
+          - string
+          - 'null'
+          description: Definition of the USAN stem
+        molecule_properties:
+          $ref: '#/components/schemas/MoleculeProperties'
+        molecule_structures:
+          $ref: '#/components/schemas/MoleculeStructures'
+        molecule_synonyms:
+          type: array
+          items:
+            type: object
+            properties:
+              molecule_synonym:
+                type: string
+              syn_type:
+                type: string
+              synonyms:
+                type: string
+          description: List of synonyms and trade names
+        atc_classifications:
+          type: array
+          items:
+            type: string
+          description: ATC classification codes
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     limit:
       name: limit
       in: query
@@ -558,6 +550,14 @@ components:
         - yaml
         - jsonp
         default: json
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

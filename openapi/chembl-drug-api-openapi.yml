@@ -90,19 +90,6 @@ paths:
                     items:
                       $ref: '#/components/schemas/Metabolism'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid query parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Drug:
       type: object
@@ -238,29 +225,6 @@ components:
           type:
           - integer
           - 'null'
-    Meta:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        limit:
-          type: integer
-          description: Number of records returned per page
-        next:
-          type:
-          - string
-          - 'null'
-          description: URL for the next page of results
-        offset:
-          type: integer
-          description: Number of records skipped
-        previous:
-          type:
-          - string
-          - 'null'
-          description: URL for the previous page of results
-        total_count:
-          type: integer
-          description: Total number of records matching the query
     MoleculeStructures:
       type: object
       description: Structural representations of a molecule
@@ -285,6 +249,92 @@ components:
           - string
           - 'null'
           description: Standard InChIKey (27-character hash)
+    Metabolism:
+      type: object
+      description: Drug metabolism data linking substrate to metabolite via enzyme
+      properties:
+        met_id:
+          type: integer
+        drug_chembl_id:
+          type:
+          - string
+          - 'null'
+          description: ChEMBL ID of the drug being metabolized
+        enzyme_chembl_id:
+          type:
+          - string
+          - 'null'
+          description: ChEMBL ID of the metabolizing enzyme
+        enzyme_name:
+          type:
+          - string
+          - 'null'
+        met_conversion:
+          type:
+          - string
+          - 'null'
+          description: Description of the metabolic conversion
+        metabolite_chembl_id:
+          type:
+          - string
+          - 'null'
+          description: ChEMBL ID of the metabolite
+        metabolite_name:
+          type:
+          - string
+          - 'null'
+        organism:
+          type:
+          - string
+          - 'null'
+        pathway_id:
+          type:
+          - integer
+          - 'null'
+        pathway_key:
+          type:
+          - string
+          - 'null'
+        refs:
+          type: array
+          items:
+            type: object
+        substrate_chembl_id:
+          type:
+          - string
+          - 'null'
+          description: ChEMBL ID of the substrate molecule
+        substrate_name:
+          type:
+          - string
+          - 'null'
+        tax_id:
+          type:
+          - string
+          - 'null'
+    Meta:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        limit:
+          type: integer
+          description: Number of records returned per page
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results
+        offset:
+          type: integer
+          description: Number of records skipped
+        previous:
+          type:
+          - string
+          - 'null'
+          description: URL for the previous page of results
+        total_count:
+          type: integer
+          description: Total number of records matching the query
     MoleculeProperties:
       type: object
       description: Calculated physicochemical properties of a molecule
@@ -404,69 +454,6 @@ components:
           - integer
           - 'null'
           description: Number of rotatable bonds
-    Metabolism:
-      type: object
-      description: Drug metabolism data linking substrate to metabolite via enzyme
-      properties:
-        met_id:
-          type: integer
-        drug_chembl_id:
-          type:
-          - string
-          - 'null'
-          description: ChEMBL ID of the drug being metabolized
-        enzyme_chembl_id:
-          type:
-          - string
-          - 'null'
-          description: ChEMBL ID of the metabolizing enzyme
-        enzyme_name:
-          type:
-          - string
-          - 'null'
-        met_conversion:
-          type:
-          - string
-          - 'null'
-          description: Description of the metabolic conversion
-        metabolite_chembl_id:
-          type:
-          - string
-          - 'null'
-          description: ChEMBL ID of the metabolite
-        metabolite_name:
-          type:
-          - string
-          - 'null'
-        organism:
-          type:
-          - string
-          - 'null'
-        pathway_id:
-          type:
-          - integer
-          - 'null'
-        pathway_key:
-          type:
-          - string
-          - 'null'
-        refs:
-          type: array
-          items:
-            type: object
-        substrate_chembl_id:
-          type:
-          - string
-          - 'null'
-          description: ChEMBL ID of the substrate molecule
-        substrate_name:
-          type:
-          - string
-          - 'null'
-        tax_id:
-          type:
-          - string
-          - 'null'
     Error:
       type: object
       properties:
@@ -474,15 +461,20 @@ components:
           type: string
         status:
           type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid query parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     limit:
       name: limit
       in: query
@@ -504,6 +496,14 @@ components:
         - yaml
         - jsonp
         default: json
+    offset:
+      name: offset
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
 externalDocs:
   description: ChEMBL Web Services Documentation
   url: https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

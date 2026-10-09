@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 plans:
   - name: Free Open Access
     description: ChEMBL is freely and openly accessible to all users including academic and commercial organizations. No registration, API key, or subscription is required to use the REST API. All data is released under Creative Commons Attribution-ShareAlike 3.0 Unported license.
@@ -29,3 +33,15 @@ notes: >
   and API access is provided at no cost. Bulk data downloads are also available via FTP.
   The API is currently serving ChEMBL_37 (released May 2026), containing over 24.5 million
   activities, ~2.9 million compounds, 101,100 publications, and 18,552 targets.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free Open Access
+    access: free
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []

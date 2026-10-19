@@ -30,18 +30,17 @@ created: '2026-06-13'
 modified: '2026-06-13'
 specificationVersion: '0.23'
 apis:
-- aid: chembl:chembl-activity-api
-  name: ChEMBL Activity API
-  description: >-
-    Activity values recorded in assays, linking molecules to targets with quantitative bioactivity measurements.
+- aid: chembl:chembl-activities-api
+  name: ChEMBL Activities API
+  description: Chembl Activities Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Activity
+  - Activities
   properties:
   - type: OpenAPI
-    url: openapi/chembl-activity-api-openapi.yml
+    url: openapi/chembl-activities-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -50,17 +49,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-assay-api
-  name: ChEMBL Assay API
-  description: Experimental protocols and result details from source documents and datasets.
+- aid: chembl:chembl-assays-api
+  name: ChEMBL Assays API
+  description: Chembl Assays Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Assay
+  - Assays
   properties:
   - type: OpenAPI
-    url: openapi/chembl-assay-api-openapi.yml
+    url: openapi/chembl-assays-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -69,17 +68,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-atc-classification-api
-  name: ChEMBL ATC Classification API
-  description: WHO Anatomical Therapeutic Chemical classification for drugs.
+- aid: chembl:chembl-drugs-api
+  name: ChEMBL Drugs API
+  description: Drug Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - ATC Classification
+  - Drugs
   properties:
   - type: OpenAPI
-    url: openapi/chembl-atc-classification-api-openapi.yml
+    url: openapi/chembl-drugs-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -88,17 +87,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-binding-site-api
-  name: ChEMBL Binding Site API
-  description: Target binding site definitions used in assays.
+- aid: chembl:chembl-efo-disease-terms-api
+  name: ChEMBL EFO disease terms API
+  description: EFO Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Binding Site
+  - EFO disease terms
   properties:
   - type: OpenAPI
-    url: openapi/chembl-binding-site-api-openapi.yml
+    url: openapi/chembl-efo-disease-terms-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -107,17 +106,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-cell-line-api
-  name: ChEMBL Cell Line API
-  description: Cell line information used in assays.
+- aid: chembl:chembl-hpo-api
+  name: ChEMBL HPO API
+  description: HPO Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Cell Line
+  - HPO
   properties:
   - type: OpenAPI
-    url: openapi/chembl-cell-line-api-openapi.yml
+    url: openapi/chembl-hpo-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -126,17 +125,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-compound-record-api
-  name: ChEMBL Compound Record API
-  description: Occurrence of a compound in a specific source document.
+- aid: chembl:chembl-intact-api
+  name: ChEMBL Intact API
+  description: Intact Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Compound Record
+  - Intact
   properties:
   - type: OpenAPI
-    url: openapi/chembl-compound-record-api-openapi.yml
+    url: openapi/chembl-intact-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -145,19 +144,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-document-api
-  name: ChEMBL Document API
-  description: Source documents and datasets from which assay data is derived.
+- aid: chembl:chembl-molecules-api
+  name: ChEMBL Molecules API
+  description: Chembl Molecules Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Documents
-  tags_raw:
-  - Document
+  - Molecules
   properties:
   - type: OpenAPI
-    url: openapi/chembl-document-api-openapi.yml
+    url: openapi/chembl-molecules-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -166,17 +163,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-drug-api
-  name: ChEMBL Drug API
-  description: Approved drug information including applicants, patent numbers, and research codes.
+- aid: chembl:chembl-proteins-api
+  name: ChEMBL Proteins API
+  description: Protein Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Drug
+  - Proteins
   properties:
   - type: OpenAPI
-    url: openapi/chembl-drug-api-openapi.yml
+    url: openapi/chembl-proteins-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -185,17 +182,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-drug-indication-api
-  name: ChEMBL Drug Indication API
-  description: Drug-disease associations with clinical trial and regulatory references.
+- aid: chembl:chembl-pubchem-bioassay-sids-api
+  name: ChEMBL PubChem Bioassay Sids API
+  description: Pubchem Bioassay Sids Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Drug Indication
+  - PubChem Bioassay Sids
   properties:
   - type: OpenAPI
-    url: openapi/chembl-drug-indication-api-openapi.yml
+    url: openapi/chembl-pubchem-bioassay-sids-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -204,17 +201,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-drug-warning-api
-  name: ChEMBL Drug Warning API
-  description: Safety information for withdrawn or black-box warned drugs.
+- aid: chembl:chembl-pubchem-biossays-api
+  name: ChEMBL PubChem Biossays API
+  description: Pubchem Bioassay Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Drug Warning
+  - PubChem Biossays
   properties:
   - type: OpenAPI
-    url: openapi/chembl-drug-warning-api-openapi.yml
+    url: openapi/chembl-pubchem-biossays-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -223,17 +220,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-mechanism-api
-  name: ChEMBL Mechanism API
-  description: Mechanism of action information for approved drugs.
+- aid: chembl:chembl-pubchem-compounds-api
+  name: ChEMBL PubChem Compounds API
+  description: Pubchem Compound Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Mechanism
+  - PubChem Compounds
   properties:
   - type: OpenAPI
-    url: openapi/chembl-mechanism-api-openapi.yml
+    url: openapi/chembl-pubchem-compounds-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -242,18 +239,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-molecule-api
-  name: ChEMBL Molecule API
-  description: >-
-    Chemical molecules including properties, structural representations, synonyms, and drug-like properties.
+- aid: chembl:chembl-pubchem-substances-api
+  name: ChEMBL PubChem Substances API
+  description: Pubchem Substance Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Molecule
+  - PubChem Substances
   properties:
   - type: OpenAPI
-    url: openapi/chembl-molecule-api-openapi.yml
+    url: openapi/chembl-pubchem-substances-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
@@ -262,74 +258,17 @@ apis:
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-similarity-api
-  name: ChEMBL Similarity API
-  description: Molecule similarity searching using Tanimoto coefficient.
+- aid: chembl:chembl-targets-api
+  name: ChEMBL Targets API
+  description: Chembl Targets Resource
   humanURL: >-
     https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
   baseURL: https://www.ebi.ac.uk/chembl/api/data/
   tags:
-  - Similarity
+  - Targets
   properties:
   - type: OpenAPI
-    url: openapi/chembl-similarity-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
-  - type: TermsOfService
-    url: https://www.ebi.ac.uk/about/terms-of-use/
-  - type: Documentation
-    url: >-
-      https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-status-api
-  name: ChEMBL Status API
-  description: API operational status and ChEMBL database version information.
-  humanURL: >-
-    https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
-  baseURL: https://www.ebi.ac.uk/chembl/api/data/
-  tags:
-  - Status
-  properties:
-  - type: OpenAPI
-    url: openapi/chembl-status-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
-  - type: TermsOfService
-    url: https://www.ebi.ac.uk/about/terms-of-use/
-  - type: Documentation
-    url: >-
-      https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-substructure-api
-  name: ChEMBL Substructure API
-  description: Molecular substructure searching.
-  humanURL: >-
-    https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
-  baseURL: https://www.ebi.ac.uk/chembl/api/data/
-  tags:
-  - Substructure
-  properties:
-  - type: OpenAPI
-    url: openapi/chembl-substructure-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
-  - type: TermsOfService
-    url: https://www.ebi.ac.uk/about/terms-of-use/
-  - type: Documentation
-    url: >-
-      https://chembl.gitbook.io/chembl-interface-documentation/web-services/cheminformatic-utils-web-services
-- aid: chembl:chembl-target-api
-  name: ChEMBL Target API
-  description: Protein and non-protein targets defined in assays.
-  humanURL: >-
-    https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services
-  baseURL: https://www.ebi.ac.uk/chembl/api/data/
-  tags:
-  - Target
-  properties:
-  - type: OpenAPI
-    url: openapi/chembl-target-api-openapi.yml
+    url: openapi/chembl-targets-api-openapi.yml
   - type: Documentation
     url: >-
       https://chembl.gitbook.io/chembl-interface-documentation/web-services/chembl-data-web-services

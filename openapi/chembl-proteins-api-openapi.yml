@@ -1,0 +1,592 @@
+openapi: 3.2.0
+info:
+  description: '# About CROssBAR & data
+
+    **CROssBAR**: Comprehensive Resource of Biomedical Relations with Deep Learning Applications and Knowledge Graph Representations
+
+    CROssBAR is a comprehensive system that integrates large-scale biomedical data from various resources e.g UniProt, ChEMBL, Drugbank, EFO, HPO, InterPro & PubChem and stores them in a new NoSQL database, enrich these data with deep learning based prediction of relations between numerous biomedical entities, rigorously analyse the enriched data to obtain biologically meaningful modules and display them to the user via easy to interpret, interactive and heterogeneous knowledge graphs.
+
+    CROssBAR platform exposes a set of 12 endpoints to query data stored in the CROssBAR database. These endpoints help the user to find data of interest using different parameters provided by the API endpoint.
+
+    For example,
+
+    https://www.ebi.ac.uk/tools/crossbar/proteins?accession=A0A023GRW5 -> will provide protein information about accession ''A0A023GRW5'' including its interactions, functions, cross-references, variations and more.
+
+    https://www.ebi.ac.uk/tools/crossbar/activities?moleculeChemblId=CHEMBL465983 -> will provide ChEMBL bio-interactions related information including targets and bio-activity measurements associated with molecule chembl id ''CHEMBL465983''
+
+
+    **Knowledge graphs**
+
+    Another use case of CROssBAR''s API endpoints is in building knowledge graphs. These endpoints can be *weaved* together (output from one API endpoint fed as input to another API endpoint) programmatically to link nodes like protein, disease, drugs etc. as nodes of the graph. The endpoints are designed to be independent from each other which allows users the flexibility to drive biological networks from any facet e.g drug-centric, disease-centric, gene-centric etc. Our service for knowledge graph construction is available at https://crossbar.kansil.org.
+
+    An example for the part of the background queries on the CROssBAR API during the construction of a knowledge graph,
+
+    (with the aim of keeping the example simple, we have only included the processes related to pathways, genes/proteins and drugs/compounds)
+
+    In this example, we would like to find bio-active compounds (with a pChEMBL value threshold of at least 6.0) & drugs targeting all proteins belonging to "WNT ligand biogenesis and trafficking" pathway (based on Reactome pathway annotations).
+
+    This can be achieved by using endpoints listed on this swagger documentation as illustrated in following steps-
+
+    Find bio-active compounds (with a pChEMBL value threshold of at least 6.0) & drugs targeting all proteins belonging to "WNT ligand biogenesis and trafficking" pathway (based on Reactome annotations)
+
+    This can be achieved by using endpoints listed on this swagger documentation as illustrated in following steps-
+
+    1. Get all proteins from “/proteins” API endpoint which have a reactome pathway name equal to "WNT ligand biogenesis and trafficking".
+
+    2. From the collection of uniprot protein accessions collected from step 1 above, we query “/targets” API endpoint to obtain the ‘target_chembl_id’s of these proteins.
+
+    3. From the collection of target_chembl_ids collected from step 2 above, we query “/activities” API endpoint with pChEMBL value >=6, to obtain the ’molecule_chembl_id’s of the molecules that we need.
+
+    4. From the collection of uniprot protein accessions collected from step 1 above, we find out Drug names and ids from the “/drugs” API endpoint that targets our proteins.
+
+    5. From the collection of ’molecule_chembl_id’s obtained in step3, we query “/molecules” endpoint to get the compounds that are interacting with the genes/proteins belonging to the “WNT ligand biogenesis and trafficking” pathway.'
+  version: '1.0'
+  title: CROssBAR Data Proteins API
+  contact:
+    name: API support
+    email: crossbar_dev@ebi.ac.uk
+servers:
+- url: https://www.ebi.ac.uk/Tools/crossbar
+tags:
+- name: Proteins
+  description: Protein Resource
+paths:
+  /proteins:
+    get:
+      tags:
+      - Proteins
+      summary: Proteins collected from Uniprot for selective tax ids HUMAN(9606)…
+      operationId: getProteinsUsingGET
+      parameters:
+      - name: accession
+        in: query
+        description: accession
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: ec
+        in: query
+        description: ec
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fullName
+        in: query
+        description: fullName
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: gene
+        in: query
+        description: gene
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: go
+        in: query
+        description: go
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: interpro
+        in: query
+        description: interpro
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: omim
+        in: query
+        description: omim
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: orphanet
+        in: query
+        description: orphanet
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: pfam
+        in: query
+        description: pfam
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: reactome
+        in: query
+        description: reactome
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: taxId
+        in: query
+        description: taxId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proteins'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+components:
+  schemas:
+    Kegg:
+      type: object
+      properties:
+        id:
+          type: string
+      title: Kegg
+    Features:
+      type: object
+      properties:
+        active_site:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+        binding_site:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+        chain:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+        domain:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+        mutagen:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+        region:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+        top_dom:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+        variant:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarFeature'
+      title: Features
+    OpenTargets:
+      type: object
+      properties:
+        id:
+          type: string
+      title: OpenTargets
+    PDBe:
+      type: object
+      properties:
+        chains:
+          type: string
+        id:
+          type: string
+        method:
+          type: string
+        resolution:
+          type: string
+      title: PDBe
+    VariationEvidenceSource:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      title: VariationEvidenceSource
+    Omim:
+      type: object
+      properties:
+        _id:
+          type: string
+        type:
+          type: string
+      title: Omim
+    VariationAssociation:
+      type: object
+      properties:
+        description:
+          type: string
+        evidences:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariationEvidence'
+        name:
+          type: string
+        xrefs:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariationXref'
+      title: VariationAssociation
+    Orphanet:
+      type: object
+      properties:
+        disease:
+          type: string
+        id:
+          type: string
+      title: Orphanet
+    Interpro:
+      type: object
+      properties:
+        entry_id:
+          type: string
+        entry_name:
+          type: string
+        entry_type:
+          type: string
+        fragments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fragment'
+        hit_position:
+          $ref: '#/components/schemas/HitPosition'
+      title: Interpro
+    Go:
+      type: object
+      properties:
+        evidences:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoEvidence'
+        id:
+          type: string
+        term:
+          type: string
+      title: Go
+    FeaturePosition:
+      type: object
+      properties:
+        ceil:
+          type: integer
+          format: int32
+        floor:
+          type: integer
+          format: int32
+        uncertain:
+          type: boolean
+        unparsed:
+          type: string
+      title: FeaturePosition
+    CrossbarFeature:
+      type: object
+      properties:
+        begin:
+          $ref: '#/components/schemas/FeaturePosition'
+        category:
+          type: string
+        description:
+          type: string
+        end:
+          $ref: '#/components/schemas/FeaturePosition'
+        ftId:
+          type: string
+        type:
+          type: string
+      title: CrossbarFeature
+    CrossReferences:
+      type: object
+      properties:
+        ensembl:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ensembl'
+        go:
+          type: array
+          items:
+            $ref: '#/components/schemas/Go'
+        interpro:
+          type: array
+          items:
+            $ref: '#/components/schemas/Interpro'
+        kegg:
+          type: array
+          items:
+            $ref: '#/components/schemas/Kegg'
+        omim:
+          type: array
+          items:
+            $ref: '#/components/schemas/Omim'
+        openTargets:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenTargets'
+        orphanet:
+          type: array
+          items:
+            $ref: '#/components/schemas/Orphanet'
+        pdBe:
+          type: array
+          items:
+            $ref: '#/components/schemas/PDBe'
+        pfam:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pfam'
+        reactome:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reactome'
+      title: CrossReferences
+    VariationXref:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      title: VariationXref
+    Fragment:
+      type: object
+      properties:
+        from:
+          type: integer
+          format: int32
+        to:
+          type: integer
+          format: int32
+        type:
+          type: string
+      title: Fragment
+    Protein:
+      type: object
+      properties:
+        accession:
+          type: string
+        chromosome:
+          type: string
+        crossreferences:
+          $ref: '#/components/schemas/CrossReferences'
+        ec_numbers:
+          type: array
+          items:
+            type: string
+        features:
+          $ref: '#/components/schemas/Features'
+        full_name:
+          type: string
+        genes:
+          type: array
+          items:
+            type: string
+        interactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProteinInteraction'
+        length:
+          type: number
+          format: double
+        mass:
+          type: number
+          format: double
+        tax_id:
+          type: integer
+          format: int32
+        variations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossbarProteinVariation'
+      title: Protein
+    Ensembl:
+      type: object
+      properties:
+        geneId:
+          type: string
+        id:
+          type: string
+        isoform:
+          type: string
+        proteinSequenceId:
+          type: string
+      title: Ensembl
+    Reactome:
+      type: object
+      properties:
+        id:
+          type: string
+        pathwayName:
+          type: string
+      title: Reactome
+    ProteinInteraction:
+      type: object
+      properties:
+        id:
+          type: string
+        interaction_type:
+          type: string
+        interactors:
+          type: array
+          items:
+            type: string
+      title: ProteinInteraction
+    CrossbarProteinVariation:
+      type: object
+      properties:
+        alternativeSequence:
+          type: string
+        association:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariationAssociation'
+        begin:
+          $ref: '#/components/schemas/FeaturePosition'
+        clinicalSignificances:
+          type: string
+        description:
+          type: string
+        end:
+          $ref: '#/components/schemas/FeaturePosition'
+        evidences:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariationEvidence'
+        ftId:
+          type: string
+        somaticStatus:
+          type: integer
+          format: int64
+        sourceType:
+          type: string
+        wildType:
+          type: string
+        xrefs:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariationXref'
+      title: CrossbarProteinVariation
+    GoEvidence:
+      type: object
+      properties:
+        source_id:
+          type: string
+        source_name:
+          type: string
+      title: GoEvidence
+    PageMeta:
+      type: object
+      properties:
+        currentElements:
+          type: integer
+          format: int64
+        currentPage:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      title: PageMeta
+    Proteins:
+      type: object
+      properties:
+        pageMeta:
+          $ref: '#/components/schemas/PageMeta'
+        proteins:
+          type: array
+          items:
+            $ref: '#/components/schemas/Protein'
+      title: Proteins
+    Pfam:
+      type: object
+      properties:
+        entryName:
+          type: string
+        id:
+          type: string
+      title: Pfam
+    HitPosition:
+      type: object
+      properties:
+        from:
+          type: integer
+          format: int32
+        to:
+          type: integer
+          format: int32
+      title: HitPosition
+    VariationEvidence:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/VariationEvidenceSource'
+      title: VariationEvidence

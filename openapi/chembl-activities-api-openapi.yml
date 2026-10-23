@@ -180,3 +180,9 @@ components:
         target_chembl_id:
           type: string
       title: Activity
+x-provenance:
+  method: harvested
+  publisher: ChEMBL
+  source: https://www.ebi.ac.uk/Tools/crossbar/v2/api-docs
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
